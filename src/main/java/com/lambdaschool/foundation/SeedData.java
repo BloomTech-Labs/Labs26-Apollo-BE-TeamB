@@ -4,10 +4,7 @@ import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 import com.lambdaschool.foundation.models.*;
-import com.lambdaschool.foundation.services.ContextService;
-import com.lambdaschool.foundation.services.RoleService;
-import com.lambdaschool.foundation.services.SurveyService;
-import com.lambdaschool.foundation.services.UserService;
+import com.lambdaschool.foundation.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -50,6 +47,12 @@ public class SeedData
      */
     @Autowired
     ContextService contextService;
+
+    /**
+     * Connects the question service to this process
+     */
+    @Autowired
+    QuestionService questionService;
 
     /**
      * Generates test, seed data for our application
@@ -210,5 +213,22 @@ public class SeedData
         Context context5 = new Context("Engineering Leadership", survey5);
         contextService.save(context5);
 
+        /*******************************************************************/
+        // questions
+
+        Question question1 = new Question("Leader Question 1", true, "text", survey1);
+        questionService.save(question1);
+
+        Question question2 = new Question("Leader Question 2", true, "text", survey1);
+        questionService.save(question2);
+
+        Question question3 = new Question("Leader Question 3", true, "text", survey1);
+        questionService.save(question3);
+
+        Question question4 = new Question("Leader Question 4", true, "text", survey2);
+        questionService.save(question4);
+
+        Question question5 = new Question("Leader Question 5", true, "text", survey2);
+        questionService.save(question5);
     }
 }
