@@ -1,13 +1,12 @@
 package com.lambdaschool.foundation.services;
 
+import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.Question;
 import com.lambdaschool.foundation.models.Survey;
 import com.lambdaschool.foundation.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityNotFoundException;
 
 @Transactional
 @Service(value = "questionService")
@@ -23,14 +22,14 @@ public class QuestionServiceImpl implements QuestionService {
     public Question findById(long id) {
 
         return questionRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Question " + id + " Not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Question " + id + " Not Found"));
     }
 
     @Override
     public void delete(long id) {
 
         Question question = questionRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Question " + id + " Not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Question " + id + " Not Found"));
         questionRepository.delete(question);
     }
 
@@ -41,7 +40,7 @@ public class QuestionServiceImpl implements QuestionService {
 
         if (question.getQuestionId() != 0) {
             Question oldQuestion = questionRepository.findById(question.getQuestionId())
-                    .orElseThrow(() -> new EntityNotFoundException("Question " + question.getQuestionId() + " Not Found"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Question " + question.getQuestionId() + " Not Found"));
             newQuestion.setQuestionId(question.getQuestionId());
         }
         newQuestion.setBody(question.getBody());
@@ -52,7 +51,7 @@ public class QuestionServiceImpl implements QuestionService {
             newQuestion.setSurvey(survey);
             return questionRepository.save(newQuestion);
         } else {
-            throw new EntityNotFoundException("Survey Id " + question.getSurvey().getSurveyId() + " Not Found");
+            throw new ResourceNotFoundException("Survey Id " + question.getSurvey().getSurveyId() + " Not Found");
         }
 
     }

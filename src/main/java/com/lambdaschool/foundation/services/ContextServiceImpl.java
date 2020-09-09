@@ -1,5 +1,6 @@
 package com.lambdaschool.foundation.services;
 
+import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.Context;
 import com.lambdaschool.foundation.models.Survey;
 import com.lambdaschool.foundation.repository.ContextRepository;
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class ContextServiceImpl implements ContextService {
     public Context findById(long id) {
 
         return contextRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Context " + id + " Not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Context " + id + " Not Found"));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ContextServiceImpl implements ContextService {
 
         Context context = contextRepository.findContextByDescription(description.toLowerCase());
         if (context == null) {
-            throw new EntityNotFoundException("Context Description: " + description + " Not Found");
+            throw new ResourceNotFoundException("Context Description: " + description + " Not Found");
         }
         return context;
     }
@@ -51,7 +51,7 @@ public class ContextServiceImpl implements ContextService {
     public void delete(long id) {
 
         contextRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Context " + id + " Not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Context " + id + " Not Found"));
         contextRepository.deleteById(id);
     }
 
@@ -63,7 +63,7 @@ public class ContextServiceImpl implements ContextService {
 
         if (context.getContextId() != 0) {
             Context oldContext = contextRepository.findById(context.getContextId())
-                    .orElseThrow(() -> new EntityNotFoundException("Context Id " + context.getContextId() + " Not Found"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Context Id " + context.getContextId() + " Not Found"));
             newContext.setContextId(context.getContextId());
         }
         newContext.setDescription(context.getDescription());
@@ -72,7 +72,7 @@ public class ContextServiceImpl implements ContextService {
             newContext.setSurvey(survey);
             return contextRepository.save(newContext);
         } else {
-            throw new EntityNotFoundException("Survey Id " + context.getSurvey().getSurveyId() + " Not Found");
+            throw new ResourceNotFoundException("Survey Id " + context.getSurvey().getSurveyId() + " Not Found");
         }
 
     }
