@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lambdaschool.foundation.models.Role;
 import com.lambdaschool.foundation.models.User;
 import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
 import com.lambdaschool.foundation.services.UserService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.After;
@@ -42,8 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
-public class UserControllerUnitTest
-{
+public class UserControllerUnitTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
@@ -56,8 +54,7 @@ public class UserControllerUnitTest
 
     @Before
     public void setUp() throws
-            Exception
-    {
+            Exception {
         userList = new ArrayList<>();
 
         Role r1 = new Role("admin");
@@ -74,18 +71,6 @@ public class UserControllerUnitTest
         admins.add(new UserRoles(new User(), r3));
         User u1 = new User("admin", "ILuvM4th!", "admin@lambdaschool.local", admins);
 
-        u1.getUseremails()
-                .add(new Useremail(u1, "admin@email.local"));
-        u1.getUseremails()
-                .get(0)
-                .setUseremailid(10);
-
-        u1.getUseremails()
-                .add(new Useremail(u1, "admin@mymail.local"));
-        u1.getUseremails()
-                .get(1)
-                .setUseremailid(11);
-
         u1.setUserid(101);
         userList.add(u1);
 
@@ -95,24 +80,6 @@ public class UserControllerUnitTest
         datas.add(new UserRoles(new User(), r2));
         User u2 = new User("cinnamon", "1234567", "cinnamon@lambdaschool.local", datas);
 
-        u2.getUseremails()
-                .add(new Useremail(u2, "cinnamon@mymail.local"));
-        u2.getUseremails()
-                .get(0)
-                .setUseremailid(20);
-
-        u2.getUseremails()
-                .add(new Useremail(u2, "hops@mymail.local"));
-        u2.getUseremails()
-                .get(1)
-                .setUseremailid(21);
-
-        u2.getUseremails()
-                .add(new Useremail(u2, "bunny@email.local"));
-        u2.getUseremails()
-                .get(2)
-                .setUseremailid(22);
-
         u2.setUserid(102);
         userList.add(u2);
 
@@ -120,12 +87,6 @@ public class UserControllerUnitTest
         ArrayList<UserRoles> users = new ArrayList<>();
         users.add(new UserRoles(new User(), r1));
         User u3 = new User("testingbarn", "ILuvM4th!", "testingbarn@school.lambda", users);
-
-        u3.getUseremails()
-                .add(new Useremail(u3, "barnbarn@email.local"));
-        u3.getUseremails()
-                .get(0)
-                .setUseremailid(30);
 
         u3.setUserid(103);
         userList.add(u3);
@@ -143,8 +104,7 @@ public class UserControllerUnitTest
         userList.add(u5);
 
         System.out.println("\n*** Seed Data ***");
-        for (User u : userList)
-        {
+        for (User u : userList) {
             System.out.println(u);
         }
         System.out.println("*** Seed Data ***\n");
@@ -158,14 +118,12 @@ public class UserControllerUnitTest
 
     @After
     public void tearDown() throws
-            Exception
-    {
+            Exception {
     }
 
     @Test
     public void listAllUsers() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/users";
 
         Mockito.when(userService.findAll())
@@ -191,8 +149,7 @@ public class UserControllerUnitTest
 
     @Test
     public void listReallyAllUsers() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/users/all";
 
         Mockito.when(userService.findAll())
@@ -218,8 +175,7 @@ public class UserControllerUnitTest
 
     @Test
     public void listUsersNameContaining() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/user/name/like/cin";
 
         Mockito.when(userService.findByNameContaining(any(String.class)))
@@ -245,8 +201,7 @@ public class UserControllerUnitTest
 
     @Test
     public void getUserById() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/user/12";
 
         Mockito.when(userService.findUserById(12))
@@ -270,8 +225,7 @@ public class UserControllerUnitTest
 
     @Test
     public void getUserByIdNotFound() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/user/77";
 
         Mockito.when(userService.findUserById(77))
@@ -294,8 +248,7 @@ public class UserControllerUnitTest
 
     @Test
     public void getUserByName() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/user/name/testing";
 
         Mockito.when(userService.findByName("testing"))
@@ -319,8 +272,7 @@ public class UserControllerUnitTest
 
     @Test
     public void getCurrentUserName() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/getusername";
 
         RequestBuilder rb = MockMvcRequestBuilders.get(apiUrl)
@@ -340,8 +292,7 @@ public class UserControllerUnitTest
 
     @Test
     public void getUserInfo() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/getuserinfo";
 
         Mockito.when(userService.findByName(anyString()))
@@ -365,21 +316,17 @@ public class UserControllerUnitTest
 
     @Test
     public void addNewUser() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/user";
 
         // build a user
         ArrayList<UserRoles> thisRole = new ArrayList<>();
-        ArrayList<Useremail> thisEmail = new ArrayList<>();
         User u1 = new User();
         u1.setUserid(100);
         u1.setUsername("tiger");
         u1.setPassword("ILuvM4th!");
         u1.setPrimaryemail("tiger@home.local");
         u1.setRoles(thisRole);
-        ;
-        u1.setUseremails(thisEmail);
 
         ObjectMapper mapper = new ObjectMapper();
         String userString = mapper.writeValueAsString(u1);
@@ -399,8 +346,7 @@ public class UserControllerUnitTest
 
     @Test
     public void updateUser() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/user/{userid}";
 
         // build a user
@@ -428,8 +374,7 @@ public class UserControllerUnitTest
 
     @Test
     public void deleteUserById() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/user/{userid}";
 
         RequestBuilder rb = MockMvcRequestBuilders.delete(apiUrl, "3")
@@ -442,8 +387,7 @@ public class UserControllerUnitTest
 
     @Test
     public void deleteUserRoleByIds() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/user/{userid}/role/{roleid}";
 
         RequestBuilder rb = MockMvcRequestBuilders.delete(apiUrl, 3, 2);
@@ -457,8 +401,7 @@ public class UserControllerUnitTest
     // userService.addUserRole(userid, roleid);
     @Test
     public void postUserRoleByIds() throws
-            Exception
-    {
+            Exception {
         String apiUrl = "/users/user/{userid}/role/{roleid}";
 
         RequestBuilder rb = MockMvcRequestBuilders.post(apiUrl, 3, 2);

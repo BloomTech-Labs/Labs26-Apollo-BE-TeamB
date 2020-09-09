@@ -95,12 +95,6 @@ public class SeedData
                            "password",
                            "admin@lambdaschool.local",
                            admins);
-        u1.getUseremails()
-                .add(new Useremail(u1,
-                                   "admin@email.local"));
-        u1.getUseremails()
-                .add(new Useremail(u1,
-                                   "admin@mymail.local"));
 
         userService.save(u1);
 
@@ -114,15 +108,6 @@ public class SeedData
                            "1234567",
                            "cinnamon@lambdaschool.local",
                            datas);
-        u2.getUseremails()
-                .add(new Useremail(u2,
-                                   "cinnamon@mymail.local"));
-        u2.getUseremails()
-                .add(new Useremail(u2,
-                                   "hops@mymail.local"));
-        u2.getUseremails()
-                .add(new Useremail(u2,
-                                   "bunny@email.local"));
         userService.save(u2);
 
         // user
@@ -133,9 +118,6 @@ public class SeedData
                            "ILuvM4th!",
                            "barnbarn@lambdaschool.local",
                            users);
-        u3.getUseremails()
-                .add(new Useremail(u3,
-                                   "barnbarn@email.local"));
         userService.save(u3);
 
         users = new ArrayList<>();
@@ -178,9 +160,6 @@ public class SeedData
                     nameFaker.internet()
                             .emailAddress(),
                     users);
-            fakeUser.getUseremails()
-                    .add(new Useremail(fakeUser,
-                            fakeValuesService.bothify("????##@gmail.com")));
             userService.save(fakeUser);
         }
 

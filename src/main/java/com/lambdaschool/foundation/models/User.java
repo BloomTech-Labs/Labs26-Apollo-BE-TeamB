@@ -78,14 +78,6 @@ public class User
     @Email
     private String primaryemail;
 
-    @ApiModelProperty(name = "user emails",
-            value = "List of user emails for this users")
-    @OneToMany(mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user",
-            allowSetters = true)
-    private List<Useremail> useremails = new ArrayList<>();
 
     /**
      * Part of the join relationship between user and role
@@ -238,26 +230,6 @@ public class User
     {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.password = passwordEncoder.encode(password);
-    }
-
-    /**
-     * Getter for the list of useremails for this user
-     *
-     * @return the list of useremails (List(Useremail)) for this user
-     */
-    public List<Useremail> getUseremails()
-    {
-        return useremails;
-    }
-
-    /**
-     * Setter for list of useremails for this user
-     *
-     * @param useremails the new list of useremails (List(Useremail)) for this user
-     */
-    public void setUseremails(List<Useremail> useremails)
-    {
-        this.useremails = useremails;
     }
 
     /**
