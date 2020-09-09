@@ -8,14 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -107,10 +100,17 @@ public class User
     private List<UserRoles> roles = new ArrayList<>();
 
     /**
+     * Part of the join relationship between topic and user
+     * connects users to the topic user combination
+     */
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private List<TopicUsers> topics = new ArrayList<>();
+
+    /**
      * Default constructor used primarily by the JPA.
      */
-    public User()
-    {
+    public User() {
     }
 
     /**

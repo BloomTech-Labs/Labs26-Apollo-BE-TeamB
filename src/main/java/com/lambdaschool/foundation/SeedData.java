@@ -55,6 +55,12 @@ public class SeedData
     QuestionService questionService;
 
     /**
+     * Connects the topic service to this process
+     */
+    @Autowired
+    TopicService topicService;
+
+    /**
      * Generates test, seed data for our application
      * First a set of known data is seeded into our database.
      * Second a random set of data using Java Faker is seeded into our database.
@@ -230,5 +236,36 @@ public class SeedData
 
         Question question5 = new Question("Leader Question 5", true, "text", survey2);
         questionService.save(question5);
+
+        /*******************************************************************/
+        // topics
+        ArrayList<TopicUsers> topicUsersArrayList1 = new ArrayList<>();
+        topicUsersArrayList1.add(new TopicUsers(new Topic(), u1));
+        topicUsersArrayList1.add(new TopicUsers(new Topic(), u2));
+        topicUsersArrayList1.add(new TopicUsers(new Topic(), u3));
+
+        Topic topic1 = new Topic("Topic 1", u1, survey1, topicUsersArrayList1);
+        topicService.save(topic1);
+
+        Topic topic2 = new Topic("Topic 2", u1, survey2, topicUsersArrayList1);
+        topicService.save(topic2);
+
+        Topic topic3 = new Topic("Topic 3", u2, survey1, topicUsersArrayList1);
+        topicService.save(topic3);
+
+        ArrayList<TopicUsers> topicUsersArrayList2 = new ArrayList<>();
+        topicUsersArrayList2.add(new TopicUsers(new Topic(), u3));
+        topicUsersArrayList2.add(new TopicUsers(new Topic(), u4));
+        topicUsersArrayList2.add(new TopicUsers(new Topic(), u5));
+
+        Topic topic4 = new Topic("Topic 4", u2, survey3, topicUsersArrayList2);
+        topicService.save(topic4);
+
+        Topic topic5 = new Topic("Topic 5", u3, survey4, topicUsersArrayList2);
+        topicService.save(topic5);
+
+        Topic topic6 = new Topic("Topic 6", u3, survey1, topicUsersArrayList2);
+        topicService.save(topic6);
+
     }
 }
