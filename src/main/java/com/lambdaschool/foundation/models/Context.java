@@ -48,26 +48,56 @@ public class Context extends Auditable {
         this.survey = survey;
     }
 
+    /**
+     * Getter for contextId
+     *
+     * @return the contextId (long) of the context
+     */
     public long getContextId() {
         return contextId;
     }
 
+    /**
+     * Setter for contextId. Used primary for seeding data
+     *
+     * @param contextId the new contextId (long) of the context
+     */
     public void setContextId(long contextId) {
         this.contextId = contextId;
     }
 
+    /**
+     * Getter for description
+     *
+     * @return the description (String) of the context
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Setter for questionId. Used primary for seeding data
+     *
+     * @param description the new description (String) of the context
+     */
     public void setDescription(String description) {
         this.description = description.toLowerCase();
     }
 
+    /**
+     * Getter for survey
+     *
+     * @return the survey (Survey) connected to the context
+     */
     public Survey getSurvey() {
         return survey;
     }
 
+    /**
+     * Setter for questionId. Used primary for seeding data
+     *
+     * @param survey the new survey (Survey) connected to the context
+     */
     public void setSurvey(Survey survey) {
         this.survey = survey;
     }
