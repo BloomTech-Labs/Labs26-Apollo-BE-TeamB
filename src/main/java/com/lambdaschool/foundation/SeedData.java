@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 import com.lambdaschool.foundation.models.*;
+import com.lambdaschool.foundation.services.ContextService;
 import com.lambdaschool.foundation.services.RoleService;
 import com.lambdaschool.foundation.services.SurveyService;
 import com.lambdaschool.foundation.services.UserService;
@@ -43,6 +44,12 @@ public class SeedData
      */
     @Autowired
     SurveyService surveyService;
+
+    /**
+     * Connects the context service to this process
+     */
+    @Autowired
+    ContextService contextService;
 
     /**
      * Generates test, seed data for our application
@@ -185,6 +192,23 @@ public class SeedData
 
         Survey survey5 = new Survey();
         surveyService.save(survey5);
+
+        /*******************************************************************/
+        // context
+        Context context1 = new Context("Product Leadership", survey1);
+        contextService.save(context1);
+
+        Context context2 = new Context("Delivery Management", survey2);
+        contextService.save(context2);
+
+        Context context3 = new Context("Project Management", survey3);
+        contextService.save(context3);
+
+        Context context4 = new Context("Design Leadership", survey4);
+        contextService.save(context4);
+
+        Context context5 = new Context("Engineering Leadership", survey5);
+        contextService.save(context5);
 
     }
 }
