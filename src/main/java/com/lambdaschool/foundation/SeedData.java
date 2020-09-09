@@ -3,11 +3,9 @@ package com.lambdaschool.foundation;
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
-import com.lambdaschool.foundation.models.Role;
-import com.lambdaschool.foundation.models.User;
-import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
+import com.lambdaschool.foundation.models.*;
 import com.lambdaschool.foundation.services.RoleService;
+import com.lambdaschool.foundation.services.SurveyService;
 import com.lambdaschool.foundation.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -39,6 +37,12 @@ public class SeedData
      */
     @Autowired
     UserService userService;
+
+    /**
+     * Connects the survey service to this process
+     */
+    @Autowired
+    SurveyService surveyService;
 
     /**
      * Generates test, seed data for our application
@@ -151,17 +155,36 @@ public class SeedData
 
             users = new ArrayList<>();
             users.add(new UserRoles(new User(),
-                                    r2));
+                    r2));
             fakeUser = new User(nameFaker.name()
-                                        .username(),
-                                "password",
-                                nameFaker.internet()
-                                        .emailAddress(),
-                                users);
+                    .username(),
+                    "password",
+                    nameFaker.internet()
+                            .emailAddress(),
+                    users);
             fakeUser.getUseremails()
                     .add(new Useremail(fakeUser,
-                                       fakeValuesService.bothify("????##@gmail.com")));
+                            fakeValuesService.bothify("????##@gmail.com")));
             userService.save(fakeUser);
         }
+
+
+        /******************************************************************/
+        // survey
+        Survey survey1 = new Survey();
+        surveyService.save(survey1);
+
+        Survey survey2 = new Survey();
+        surveyService.save(survey2);
+
+        Survey survey3 = new Survey();
+        surveyService.save(survey3);
+
+        Survey survey4 = new Survey();
+        surveyService.save(survey4);
+
+        Survey survey5 = new Survey();
+        surveyService.save(survey5);
+
     }
 }
