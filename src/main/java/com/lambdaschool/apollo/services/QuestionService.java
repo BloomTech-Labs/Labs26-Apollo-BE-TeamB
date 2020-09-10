@@ -2,6 +2,8 @@ package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.models.Question;
 
+import java.util.List;
+
 public interface QuestionService {
 
     Question findById(long id);
@@ -11,4 +13,6 @@ public interface QuestionService {
     Question save(Question question);
 
     Question update(Question question);
+
+    List<Question> findAll();
 }

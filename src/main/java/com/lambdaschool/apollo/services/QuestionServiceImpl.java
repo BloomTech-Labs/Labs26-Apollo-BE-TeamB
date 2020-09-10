@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 @Service(value = "questionService")
 public class QuestionServiceImpl implements QuestionService {
@@ -23,6 +25,12 @@ public class QuestionServiceImpl implements QuestionService {
 
         return questionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Question " + id + " Not Found"));
+    }
+
+    @Override
+    public List<Question> findAll() {
+        return questionRepository.findAll();
+//                .orElseThrow(() -> new ResourceNotFoundException("Something went horribly wrong..."));
     }
 
     @Override
