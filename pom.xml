@@ -112,7 +112,7 @@
     </dependencies>
 
     <build>
-        <finalName>jrmmba-foundation</finalName>
+        <finalName>apollo-b-api</finalName>
 
         <plugins>
             <plugin>
