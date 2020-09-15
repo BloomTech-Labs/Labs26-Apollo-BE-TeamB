@@ -7,7 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface TopicRepository extends CrudRepository<Topic, Long> {
+
+
+    @Query(value = "SELECT * as count FROM topics", nativeQuery = true)
+    List<Topic> findByOwnerId(long userid);
 
     /**
      * Counts the number of topic user combinations for the given topicId and userId. Answer should be only 0 or 1.
