@@ -90,6 +90,10 @@ public class User
             allowSetters = true)
     private List<UserRoles> roles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = {"owner", "users"}, allowSetters = true)
+    private List<Topic> ownedtopics = new ArrayList<>();
+
     /**
      * Part of the join relationship between topic and user
      * connects users to the topic user combination
@@ -244,6 +248,22 @@ public class User
     public void addRole(Role role) {
         roles.add(new UserRoles(this,
                 role));
+    }
+
+    public List<TopicUsers> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<TopicUsers> topics) {
+        this.topics = topics;
+    }
+
+    public List<Topic> getOwnedtopics() {
+        return ownedtopics;
+    }
+
+    public void setOwnedtopics(List<Topic> ownedtopics) {
+        this.ownedtopics = ownedtopics;
     }
 
     /**

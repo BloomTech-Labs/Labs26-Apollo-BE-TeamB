@@ -25,12 +25,10 @@ public class Topic extends Auditable {
     @Column(nullable = false)
     private String title;
 
-    /**
-     * One to One relationship between topic and owner (User)
-     * one Topic has one owner
-     */
-    @OneToOne
-    @JoinColumn(name = "ownerId")
+
+    @ManyToOne
+    @JoinColumn(name = "userid", nullable = false)
+    @JsonIgnoreProperties(value = {"ownedtopics", "topics"}, allowSetters = true)
     private User owner;
 
     /**
@@ -70,14 +68,10 @@ public class Topic extends Auditable {
      * @param survey     The survey (String) connected to the topic
      * @param topicUsers The users (List) of the topic
      */
-    public Topic(String title, User owner, Survey survey, List<TopicUsers> topicUsers) {
+    public Topic(String title, User owner, Survey survey) {
         setTitle(title);
-        setOwner(owner);
         setSurvey(survey);
-        for (TopicUsers tu : topicUsers) {
-            tu.setTopic(this);
-        }
-        setUsers(topicUsers);
+        setOwner(owner);
     }
 
     /**
@@ -114,24 +108,6 @@ public class Topic extends Auditable {
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    /**
-     * Getter for owner
-     *
-     * @return the owner (User) of the topic
-     */
-    public User getOwner() {
-        return owner;
-    }
-
-    /**
-     * Setter for owner. Used primary for seeding data
-     *
-     * @param owner the new owner (long) of the topic
-     */
-    public void setOwner(User owner) {
-        this.owner = owner;
     }
 
     /**
@@ -177,5 +153,13 @@ public class Topic extends Auditable {
      */
     public void addUser(User user) {
         users.add(new TopicUsers(this, user));
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

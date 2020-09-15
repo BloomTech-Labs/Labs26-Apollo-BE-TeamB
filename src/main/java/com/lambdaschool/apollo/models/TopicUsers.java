@@ -96,4 +96,6 @@ public class TopicUsers extends Auditable implements Serializable {
     public int hashCode() {
         return Objects.hash(getTopic(), getUser());
     }
+
+
 }

@@ -99,6 +99,8 @@ public class UserRoles
         this.role = role;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

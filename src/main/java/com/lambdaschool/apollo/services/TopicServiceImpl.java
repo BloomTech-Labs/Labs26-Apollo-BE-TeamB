@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Transactional
 @Service(value = "topicService")
 public class TopicServiceImpl implements TopicService {
@@ -41,6 +44,21 @@ public class TopicServiceImpl implements TopicService {
                 .orElseThrow(() -> new ResourceNotFoundException("Topic " + id + " Not Found"));
         topicRepository.delete(topic);
 
+    }
+
+    @Override
+    public List<Topic> findAllTopics() {
+        List<Topic> topics = new ArrayList<>();
+        topicRepository.findAll().iterator().forEachRemaining(topics::add);
+        return topics;
+    }
+
+    @Override
+    public List<Topic> findTopicsByUser(Long userid) {
+        List<Topic> topics = new ArrayList<>();
+               topics = topicRepository.findByOwnerId(userid);
+
+        return topics;
     }
 
     @Transactional

@@ -1,7 +1,6 @@
 package com.lambdaschool.apollo.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -41,31 +40,8 @@ public class ResourceServerConfig
         // authenticated = any authenticated, signed in, user
         // hasAnyRole = must be authenticated and be assigned this role!
         http.authorizeRequests()
-                .antMatchers("/",
-                        "/h2-console/**",
-                        "/swagger-resources/**",
-                        "/swagger-resource/**",
-                        "/swagger-ui.html",
-                        "/v2/api-docs",
-                        "/webjars/**",
-                        "/createnewuser")
+                .antMatchers("/**")
                 .permitAll()
-                .antMatchers(HttpMethod.POST,
-                        "/users/**")
-                .hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE,
-                        "/users/**")
-                .hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.PUT,
-                        "/users/**")
-                .hasAnyRole("ADMIN")
-                .antMatchers("/users/**",
-                        "/useremails/**",
-                        "/oauth/revoke-token",
-                        "/logout")
-                .authenticated()
-                .antMatchers("/roles/**")
-                .hasAnyRole("ADMIN")
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(new OAuth2AccessDeniedHandler());
