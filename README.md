@@ -1,6 +1,6 @@
 # Apollo API
 
-
+Api will be extended
 
 ### Database layout
 
