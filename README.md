@@ -6,7 +6,7 @@ Api will be extended
 
 Table layout will be provide here once finalized
 
-### Using the provided seed data, expand each endpoint below to see the output it generates. Run with user **admin** who has roles ADMIN, USER, DATA
+### Endpoints:
 
 <details>
 <summary>http://{urlhere}/topics/topics</summary>
