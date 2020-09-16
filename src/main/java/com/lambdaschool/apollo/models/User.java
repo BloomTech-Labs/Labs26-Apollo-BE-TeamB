@@ -75,6 +75,7 @@ public class User
     @Column(nullable = false,
             unique = true)
     @Email
+    @JsonIgnore
     private String primaryemail;
 
 
@@ -88,10 +89,12 @@ public class User
             cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = "user",
             allowSetters = true)
+    @JsonIgnore
     private List<UserRoles> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"owner", "users"}, allowSetters = true)
+    @JsonIgnore
     private List<Topic> ownedtopics = new ArrayList<>();
 
     /**
