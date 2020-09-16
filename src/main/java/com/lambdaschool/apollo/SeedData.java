@@ -5,6 +5,7 @@ import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 import com.lambdaschool.apollo.models.*;
 import com.lambdaschool.apollo.services.*;
+import com.lambdaschool.apollo.views.TopicFrequency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -180,23 +181,23 @@ public class SeedData
 
         Survey defaultSurvey1 = surveyService.save(new Survey());
 
-        Topic topic1 = new Topic("Topic 1", u1, defaultSurvey1.getSurveyId(), topicUsersArrayList1);
+        Topic topic1 = new Topic("Topic 1", u1, defaultSurvey1.getSurveyId(), topicUsersArrayList1, TopicFrequency.MONDAY);
         topic1 = topicService.save(topic1);
 
-        Topic topic2 = new Topic("Topic 2", u1, defaultSurvey1);
+        Topic topic2 = new Topic("Topic 2", u1, defaultSurvey1, TopicFrequency.MONDAY);
         topic2 = topicService.save(topic2);
 
-        Topic topic3 = new Topic("Topic 3", u2, defaultSurvey1);
+        Topic topic3 = new Topic("Topic 3", u2, defaultSurvey1, TopicFrequency.WEEKLY);
         topic3 = topicService.save(topic3);
 
 
-        Topic topic4 = new Topic("Topic 4", u2, defaultSurvey1);
+        Topic topic4 = new Topic("Topic 4", u2, defaultSurvey1, TopicFrequency.WEEKLY);
         topic4 = topicService.save(topic4);
 
-        Topic topic5 = new Topic("Topic 5", u2, defaultSurvey1);
+        Topic topic5 = new Topic("Topic 5", u2, defaultSurvey1, TopicFrequency.MONTHLY);
         topic5 = topicService.save(topic5);
 
-        Topic topic6 = new Topic("Topic 6", u2, defaultSurvey1);
+        Topic topic6 = new Topic("Topic 6", u2, defaultSurvey1, TopicFrequency.MONTHLY);
         topic6 = topicService.save(topic6);
 
 

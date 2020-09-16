@@ -1,5 +1,6 @@
 package com.lambdaschool.apollo.models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -94,7 +95,6 @@ public class User
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"owner", "users"}, allowSetters = true)
-    @JsonIgnore
     private List<Topic> ownedtopics = new ArrayList<>();
 
     /**
@@ -253,6 +253,7 @@ public class User
                 role));
     }
 
+    @JsonGetter
     public List<TopicUsers> getTopics() {
         return topics;
     }

@@ -1,6 +1,7 @@
 package com.lambdaschool.apollo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.lambdaschool.apollo.views.TopicFrequency;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -31,6 +32,8 @@ public class Topic extends Auditable {
     @JsonIgnoreProperties(value = {"ownedtopics", "topics", "primaryemail", "roles", ""}, allowSetters = true)
     private User owner;
 
+    private TopicFrequency frequency;
+
     /**
      * The surveyid of the survey assigned to this topic is what is stored in the database.
      * This is the entire survey object!
@@ -60,13 +63,14 @@ public class Topic extends Auditable {
     public Topic() {
     }
 
-    public Topic(@NotNull String title, User owner, Survey survey) {
+    public Topic(@NotNull String title, User owner, Survey survey, TopicFrequency frequency) {
         this.title = title;
         this.owner = owner;
         this.defaultsurveyid = survey.getSurveyId();
+        this.frequency = frequency;
     }
 
-    public Topic(@NotNull String title, User owner, long defaultsurveyid, List<TopicUsers> users) {
+    public Topic(@NotNull String title, User owner, long defaultsurveyid, List<TopicUsers> users, TopicFrequency frequency) {
         this.title = title;
         this.owner = owner;
         this.defaultsurveyid = defaultsurveyid;
@@ -74,6 +78,7 @@ public class Topic extends Auditable {
             tu.setTopic(this);
         }
         this.users = users;
+        this.frequency = frequency;
     }
 
     public long getTopicId() {
@@ -120,11 +125,21 @@ public class Topic extends Auditable {
         users.add(new TopicUsers(this, user));
     }
 
+
+
     public long getDefaultsurveyid() {
         return defaultsurveyid;
     }
 
     public void setDefaultsurveyid(long defaultsurveyid) {
         this.defaultsurveyid = defaultsurveyid;
+    }
+
+    public TopicFrequency getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(TopicFrequency frequency) {
+        this.frequency = frequency;
     }
 }

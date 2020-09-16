@@ -106,6 +106,8 @@ public class TopicServiceImpl implements TopicService {
             }
         }
 
+        newTopic.setFrequency(topic.getFrequency());
+
         return topicRepository.save(newTopic);
 
     }
