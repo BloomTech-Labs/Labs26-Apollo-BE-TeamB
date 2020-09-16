@@ -81,8 +81,7 @@ public class User
 
 
     /**
-     * Part of the join relationship between user and role
-     * connects users to the user role combination
+     * This field captures which topics a user owns
      */
     @ApiModelProperty(name = "roles",
             value = "List of user roles for this users")
@@ -98,8 +97,8 @@ public class User
     private List<Topic> ownedtopics = new ArrayList<>();
 
     /**
-     * Part of the join relationship between topic and user
-     * connects users to the topic user combination
+     * This field represents which topics a user is a member of
+     * EXCLUSIVE of owned topics
      */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = "user", allowSetters = true)

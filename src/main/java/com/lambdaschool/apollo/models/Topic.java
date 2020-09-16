@@ -41,10 +41,10 @@ public class Topic extends Auditable {
      * Forms a Many to One relationship between topics and survey.
      * A survey can have many topics.
      */
-
+    //ID of the defaul survey a topic uses to prepopulate any survey request
     private long defaultsurveyid;
 
-
+    //Survey Requests that an owner of a topic has generated
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties({"topic"})
     private List<Survey> surveysrequests = new ArrayList<>();

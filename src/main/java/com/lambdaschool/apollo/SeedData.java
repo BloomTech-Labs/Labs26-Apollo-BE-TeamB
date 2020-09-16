@@ -165,6 +165,7 @@ public class SeedData
 
 
         /*******************************************************************/
+        //List of members to add to topic
         ArrayList<TopicUsers> topicUsersArrayList1 = new ArrayList<>();
         topicUsersArrayList1.add(new TopicUsers(new Topic(), u1));
         topicUsersArrayList1.add(new TopicUsers(new Topic(), u2));
@@ -178,7 +179,7 @@ public class SeedData
         /*******************************************************************/
         // topics
 
-
+        //Default survey to initialize a Topic with
         Survey defaultSurvey1 = surveyService.save(new Survey());
 
         Topic topic1 = new Topic("Topic 1", u1, defaultSurvey1.getSurveyId(), topicUsersArrayList1, TopicFrequency.MONDAY);
