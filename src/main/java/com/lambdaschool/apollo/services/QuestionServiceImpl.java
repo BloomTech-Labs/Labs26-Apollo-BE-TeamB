@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -21,16 +22,18 @@ public class QuestionServiceImpl implements QuestionService {
     private SurveyService surveyService;
 
     @Override
-    public Question findById(long id) {
+    public Question findById(long id) throws ResourceNotFoundException{
 
         return questionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Question " + id + " Not Found"));
     }
 
     @Override
-    public List<Question> findAll() {
-        return questionRepository.findAll();
-//                .orElseThrow(() -> new ResourceNotFoundException("Something went horribly wrong..."));
+    public List<Question> findAllQuestions() {
+        List<Question> q = new ArrayList<>();
+
+        questionRepository.findAll().iterator().forEachRemaining(q::add);
+        return q;
     }
 
     @Override
@@ -68,4 +71,6 @@ public class QuestionServiceImpl implements QuestionService {
     public Question update(Question question) {
         return null;
     }
+
+
 }

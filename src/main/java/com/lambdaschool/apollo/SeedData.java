@@ -5,6 +5,7 @@ import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 import com.lambdaschool.apollo.models.*;
 import com.lambdaschool.apollo.services.*;
+import com.lambdaschool.apollo.views.QuestionType;
 import com.lambdaschool.apollo.views.TopicFrequency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -240,20 +241,20 @@ public class SeedData
         /*******************************************************************/
         // questions
 
-        Question question1 = new Question("Leader Question 1", true, "text", survey1);
-        questionService.save(question1);
+        Question question1 = new Question("Leader Question 1", true, QuestionType.TEXT, survey1);
+        question1 = questionService.save(question1);
 
-        Question question2 = new Question("Leader Question 2", true, "text", survey1);
-        questionService.save(question2);
+        Question question2 = new Question("Leader Question 2", true, QuestionType.TEXT, survey1);
+        question2 = questionService.save(question2);
 
-        Question question3 = new Question("Leader Question 3", true, "text", survey1);
-        questionService.save(question3);
+        Question question3 = new Question("Member Question 1", false, QuestionType.TEXT, survey1);
+        question3 = questionService.save(question3);
 
-        Question question4 = new Question("Leader Question 4", true, "text", survey2);
-        questionService.save(question4);
+        Question question4 = new Question("Member Question 2", false, QuestionType.TEXT, survey2);
+        question4 = questionService.save(question4);
 
-        Question question5 = new Question("Leader Question 5", true, "text", survey2);
-        questionService.save(question5);
+        Question question5 = new Question("Member Question 3", false, QuestionType.TEXT, survey2);
+        question5 = questionService.save(question5);
 
     }
 }
