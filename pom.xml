@@ -28,7 +28,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        
         <!--        DevTools can cause some console messages to appear twice!-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -109,6 +109,14 @@
             <version>3.3.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!--        Okta stuff-->
+        <dependency>
+            <groupId>com.okta.spring</groupId>
+            <artifactId>okta-spring-boot-starter</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
