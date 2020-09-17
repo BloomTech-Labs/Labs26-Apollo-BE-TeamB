@@ -17,7 +17,7 @@ public class TopicUsers extends Auditable implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "topicId")
-    @JsonIgnoreProperties(value = "users", allowSetters = true)
+    @JsonIgnoreProperties(value = {"users", ""}, allowSetters = true)
     private Topic topic;
 
     /**
@@ -27,7 +27,7 @@ public class TopicUsers extends Auditable implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "userId")
-    @JsonIgnoreProperties(value = "topics", allowSetters = true)
+    @JsonIgnoreProperties(value = {"topics", "ownedtopics","roles","primaryemail"}, allowSetters = true)
     private User user;
 
     /**

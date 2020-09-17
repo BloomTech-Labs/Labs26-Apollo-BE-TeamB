@@ -1,5 +1,7 @@
 package com.lambdaschool.apollo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,30 +15,35 @@ public class Survey extends Auditable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long surveyId;
 
+
+    @ManyToOne
+    @JoinColumn(name = "topicId")
+    @JsonIgnoreProperties({"surveyrequests"})
+    private Topic topic;
+
     /**
      * Default constructor used primarily by the JPA.
      */
     public Survey() {
     }
 
-    /**
-     * Getter for surveyId
-     *
-     * @return the surveyId (long) of the survey
-     */
+    public Survey(Topic topic) {
+        this.topic = topic;
+    }
+
     public long getSurveyId() {
         return surveyId;
     }
 
-    /**
-     * Setter for surveyId. Used primary for seeding data
-     *
-     * @param surveyId the new surveyId (long) of the survey
-     */
     public void setSurveyId(long surveyId) {
         this.surveyId = surveyId;
     }
 
+    public Topic getTopic() {
+        return topic;
+    }
 
-
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
 }
