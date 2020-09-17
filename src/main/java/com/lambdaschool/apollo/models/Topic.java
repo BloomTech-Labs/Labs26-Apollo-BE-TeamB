@@ -44,6 +44,8 @@ public class Topic extends Auditable {
     //ID of the defaul survey a topic uses to prepopulate any survey request
     private long defaultsurveyid;
 
+    private String joincode;
+
     //Survey Requests that an owner of a topic has generated
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties({"topic"})

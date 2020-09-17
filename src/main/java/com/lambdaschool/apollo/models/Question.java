@@ -1,6 +1,7 @@
 package com.lambdaschool.apollo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.lambdaschool.apollo.views.QuestionType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -35,7 +36,7 @@ public class Question extends Auditable {
      */
     @NotNull
     @Column(nullable = false)
-    private String type;
+    private QuestionType type;
 
     /**
      * The surveyid of the survey assigned to this question is what is stored in the database.
@@ -45,7 +46,7 @@ public class Question extends Auditable {
      * A survey can have many questions.
      */
     @ManyToOne
-    @JoinColumn(name = "surveyId", nullable = false)
+    @JoinColumn(name = "surveyId")
     @JsonIgnoreProperties(value = "questions", allowSetters = true)
     private Survey survey;
 
@@ -65,7 +66,7 @@ public class Question extends Auditable {
      * @param type     The type (String) of the question
      * @param survey   The survey (Survey) connected to the question
      */
-    public Question(String body, boolean isLeader, String type, Survey survey) {
+    public Question(String body, boolean isLeader, QuestionType type, Survey survey) {
         setBody(body);
         setLeader(isLeader);
         setType(type);
@@ -131,7 +132,7 @@ public class Question extends Auditable {
      *
      * @return the type (String) of the question
      */
-    public String getType() {
+    public QuestionType getType() {
         return type;
     }
 
@@ -140,27 +141,15 @@ public class Question extends Auditable {
      *
      * @param type the new type (String) of the question
      */
-    public void setType(String type) {
+    public void setType(QuestionType type) {
         this.type = type;
     }
 
-    /**
-     * Getter for survey
-     *
-     * @return the survey (Survey) of the question
-     */
     public Survey getSurvey() {
         return survey;
     }
 
-    /**
-     * Setter for survey. Used primary for seeding data
-     *
-     * @param survey the new survey (Survey) of the question
-     */
     public void setSurvey(Survey survey) {
         this.survey = survey;
     }
-
-
 }

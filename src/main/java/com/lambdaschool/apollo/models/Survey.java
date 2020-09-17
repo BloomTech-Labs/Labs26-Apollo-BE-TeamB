@@ -3,6 +3,8 @@ package com.lambdaschool.apollo.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "surveys")
@@ -18,8 +20,13 @@ public class Survey extends Auditable {
 
     @ManyToOne
     @JoinColumn(name = "topicId")
-    @JsonIgnoreProperties({"surveyrequests"})
+    @JsonIgnoreProperties({"surveysrequests", "owner", "defaultsurveyid", "users"})
     private Topic topic;
+
+    @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("survey")
+    private List<Question> questions = new ArrayList<>();
+
 
     /**
      * Default constructor used primarily by the JPA.
@@ -45,5 +52,17 @@ public class Survey extends Auditable {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    public void addQuestion(Question question) {
+        this.questions.add(question);
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

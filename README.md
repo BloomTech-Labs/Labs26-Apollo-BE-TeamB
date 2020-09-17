@@ -9,6 +9,9 @@ Table layout will be provide here once finalized
 ### Endpoints:
 
 <details>
+Topics
+--------
+
 <summary>GET: http://apollo-b-api.herokuapp.com/topics/topics - Get all topics regardless of user</summary>
 
 GET Endpoint
@@ -128,6 +131,8 @@ GET Endpoint
 </details>
 
 <details>
+Users
+-------
 <summary>GET: http://apollo-b-api.herokuapp.com/users/users Returns user info included topics of which they are a member</summary>
 
 ```JSON
@@ -300,6 +305,180 @@ GET Endpoint
             }
         ]
     }]
+
+```
+</details>
+<details>
+Surveys
+-------
+<summary>GET: http://apollo-b-api.herokuapp.com/surveys/all Returns list of surveys</summary>
+
+```JSON
+[
+    {
+        "surveyId": 34,
+        "topic": null,
+        "questions": []
+    },
+    {
+        "surveyId": 41,
+        "topic": {
+            "topicId": 35,
+            "title": "Topic 1",
+            "frequency": "MONDAY"
+        },
+        "questions": [
+            {
+                "questionId": 51,
+                "body": "Leader Question 1",
+                "type": "TEXT",
+                "leader": true
+            },
+            {
+                "questionId": 52,
+                "body": "Leader Question 2",
+                "type": "TEXT",
+                "leader": true
+            },
+            {
+                "questionId": 53,
+                "body": "Member Question 1",
+                "type": "TEXT",
+                "leader": false
+            }
+        ]
+    },
+    {
+        "surveyId": 42,
+        "topic": {
+            "topicId": 35,
+            "title": "Topic 1",
+            "frequency": "MONDAY"
+        },
+        "questions": [
+            {
+                "questionId": 54,
+                "body": "Member Question 2",
+                "type": "TEXT",
+                "leader": false
+            },
+            {
+                "questionId": 55,
+                "body": "Member Question 3",
+                "type": "TEXT",
+                "leader": false
+            }
+        ]
+    },
+    {
+        "surveyId": 43,
+        "topic": {
+            "topicId": 35,
+            "title": "Topic 1",
+            "frequency": "MONDAY"
+        },
+        "questions": []
+    },
+    {
+        "surveyId": 44,
+        "topic": {
+            "topicId": 35,
+            "title": "Topic 1",
+            "frequency": "MONDAY"
+        },
+        "questions": []
+    },
+    {
+        "surveyId": 45,
+        "topic": {
+            "topicId": 35,
+            "title": "Topic 1",
+            "frequency": "MONDAY"
+        },
+        "questions": []
+    }
+]
+
+```
+</details>
+<details>
+Surveys
+-------
+<summary>GET: http://apollo-b-api.herokuapp.com/questions Returns list of questions</summary>
+
+```JSON
+[
+    {
+        "questionId": 51,
+        "body": "Leader Question 1",
+        "type": "TEXT",
+        "survey": {
+            "surveyId": 41,
+            "topic": {
+                "topicId": 35,
+                "title": "Topic 1",
+                "frequency": "MONDAY"
+            }
+        },
+        "leader": true
+    },
+    {
+        "questionId": 52,
+        "body": "Leader Question 2",
+        "type": "TEXT",
+        "survey": {
+            "surveyId": 41,
+            "topic": {
+                "topicId": 35,
+                "title": "Topic 1",
+                "frequency": "MONDAY"
+            }
+        },
+        "leader": true
+    },
+    {
+        "questionId": 53,
+        "body": "Member Question 1",
+        "type": "TEXT",
+        "survey": {
+            "surveyId": 41,
+            "topic": {
+                "topicId": 35,
+                "title": "Topic 1",
+                "frequency": "MONDAY"
+            }
+        },
+        "leader": false
+    },
+    {
+        "questionId": 54,
+        "body": "Member Question 2",
+        "type": "TEXT",
+        "survey": {
+            "surveyId": 42,
+            "topic": {
+                "topicId": 35,
+                "title": "Topic 1",
+                "frequency": "MONDAY"
+            }
+        },
+        "leader": false
+    },
+    {
+        "questionId": 55,
+        "body": "Member Question 3",
+        "type": "TEXT",
+        "survey": {
+            "surveyId": 42,
+            "topic": {
+                "topicId": 35,
+                "title": "Topic 1",
+                "frequency": "MONDAY"
+            }
+        },
+        "leader": false
+    }
+]
 
 ```
 </details>
