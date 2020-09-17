@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -351,5 +352,10 @@ public class UserController {
         User u = userService.findByName(authentication.getName());
         return new ResponseEntity<>(u,
                 HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/dummy") // <-- for jwt testing purposes
+    public ResponseEntity<?> helloWorld(JwtAuthenticationToken authentication) {
+        return new ResponseEntity<>(authentication.getTokenAttributes(), HttpStatus.OK);
     }
 }
