@@ -64,7 +64,7 @@ public class OpenController {
         User newuser = new User();
 
         newuser.setUsername(newminuser.getUsername());
-        newuser.setPassword(newminuser.getPassword());
+//        newuser.setPassword(newminuser.getPassword());
         newuser.setPrimaryemail(newminuser.getPrimaryemail());
 
         // add the default role of user
@@ -110,8 +110,6 @@ public class OpenController {
                 "read write trust");
         map.add("username",
                 newminuser.getUsername());
-        map.add("password",
-                newminuser.getPassword());
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map,
                 headers);
