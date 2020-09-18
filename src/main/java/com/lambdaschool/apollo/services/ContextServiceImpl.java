@@ -2,7 +2,6 @@ package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
 import com.lambdaschool.apollo.models.Context;
-import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.repository.ContextRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,15 +65,8 @@ public class ContextServiceImpl implements ContextService {
                     .orElseThrow(() -> new ResourceNotFoundException("Context Id " + context.getContextId() + " Not Found"));
             newContext.setContextId(context.getContextId());
         }
-        newContext.setDescription(context.getDescription());
-        Survey survey = surveyService.findById(context.getSurvey().getSurveyId());
-        if (survey != null) {
-            newContext.setSurvey(survey);
-            return contextRepository.save(newContext);
-        } else {
-            throw new ResourceNotFoundException("Survey Id " + context.getSurvey().getSurveyId() + " Not Found");
-        }
-
+        newContext.setContextname(context.getContextname());
+        return contextRepository.save(newContext);
     }
 
     @Transactional
