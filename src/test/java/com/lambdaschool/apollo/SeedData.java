@@ -64,9 +64,8 @@ public class SeedData
                 r2));
         admins.add(new UserRoles(new User(),
                 r3));
-        User u1 = new User("admin",
-                "password",
-                "admin@lambdaschool.local",
+        User u1 = new User("FinnTheHuman",
+                "Jeremy@Shada.Ooo",
                 admins);
 
         userService.save(u1);
@@ -77,9 +76,8 @@ public class SeedData
                 r3));
         datas.add(new UserRoles(new User(),
                 r2));
-        User u2 = new User("cinnamon",
-                "1234567",
-                "cinnamon@lambdaschool.local",
+        User u2 = new User("JakeTheDog",
+                "John@DiMaggio.Ooo",
                 datas);
         userService.save(u2);
 
@@ -87,27 +85,24 @@ public class SeedData
         ArrayList<UserRoles> users = new ArrayList<>();
         users.add(new UserRoles(new User(),
                 r2));
-        User u3 = new User("barnbarn",
-                "ILuvM4th!",
-                "barnbarn@lambdaschool.local",
+        User u3 = new User("BMO",
+                "Niki@Yang.Ooo",
                 users);
         userService.save(u3);
 
         users = new ArrayList<>();
         users.add(new UserRoles(new User(),
                 r2));
-        User u4 = new User("puttat",
-                "password",
-                "puttat@school.lambda",
+        User u4 = new User("IceKing",
+                "Tom@Kenny.Ooo",
                 users);
         userService.save(u4);
 
         users = new ArrayList<>();
         users.add(new UserRoles(new User(),
                 r2));
-        User u5 = new User("misskitty",
-                "password",
-                "misskitty@school.lambda",
+        User u5 = new User("Lemongrab",
+                "Justin@Roiland.Ooo",
                 users);
         userService.save(u5);
     }
