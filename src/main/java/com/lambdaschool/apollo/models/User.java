@@ -66,9 +66,7 @@ public class User
     private String primaryemail;
 
 
-    /**
-     * This field captures which topics a user owns
-     */
+
     @ApiModelProperty(name = "roles",
             value = "List of user roles for this users")
     @OneToMany(mappedBy = "user",
@@ -78,6 +76,9 @@ public class User
     @JsonIgnore
     private List<UserRoles> roles = new ArrayList<>();
 
+    /**
+     * This field captures which topics a user owns
+     */
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"owner", "users"}, allowSetters = true)
     private List<Topic> ownedtopics = new ArrayList<>();
