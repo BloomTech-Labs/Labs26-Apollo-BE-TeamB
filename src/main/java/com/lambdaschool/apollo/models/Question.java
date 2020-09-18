@@ -1,10 +1,13 @@
 package com.lambdaschool.apollo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lambdaschool.apollo.views.QuestionType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "questions")
@@ -50,6 +53,9 @@ public class Question extends Auditable {
     @JsonIgnoreProperties(value = "questions", allowSetters = true)
     private Survey survey;
 
+    @ManyToMany(mappedBy = "contextquestions")
+    @JsonIgnore
+    private List<Context> contexts = new ArrayList<>();
     /**
      * Default constructor used primarily by the JPA.
      */
@@ -64,13 +70,11 @@ public class Question extends Auditable {
      * @param body     The body (String) of the question
      * @param isLeader The isLeader (boolean) of the question
      * @param type     The type (String) of the question
-     * @param survey   The survey (Survey) connected to the question
      */
-    public Question(String body, boolean isLeader, QuestionType type, Survey survey) {
+    public Question(String body, boolean isLeader, QuestionType type) {
         setBody(body);
         setLeader(isLeader);
         setType(type);
-        setSurvey(survey);
     }
 
     /**

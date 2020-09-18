@@ -164,7 +164,47 @@ public class SeedData
 
 
 
+//      Create all the Contexts
+// context
+        Context context1 = new Context("Product Leadership");
+        Context context2 = new Context("Delivery Management");
+        Context context3 = new Context("Project Management");
+        Context context4 = new Context("Design Leadership");
+        Context context5 = new Context("Engineering Leadership");
 
+        //   create All the Questions
+        Question question1 = new Question("What is the priority today?", true, QuestionType.TEXT);
+        Question question2 = new Question("Are we on schedule?", true, QuestionType.TEXT);
+        Question question3 = new Question("What did you accomplish yesterday?", false, QuestionType.TEXT);
+        Question question4 = new Question("What do you plan to work on today?", false, QuestionType.TEXT);
+
+//      add the questions to the correct context
+        context1.getContextquestions().add(question1);
+        context1.getContextquestions().add(question2);
+        context1.getContextquestions().add(question3);
+        context1.getContextquestions().add(question4);
+        context2.getContextquestions().add(question1);
+        context2.getContextquestions().add(question2);
+        context2.getContextquestions().add(question3);
+        context2.getContextquestions().add(question4);
+        context3.getContextquestions().add(question1);
+        context3.getContextquestions().add(question2);
+        context3.getContextquestions().add(question3);
+        context3.getContextquestions().add(question4);
+        context4.getContextquestions().add(question1);
+        context4.getContextquestions().add(question2);
+        context4.getContextquestions().add(question3);
+        context4.getContextquestions().add(question4);
+        context5.getContextquestions().add(question1);
+        context5.getContextquestions().add(question2);
+        context5.getContextquestions().add(question3);
+        context5.getContextquestions().add(question4);
+
+        contextService.save(context1);
+        contextService.save(context2);
+        contextService.save(context3);
+        contextService.save(context4);
+        contextService.save(context5);
         /*******************************************************************/
         //List of members to add to topic
         ArrayList<TopicUsers> topicUsersArrayList1 = new ArrayList<>();
@@ -221,40 +261,6 @@ public class SeedData
 
         Survey survey5 = new Survey(topic1);
         survey5 = surveyService.save(survey5);
-
-        // context
-        Context context1 = new Context("Product Leadership", survey1);
-        contextService.save(context1);
-
-        Context context2 = new Context("Delivery Management", survey2);
-        contextService.save(context2);
-
-        Context context3 = new Context("Project Management", survey3);
-        contextService.save(context3);
-
-        Context context4 = new Context("Design Leadership", survey4);
-        contextService.save(context4);
-
-        Context context5 = new Context("Engineering Leadership", survey5);
-        contextService.save(context5);
-
-        /*******************************************************************/
-        // questions
-
-        Question question1 = new Question("Leader Question 1", true, QuestionType.TEXT, survey1);
-        question1 = questionService.save(question1);
-
-        Question question2 = new Question("Leader Question 2", true, QuestionType.TEXT, survey1);
-        question2 = questionService.save(question2);
-
-        Question question3 = new Question("Member Question 1", false, QuestionType.TEXT, survey1);
-        question3 = questionService.save(question3);
-
-        Question question4 = new Question("Member Question 2", false, QuestionType.TEXT, survey2);
-        question4 = questionService.save(question4);
-
-        Question question5 = new Question("Member Question 3", false, QuestionType.TEXT, survey2);
-        question5 = questionService.save(question5);
 
     }
 }
