@@ -15,63 +15,34 @@ import java.util.List;
 public class ContextServiceImpl implements ContextService {
 
     @Autowired
-    private ContextRepository contextRepository;
-
-    @Autowired
-    private SurveyService surveyService;
+    private ContextRepository contextrepos;
 
     @Override
-    public List<Context> findAll() {
+    public List<Context> findAllContexts(){
+        List<Context> allcontexts = new ArrayList<>();
 
-        List<Context> contextList = new ArrayList<>();
-        contextRepository.findAll().iterator().forEachRemaining(contextList::add);
-        return contextList;
+        contextrepos.findAll().iterator()
+                .forEachRemaining(allcontexts::add);
+        return allcontexts;
     }
 
     @Override
-    public Context findById(long id) {
-
-        return contextRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Context " + id + " Not Found"));
-    }
-
-    @Override
-    public Context findByDescription(String description) {
-
-        Context context = contextRepository.findContextByDescription(description.toLowerCase());
-        if (context == null) {
-            throw new ResourceNotFoundException("Context Description: " + description + " Not Found");
-        }
-        return context;
+    public Context findContextById(long contextid)
+            throws ResourceNotFoundException
+    {
+        return contextrepos.findById(contextid)
+                .orElseThrow(() -> new
+                        ResourceNotFoundException
+                        ("Context id " + contextid + " Not Found!"));
     }
 
     @Transactional
     @Override
-    public void delete(long id) {
-
-        contextRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Context " + id + " Not Found"));
-        contextRepository.deleteById(id);
-    }
-
-    @Transactional
-    @Override
-    public Context save(Context context) {
-
+    public Context save(Context context){
         Context newContext = new Context();
-
-        if (context.getContextId() != 0) {
-            Context oldContext = contextRepository.findById(context.getContextId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Context Id " + context.getContextId() + " Not Found"));
-            newContext.setContextId(context.getContextId());
-        }
         newContext.setContextname(context.getContextname());
-        return contextRepository.save(newContext);
+        newContext.setContextquestions(context.getContextquestions());
+        return contextrepos.save(newContext);
     }
 
-    @Transactional
-    @Override
-    public Context update(Context context, long id) {
-        return null;
-    }
 }

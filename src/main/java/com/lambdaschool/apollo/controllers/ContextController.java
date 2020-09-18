@@ -19,16 +19,20 @@ public class ContextController {
     @Autowired
     private ContextService contextService;
 
-    @GetMapping(value = "/contexts", produces = {"application/json"})
+    @GetMapping(value = "/all",
+            produces = {"application/json"})
     public ResponseEntity<?> getAllContexts() {
-        List<Context> myContexts = contextService.findAll();
-        return new ResponseEntity<>(myContexts,HttpStatus.OK);
+        List<Context> allContexts = contextService.findAllContexts();
+        return new ResponseEntity<>(allContexts,
+                HttpStatus.OK);
     }
 
-    @GetMapping(value = "/contexts/{contextId}", produces = {"application/json"})
-    public ResponseEntity<?> getContextById(@PathVariable Long contextId) {
-        Context context = contextService.findById(contextId);
-        return new ResponseEntity<>(context, HttpStatus.OK);
+    @GetMapping(value = "/contextid={contextid}/questions",
+            produces = {"application/json"})
+    public ResponseEntity<?> getQuestionsByContextId(@PathVariable Long contextid)
+    {
+        Context context = contextService.findContextById(contextid);
+        return new ResponseEntity<>(context.getContextquestions(), HttpStatus.OK);
     }
 
 }
