@@ -23,6 +23,10 @@ public class Survey extends Auditable {
     @JsonIgnoreProperties({"surveysrequests", "owner", "defaultsurveyid", "users"})
     private Topic topic;
 
+    @OneToMany(mappedBy = "defaultsurvey", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = {"defaultsurvey", "survey"})
+    private List<Topic> defaulttopic;
+
     @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("survey")
     private List<Question> questions = new ArrayList<>();
@@ -64,5 +68,13 @@ public class Survey extends Auditable {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public List<Topic> getDefaulttopic() {
+        return defaulttopic;
+    }
+
+    public void setDefaulttopic(List<Topic> defaulttopic) {
+        this.defaulttopic = defaulttopic;
     }
 }

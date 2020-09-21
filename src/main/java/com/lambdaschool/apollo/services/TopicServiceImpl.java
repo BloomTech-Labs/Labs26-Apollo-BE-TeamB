@@ -66,7 +66,6 @@ public class TopicServiceImpl implements TopicService {
     public Topic save(Topic topic) {
 
         Topic newTopic = new Topic();
-
         if (topic.getTopicId() != 0) {
             Topic oldTopic = topicRepository.findById(topic.getTopicId())
                     .orElseThrow(() -> new ResourceNotFoundException("Topic " + topic.getTopicId() + " Not Found"));
@@ -77,8 +76,7 @@ public class TopicServiceImpl implements TopicService {
             }
             newTopic.setTopicId(oldTopic.getTopicId());
         }
-
-        newTopic.setTitle(topic.getTitle());
+        System.out.println("prost-getTopic");
 
         User owner = userService.findByName(topic.getOwner().getUsername());
         if (owner != null) {
@@ -87,9 +85,10 @@ public class TopicServiceImpl implements TopicService {
             throw new ResourceNotFoundException("User " + topic.getOwner().getUsername() + " Not Found");
         }
 
-        Survey survey = surveyService.findById(topic.getDefaultsurveyid());
+        Survey survey = surveyService.findById(topic.getDefaultsurvey().getSurveyId());
         if (survey != null) {
             newTopic.setDefaultsurveyid(survey.getSurveyId());
+            newTopic.setDefaultsurvey(topic.getDefaultsurvey());
         } else {
             throw new ResourceNotFoundException("Survey Id " + topic.getDefaultsurveyid() + " Not Found");
         }
@@ -107,9 +106,9 @@ public class TopicServiceImpl implements TopicService {
         }
 
         newTopic.setFrequency(topic.getFrequency());
+        System.out.println("prost-getTopic");
 
         return topicRepository.save(newTopic);
-
     }
 
     @Override

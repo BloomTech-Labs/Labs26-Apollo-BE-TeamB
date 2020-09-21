@@ -17,6 +17,7 @@ public class Topic extends Auditable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "topicId")
     private long topicId;
 
     /**
@@ -44,11 +45,16 @@ public class Topic extends Auditable {
     //ID of the defaul survey a topic uses to prepopulate any survey request
     private long defaultsurveyid;
 
+    @ManyToOne
+    @JoinColumn(name = "surveyId")
+    @JsonIgnoreProperties(value = {"defaulttopic", "topic"}, allowSetters = true)
+    private Survey defaultsurvey;
+
     private String joincode;
 
     //Survey Requests that an owner of a topic has generated
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties({"topic"})
+    @JsonIgnoreProperties(value = {"topic", "defaulttopic"}, allowSetters = true)
     private List<Survey> surveysrequests = new ArrayList<>();
 
     /**
@@ -68,7 +74,7 @@ public class Topic extends Auditable {
     public Topic(@NotNull String title, User owner, Survey survey, TopicFrequency frequency) {
         this.title = title;
         this.owner = owner;
-        this.defaultsurveyid = survey.getSurveyId();
+        this.defaultsurvey = survey;
         this.frequency = frequency;
     }
 
@@ -143,5 +149,21 @@ public class Topic extends Auditable {
 
     public void setFrequency(TopicFrequency frequency) {
         this.frequency = frequency;
+    }
+
+    public String getJoincode() {
+        return joincode;
+    }
+
+    public void setJoincode(String joincode) {
+        this.joincode = joincode;
+    }
+
+    public Survey getDefaultsurvey() {
+        return defaultsurvey;
+    }
+
+    public void setDefaultsurvey(Survey defaultsurvey) {
+        this.defaultsurvey = defaultsurvey;
     }
 }
