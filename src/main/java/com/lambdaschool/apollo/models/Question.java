@@ -47,7 +47,7 @@ public class Question extends Auditable {
      */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "surveyId")
-    @JsonIgnoreProperties(value = "questions", allowSetters = true)
+    @JsonIgnoreProperties(value = {"questions", "topic", "defaulttopic"}, allowSetters = true)
     private Survey survey;
 
     /**
