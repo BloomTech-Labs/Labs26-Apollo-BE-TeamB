@@ -166,4 +166,12 @@ public class Topic extends Auditable {
     public void setDefaultsurvey(Survey defaultsurvey) {
         this.defaultsurvey = defaultsurvey;
     }
+
+    @Override
+    public String toString() {
+        return "Topic{" +
+                "title='" + title + '\'' +
+                ", owner=" + owner +
+                '}';
+    }
 }

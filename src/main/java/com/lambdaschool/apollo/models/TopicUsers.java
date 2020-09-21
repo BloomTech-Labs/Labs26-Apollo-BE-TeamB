@@ -15,7 +15,7 @@ public class TopicUsers extends Auditable implements Serializable {
      * Also is a foreign key into the topics table
      */
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "topicId")
     @JsonIgnoreProperties(value = {"users", ""}, allowSetters = true)
     private Topic topic;
@@ -25,7 +25,7 @@ public class TopicUsers extends Auditable implements Serializable {
      * Also is a foreign key into the users table
      */
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     @JsonIgnoreProperties(value = {"topics", "ownedtopics","roles","primaryemail"}, allowSetters = true)
     private User user;
@@ -97,5 +97,11 @@ public class TopicUsers extends Auditable implements Serializable {
         return Objects.hash(getTopic(), getUser());
     }
 
-
+    @Override
+    public String toString() {
+        return "TopicUsers{" +
+                "topic=" + topic +
+                ", user=" + user +
+                '}';
+    }
 }

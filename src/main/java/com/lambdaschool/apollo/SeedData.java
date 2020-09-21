@@ -168,6 +168,8 @@ public class SeedData
 
         /*******************************************************************/
         //List of members to add to topic
+        //NOT WORKING. LEAVING HERE FOR REFERENCE
+
 //        ArrayList<TopicUsers> topicUsersArrayList1 = new ArrayList<>();
 //        topicUsersArrayList1.add(new TopicUsers(new Topic(), u1));
 //        topicUsersArrayList1.add(new TopicUsers(new Topic(), u2));
@@ -181,20 +183,16 @@ public class SeedData
         /*******************************************************************/
         // topics
 
-        //Default survey to initialize a Topic with
-//        Survey defaultSurvey1 = surveyService.save(new Survey());
-//        System.out.println(defaultSurvey1.getSurveyId());
-//        Topic topic1 = new Topic("Topic 1", u1, defaultSurvey1.getSurveyId(), topicUsersArrayList1, TopicFrequency.MONDAY);
-//        topic1 = topicService.save(topic1);
+
+
         Survey s1 = surveyService.save(new Survey());
-        System.out.println(s1.getSurveyId());
         Topic topic2 = new Topic("Topic 2", u1, s1, TopicFrequency.MONDAY);
         topic2 = topicService.save(topic2);
 
         Survey s2 = surveyService.save(new Survey());
         Topic topic3 = new Topic("Topic 3", u2, s2, TopicFrequency.WEEKLY);
         topic3 = topicService.save(topic3);
-        System.out.println(s2.getSurveyId());
+
 
         Survey s3 = surveyService.save(new Survey());
         Topic topic4 = new Topic("Topic 4", u2, s3, TopicFrequency.WEEKLY);
@@ -207,8 +205,6 @@ public class SeedData
         Survey s5 = surveyService.save(new Survey());
         Topic topic6 = new Topic("Topic 6", u2, s5, TopicFrequency.MONTHLY);
         topic6 = topicService.save(topic6);
-
-
 
 
         /******************************************************************/
@@ -265,6 +261,5 @@ public class SeedData
 
         Question question5 = new Question("Member Question 3", false, QuestionType.TEXT, survey2);
         question5 = questionService.save(question5);
-
     }
 }

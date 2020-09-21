@@ -2,10 +2,7 @@ package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.exceptions.ResourceFoundException;
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
-import com.lambdaschool.apollo.models.Question;
-import com.lambdaschool.apollo.models.Survey;
-import com.lambdaschool.apollo.models.Topic;
-import com.lambdaschool.apollo.models.User;
+import com.lambdaschool.apollo.models.*;
 import com.lambdaschool.apollo.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,9 +68,9 @@ public class TopicServiceImpl implements TopicService {
                     .orElseThrow(() -> new ResourceNotFoundException("Topic " + topic.getTopicId() + " Not Found"));
 
             // delete the users for the old topic we are replacing
-//            for (TopicUsers tu : oldTopic.getUsers()) {
-//                deleteTopicUser(tu.getTopic().getTopicId(), tu.getUser().getUserid());
-//            }
+            for (TopicUsers tu : oldTopic.getUsers()) {
+                deleteTopicUser(tu.getTopic().getTopicId(), tu.getUser().getUserid());
+            }
             newTopic.setTopicId(oldTopic.getTopicId());
         }
         newTopic.setTitle(topic.getTitle());
@@ -95,6 +92,10 @@ public class TopicServiceImpl implements TopicService {
 
 
         newTopic.getUsers().clear();
+
+        for (TopicUsers tu : topic.getUsers()) {
+            newTopic.getUsers().add(new TopicUsers(newTopic, tu.getUser()));
+        }
 
         return topicRepository.save(newTopic);
     }
