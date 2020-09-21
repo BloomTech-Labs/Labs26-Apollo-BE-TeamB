@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/surveys")
@@ -36,6 +37,12 @@ public class SurveyController {
         return new ResponseEntity<>(newSurvey, HttpStatus.CREATED);
     }
 
+
+    @GetMapping(value = "/all", produces = {"application/json"})
+    public ResponseEntity<?> getAllSurveys() {
+        List<Survey> surveys = surveyService.findAllSurveys();
+        return new ResponseEntity<>(surveys, HttpStatus.OK);
+    }
     
 
 }

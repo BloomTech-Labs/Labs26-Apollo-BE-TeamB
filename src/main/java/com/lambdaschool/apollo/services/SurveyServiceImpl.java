@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Transactional
 @Service(value = "surveyService")
 public class SurveyServiceImpl implements SurveyService {
@@ -34,5 +37,12 @@ public class SurveyServiceImpl implements SurveyService {
     @Override
     public Survey save(Survey survey) {
         return surveyRepository.save(survey);
+    }
+
+    @Override
+    public List<Survey> findAllSurveys() {
+        List<Survey> list = new ArrayList<>();
+        surveyRepository.findAll().iterator().forEachRemaining(list::add);
+        return list;
     }
 }

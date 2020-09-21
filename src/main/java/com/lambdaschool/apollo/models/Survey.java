@@ -1,6 +1,10 @@
 package com.lambdaschool.apollo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "surveys")
@@ -13,30 +17,52 @@ public class Survey extends Auditable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long surveyId;
 
+
+    @ManyToOne
+    @JoinColumn(name = "topicId")
+    @JsonIgnoreProperties({"surveysrequests", "owner", "defaultsurveyid", "users"})
+    private Topic topic;
+
+    @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("survey")
+    private List<Question> questions = new ArrayList<>();
+
+
     /**
      * Default constructor used primarily by the JPA.
      */
     public Survey() {
     }
 
-    /**
-     * Getter for surveyId
-     *
-     * @return the surveyId (long) of the survey
-     */
+    public Survey(Topic topic) {
+        this.topic = topic;
+    }
+
     public long getSurveyId() {
         return surveyId;
     }
 
-    /**
-     * Setter for surveyId. Used primary for seeding data
-     *
-     * @param surveyId the new surveyId (long) of the survey
-     */
     public void setSurveyId(long surveyId) {
         this.surveyId = surveyId;
     }
 
+    public Topic getTopic() {
+        return topic;
+    }
 
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
 
+    public void addQuestion(Question question) {
+        this.questions.add(question);
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
 }
