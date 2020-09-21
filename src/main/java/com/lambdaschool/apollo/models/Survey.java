@@ -18,17 +18,17 @@ public class Survey extends Auditable {
     private long surveyId;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "topicId")
-    @JsonIgnoreProperties({"surveysrequests", "owner", "defaultsurveyid", "users"})
+    @JsonIgnoreProperties(value = {"surveysrequests", "owner", "defaultsurveyid", "users"}, allowSetters = true)
     private Topic topic;
 
     @OneToMany(mappedBy = "defaultsurvey", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = {"defaultsurvey", "survey"})
+    @JsonIgnoreProperties(value = {"defaultsurvey", "survey"}, allowSetters = true)
     private List<Topic> defaulttopic;
 
     @OneToMany(mappedBy = "survey", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("survey")
+    @JsonIgnoreProperties(value = "survey", allowSetters = true)
     private List<Question> questions = new ArrayList<>();
 
 

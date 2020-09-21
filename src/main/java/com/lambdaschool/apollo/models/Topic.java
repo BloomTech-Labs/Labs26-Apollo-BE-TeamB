@@ -28,7 +28,7 @@ public class Topic extends Auditable {
     private String title;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties(value = {"ownedtopics", "topics", "primaryemail", "roles", ""}, allowSetters = true)
     private User owner;
@@ -45,7 +45,7 @@ public class Topic extends Auditable {
     //ID of the defaul survey a topic uses to prepopulate any survey request
     private long defaultsurveyid;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "surveyId")
     @JsonIgnoreProperties(value = {"defaulttopic", "topic"}, allowSetters = true)
     private Survey defaultsurvey;

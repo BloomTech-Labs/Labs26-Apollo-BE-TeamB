@@ -2,9 +2,9 @@ package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.exceptions.ResourceFoundException;
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
+import com.lambdaschool.apollo.models.Question;
 import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.models.Topic;
-import com.lambdaschool.apollo.models.TopicUsers;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,12 +71,12 @@ public class TopicServiceImpl implements TopicService {
                     .orElseThrow(() -> new ResourceNotFoundException("Topic " + topic.getTopicId() + " Not Found"));
 
             // delete the users for the old topic we are replacing
-            for (TopicUsers tu : oldTopic.getUsers()) {
-                deleteTopicUser(tu.getTopic().getTopicId(), tu.getUser().getUserid());
-            }
+//            for (TopicUsers tu : oldTopic.getUsers()) {
+//                deleteTopicUser(tu.getTopic().getTopicId(), tu.getUser().getUserid());
+//            }
             newTopic.setTopicId(oldTopic.getTopicId());
         }
-        System.out.println("prost-getTopic");
+        newTopic.setTitle(topic.getTitle());
 
         User owner = userService.findByName(topic.getOwner().getUsername());
         if (owner != null) {
@@ -85,28 +85,16 @@ public class TopicServiceImpl implements TopicService {
             throw new ResourceNotFoundException("User " + topic.getOwner().getUsername() + " Not Found");
         }
 
-        Survey survey = surveyService.findById(topic.getDefaultsurvey().getSurveyId());
-        if (survey != null) {
-            newTopic.setDefaultsurveyid(survey.getSurveyId());
-            newTopic.setDefaultsurvey(topic.getDefaultsurvey());
-        } else {
-            throw new ResourceNotFoundException("Survey Id " + topic.getDefaultsurveyid() + " Not Found");
+        newTopic.setFrequency(topic.getFrequency());
+
+        newTopic.setDefaultsurvey(new Survey(newTopic));
+        for (Question sq : topic.getDefaultsurvey().getQuestions()) {
+            newTopic.getDefaultsurvey().addQuestion(new Question(sq.getBody(), sq.isLeader(),sq.getType(),newTopic.getDefaultsurvey()));
         }
+        newTopic.setJoincode("ABCD");
+
 
         newTopic.getUsers().clear();
-        if (topic.getTopicId() == 0) {
-            for (TopicUsers tu : topic.getUsers()) {
-                User newUser = userService.findByName(tu.getUser().getUsername());
-                newTopic.addUser(newUser);
-            }
-        } else {
-            for (TopicUsers tu : topic.getUsers()) {
-                addTopicUser(newTopic.getTopicId(), tu.getUser().getUserid());
-            }
-        }
-
-        newTopic.setFrequency(topic.getFrequency());
-        System.out.println("prost-getTopic");
 
         return topicRepository.save(newTopic);
     }

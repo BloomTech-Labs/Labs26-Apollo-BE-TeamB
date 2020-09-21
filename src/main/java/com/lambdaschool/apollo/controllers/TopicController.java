@@ -4,9 +4,9 @@ import com.lambdaschool.apollo.services.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/topics")
+@Transactional
 public class TopicController {
 
     @Autowired
@@ -43,8 +44,9 @@ public class TopicController {
         return new ResponseEntity<>(myTopic, HttpStatus.OK);
     }
 
+    @Transactional
     @PostMapping(value = "/new", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> createTopic(@Valid @RequestBody Topic newtopic) throws URISyntaxException {
+    public ResponseEntity<?> createTopic(@RequestBody Topic newtopic) throws URISyntaxException {
         newtopic.setTopicId(0);
         newtopic = topicService.save(newtopic);
         return new ResponseEntity<>(newtopic, HttpStatus.CREATED);
