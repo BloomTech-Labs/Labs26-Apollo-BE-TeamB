@@ -181,6 +181,7 @@ public class SeedData
 
         Survey s1 = surveyService.save(new Survey());
         Topic topic2 = new Topic("Topic 2", u1, s1, TopicFrequency.MONDAY);
+        topic2.getUsers().add(new TopicUsers(topic2, ))
         topic2 = topicService.save(topic2);
 
         Survey s2 = surveyService.save(new Survey());
