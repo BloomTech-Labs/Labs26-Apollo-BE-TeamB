@@ -46,14 +46,6 @@ public class ContextServiceImpl implements ContextService {
         return context;
     }
 
-    @Transactional
-    @Override
-    public void delete(long id) {
-
-        contextRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Context " + id + " Not Found"));
-        contextRepository.deleteById(id);
-    }
 
     @Transactional
     @Override
@@ -77,9 +69,4 @@ public class ContextServiceImpl implements ContextService {
 
     }
 
-    @Transactional
-    @Override
-    public Context update(Context context, long id) {
-        return null;
-    }
 }

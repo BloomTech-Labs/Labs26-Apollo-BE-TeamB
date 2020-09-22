@@ -1,10 +1,13 @@
 package com.lambdaschool.apollo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lambdaschool.apollo.views.QuestionType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "questions")
@@ -37,6 +40,13 @@ public class Question extends Auditable {
     @NotNull
     @Column(nullable = false)
     private QuestionType type;
+
+    /**
+     * A list of contexts the question is associated with
+     */
+    @ManyToMany(mappedBy = "contextquestions")
+    @JsonIgnore
+    private List<Context> contexts = new ArrayList<>();
 
     /**
      * The surveyid of the survey assigned to this question is what is stored in the database.

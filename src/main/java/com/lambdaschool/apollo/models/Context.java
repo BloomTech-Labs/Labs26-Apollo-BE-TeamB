@@ -1,7 +1,11 @@
 package com.lambdaschool.apollo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "contexts")
@@ -20,6 +24,19 @@ public class Context extends Auditable {
     @NotNull
     @Column(nullable = false, unique = true)
     private String description;
+
+    /**
+     * A list of questions the context is asssociated with
+     */
+    @ManyToMany(
+            cascade = {
+                    CascadeType.PERSIST,
+            })
+    @JoinTable(name = "contextQuestions",
+            joinColumns = { @JoinColumn(name = "contextid")},
+            inverseJoinColumns = {@JoinColumn(name = "questionid")})
+    @JsonIgnoreProperties(value = "contexts")
+    private List<Question> contextquestions = new ArrayList<>();
 
     /**
      * One to One relationship between context and survey
