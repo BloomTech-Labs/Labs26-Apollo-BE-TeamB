@@ -4,14 +4,13 @@ import com.okta.spring.boot.oauth.Okta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.core.env.Environment;
 
     @Configuration
-//    @Order(99)
     public class OktaAuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Autowired
@@ -26,10 +25,14 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                    .antMatchers("*").permitAll();
+//                    .anyRequest().authenticated()
+//                    .and()
+//                    .oauth2ResourceServer().jwt();
+                        .antMatchers("*")
+                        .permitAll();
 
             // process CORS annotations
-            http.cors().and().csrf().disable();
+            http.cors();
 
             // force a non-empty response body for 401's to make the response more browser friendly
             Okta.configureResourceServer401ResponseBody(http);

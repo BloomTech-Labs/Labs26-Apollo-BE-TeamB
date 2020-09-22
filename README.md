@@ -1,5 +1,21 @@
 # Apollo API
 
+### Getting a JWT
+
+once you have signed in through okta on the [client]("https://github.com/Lambda-School-Labs/Labs26-Apollo-FE-TeamB") do
+```JS
+let tokenObj = JSON.parse(localStorage.getItem("okta-token-storage"));
+```
+![Client Dev Console](./screenshots/img_1.PNG)
+```JS
+tokenObj.idToken.value
+```
+![Another Dev Console](./screenshots/img_2.PNG)
+
+Ok so now that you have copied that idtoken property head over to postman, and in the auth tab select barer token and paste in the token.
+
+![Postman](./screenshots/img_3.PNG)
+
 Api will be extended
 
 ### Database layout
