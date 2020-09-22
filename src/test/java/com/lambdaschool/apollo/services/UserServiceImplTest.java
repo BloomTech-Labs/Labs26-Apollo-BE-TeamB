@@ -93,7 +93,7 @@ public class UserServiceImplTest {
     @Test
     public void F_save() {
         ArrayList<UserRoles> datas = new ArrayList<>();
-        User u2 = new User("tiger", "ILuvMath!", "tiger@school.lambda", datas);
+        User u2 = new User("tiger", "tiger@school.lambda", datas);
 
         User saveU2 = userService.save(u2);
 
@@ -108,7 +108,7 @@ public class UserServiceImplTest {
     @Test
     public void G_update() {
         ArrayList<UserRoles> datas = new ArrayList<>();
-        User u2 = new User("cinnamon", "password", "cinnamon@school.lambda", datas);
+        User u2 = new User("cinnamon", "cinnamon@school.lambda", datas);
 
         User updatedu2 = userService.update(u2, 7);
 
@@ -125,7 +125,7 @@ public class UserServiceImplTest {
         Role r2 = new Role("user");
 
         ArrayList<UserRoles> datas = new ArrayList<>();
-        User u2 = new User("cinnamon", "password", "cinnamon@school.lambda", datas);
+        User u2 = new User("cinnamon", "cinnamon@school.lambda", datas);
 
         User updatedu2 = userService.update(u2, 8);
 
