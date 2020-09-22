@@ -25,14 +25,14 @@ import org.springframework.core.env.Environment;
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-//                    .anyRequest().authenticated()
-//                    .and()
-//                    .oauth2ResourceServer().jwt();
-                        .antMatchers("*")
-                        .permitAll();
+                    .anyRequest().authenticated()
+                    .and()
+                    .oauth2ResourceServer().jwt();
+//                        .antMatchers("*")
+//                        .permitAll();
 
             // process CORS annotations
-            http.cors();
+            http.cors().and().csrf().disable();
 
             // force a non-empty response body for 401's to make the response more browser friendly
             Okta.configureResourceServer401ResponseBody(http);
