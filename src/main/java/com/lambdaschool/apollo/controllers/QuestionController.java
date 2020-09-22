@@ -18,7 +18,7 @@ public class QuestionController {
 
     @GetMapping(value = "/questions", produces = {"application/json"})
     public ResponseEntity<?> getAllQuestions() {
-        List<Question> questions = questionService.findAll();
+        List<Question> questions = questionService.findAllQuestions();
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 }

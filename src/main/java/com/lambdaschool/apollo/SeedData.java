@@ -5,6 +5,8 @@ import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 import com.lambdaschool.apollo.models.*;
 import com.lambdaschool.apollo.services.*;
+import com.lambdaschool.apollo.views.QuestionType;
+import com.lambdaschool.apollo.views.TopicFrequency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -90,7 +92,7 @@ public class SeedData
         admins.add(new UserRoles(new User(),
                 r3));
         User u1 = new User("admin",
-                "password",
+//                "password",
                 "admin@lambdaschool.local",
                 admins);
 
@@ -103,7 +105,7 @@ public class SeedData
         datas.add(new UserRoles(new User(),
                 r2));
         User u2 = new User("cinnamon",
-                "1234567",
+//                "1234567",
                 "cinnamon@lambdaschool.local",
                 datas);
         userService.save(u2);
@@ -113,7 +115,7 @@ public class SeedData
         users.add(new UserRoles(new User(),
                 r2));
         User u3 = new User("barnbarn",
-                "ILuvM4th!",
+//                "ILuvM4th!",
                 "barnbarn@lambdaschool.local",
                 users);
         userService.save(u3);
@@ -122,7 +124,7 @@ public class SeedData
         users.add(new UserRoles(new User(),
                 r2));
         User u4 = new User("puttat",
-                "password",
+//                "password",
                 "puttat@school.lambda",
                 users);
         userService.save(u4);
@@ -131,7 +133,7 @@ public class SeedData
         users.add(new UserRoles(new User(),
                 r2));
         User u5 = new User("misskitty",
-                "password",
+//                "password",
                 "misskitty@school.lambda",
                 users);
         userService.save(u5);
@@ -153,7 +155,7 @@ public class SeedData
                     r2));
             fakeUser = new User(nameFaker.name()
                     .username(),
-                    "password",
+//                    "password",
                     nameFaker.internet()
                             .emailAddress(),
                     users);
@@ -161,24 +163,65 @@ public class SeedData
         }
 
 
-        /******************************************************************/
-        // survey
-        Survey survey1 = new Survey();
-        surveyService.save(survey1);
 
-        Survey survey2 = new Survey();
-        surveyService.save(survey2);
-
-        Survey survey3 = new Survey();
-        surveyService.save(survey3);
-
-        Survey survey4 = new Survey();
-        surveyService.save(survey4);
-
-        Survey survey5 = new Survey();
-        surveyService.save(survey5);
 
         /*******************************************************************/
+        //List of members to add to topic
+        ArrayList<TopicUsers> topicUsersArrayList1 = new ArrayList<>();
+        topicUsersArrayList1.add(new TopicUsers(new Topic(), u1));
+        topicUsersArrayList1.add(new TopicUsers(new Topic(), u2));
+        topicUsersArrayList1.add(new TopicUsers(new Topic(), u3));
+
+        ArrayList<TopicUsers> topicUsersArrayList2 = new ArrayList<>();
+        topicUsersArrayList2.add(new TopicUsers(new Topic(), u3));
+        topicUsersArrayList2.add(new TopicUsers(new Topic(), u4));
+        topicUsersArrayList2.add(new TopicUsers(new Topic(), u5));
+
+        /*******************************************************************/
+        // topics
+
+        //Default survey to initialize a Topic with
+        Survey defaultSurvey1 = surveyService.save(new Survey());
+
+        Topic topic1 = new Topic("Topic 1", u1, defaultSurvey1.getSurveyId(), topicUsersArrayList1, TopicFrequency.MONDAY);
+        topic1 = topicService.save(topic1);
+
+        Topic topic2 = new Topic("Topic 2", u1, defaultSurvey1, TopicFrequency.MONDAY);
+        topic2 = topicService.save(topic2);
+
+        Topic topic3 = new Topic("Topic 3", u2, defaultSurvey1, TopicFrequency.WEEKLY);
+        topic3 = topicService.save(topic3);
+
+
+        Topic topic4 = new Topic("Topic 4", u2, defaultSurvey1, TopicFrequency.WEEKLY);
+        topic4 = topicService.save(topic4);
+
+        Topic topic5 = new Topic("Topic 5", u2, defaultSurvey1, TopicFrequency.MONTHLY);
+        topic5 = topicService.save(topic5);
+
+        Topic topic6 = new Topic("Topic 6", u2, defaultSurvey1, TopicFrequency.MONTHLY);
+        topic6 = topicService.save(topic6);
+
+
+
+
+        /******************************************************************/
+        // survey
+        Survey survey1 = new Survey(topic1);
+        survey1 = surveyService.save(survey1);
+
+        Survey survey2 = new Survey(topic1);
+        survey2 = surveyService.save(survey2);
+
+        Survey survey3 = new Survey(topic1);
+        survey3 = surveyService.save(survey3);
+
+        Survey survey4 = new Survey(topic1);
+        survey4 = surveyService.save(survey4);
+
+        Survey survey5 = new Survey(topic1);
+        survey5 = surveyService.save(survey5);
+
         // context
         Context context1 = new Context("Product Leadership", survey1);
         contextService.save(context1);
@@ -198,50 +241,20 @@ public class SeedData
         /*******************************************************************/
         // questions
 
-        Question question1 = new Question("Leader Question 1", true, "text", survey1);
-        questionService.save(question1);
+        Question question1 = new Question("Leader Question 1", true, QuestionType.TEXT, survey1);
+        question1 = questionService.save(question1);
 
-        Question question2 = new Question("Leader Question 2", true, "text", survey1);
-        questionService.save(question2);
+        Question question2 = new Question("Leader Question 2", true, QuestionType.TEXT, survey1);
+        question2 = questionService.save(question2);
 
-        Question question3 = new Question("Leader Question 3", true, "text", survey1);
-        questionService.save(question3);
+        Question question3 = new Question("Member Question 1", false, QuestionType.TEXT, survey1);
+        question3 = questionService.save(question3);
 
-        Question question4 = new Question("Leader Question 4", true, "text", survey2);
-        questionService.save(question4);
+        Question question4 = new Question("Member Question 2", false, QuestionType.TEXT, survey2);
+        question4 = questionService.save(question4);
 
-        Question question5 = new Question("Leader Question 5", true, "text", survey2);
-        questionService.save(question5);
-
-        /*******************************************************************/
-        // topics
-//        ArrayList<TopicUsers> topicUsersArrayList1 = new ArrayList<>();
-//        topicUsersArrayList1.add(new TopicUsers(new Topic(), u1));
-//        topicUsersArrayList1.add(new TopicUsers(new Topic(), u2));
-//        topicUsersArrayList1.add(new TopicUsers(new Topic(), u3));
-
-        Topic topic1 = new Topic("Topic 1", u1, survey1);
-        topicService.save(topic1);
-
-        Topic topic2 = new Topic("Topic 2", u1, survey2);
-        topicService.save(topic2);
-
-        Topic topic3 = new Topic("Topic 3", u2, survey1);
-        topicService.save(topic3);
-
-//        ArrayList<TopicUsers> topicUsersArrayList2 = new ArrayList<>();
-//        topicUsersArrayList2.add(new TopicUsers(new Topic(), u3));
-//        topicUsersArrayList2.add(new TopicUsers(new Topic(), u4));
-//        topicUsersArrayList2.add(new TopicUsers(new Topic(), u5));
-
-        Topic topic4 = new Topic("Topic 4", u2, survey3);
-        topicService.save(topic4);
-
-        Topic topic5 = new Topic("Topic 5", u2, survey4);
-        topicService.save(topic5);
-
-        Topic topic6 = new Topic("Topic 6", u2, survey1);
-        topicService.save(topic6);
+        Question question5 = new Question("Member Question 3", false, QuestionType.TEXT, survey2);
+        question5 = questionService.save(question5);
 
     }
 }

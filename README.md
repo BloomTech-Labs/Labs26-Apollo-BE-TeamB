@@ -32,187 +32,476 @@ Table layout will be provide here once finalized
 ### Endpoints:
 
 <details>
-<summary>http://{urlhere}/topics/topics</summary>
+Topics
+--------
+
+<summary>GET: http://apollo-b-api.herokuapp.com/topics/topics - Get all topics regardless of user</summary>
 
 GET Endpoint
 
 ```JSON
 [
     {
-        "topicId": 49,
+        "topicId": 35,
         "title": "Topic 1",
         "owner": {
             "userid": 4,
-            "username": "admin",
-            "primaryemail": "admin@lambdaschool.local",
-            "roles": [
-                {
-                    "role": {
-                        "roleid": 1,
-                        "name": "ADMIN"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 2,
-                        "name": "USER"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 3,
-                        "name": "DATA"
-                    }
+            "username": "admin"
+        },
+        "frequency": "MONDAY",
+        "defaultsurveyid": 34,
+        "surveysrequests": [
+            {
+                "surveyId": 41
+            },
+            {
+                "surveyId": 42
+            },
+            {
+                "surveyId": 43
+            },
+            {
+                "surveyId": 44
+            },
+            {
+                "surveyId": 45
+            }
+        ],
+        "users": [
+            {
+                "user": {
+                    "userid": 4,
+                    "username": "admin"
                 }
-            ]
-        },
-        "survey": {
-            "surveyId": 34
-        },
-        "users": []
+            },
+            {
+                "user": {
+                    "userid": 5,
+                    "username": "cinnamon"
+                }
+            },
+            {
+                "user": {
+                    "userid": 6,
+                    "username": "barnbarn"
+                }
+            }
+        ]
     },
     {
-        "topicId": 50,
+        "topicId": 36,
         "title": "Topic 2",
         "owner": {
             "userid": 4,
-            "username": "admin",
-            "primaryemail": "admin@lambdaschool.local",
-            "roles": [
-                {
-                    "role": {
-                        "roleid": 1,
-                        "name": "ADMIN"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 2,
-                        "name": "USER"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 3,
-                        "name": "DATA"
-                    }
-                }
-            ]
+            "username": "admin"
         },
-        "survey": {
-            "surveyId": 35
-        },
+        "frequency": "MONDAY",
+        "defaultsurveyid": 34,
+        "surveysrequests": [],
         "users": []
     },
     {
-        "topicId": 51,
+        "topicId": 37,
         "title": "Topic 3",
         "owner": {
             "userid": 5,
-            "username": "cinnamon",
-            "primaryemail": "cinnamon@lambdaschool.local",
-            "roles": [
-                {
-                    "role": {
-                        "roleid": 3,
-                        "name": "DATA"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 2,
-                        "name": "USER"
-                    }
-                }
-            ]
+            "username": "cinnamon"
         },
-        "survey": {
-            "surveyId": 34
-        },
+        "frequency": "WEEKLY",
+        "defaultsurveyid": 34,
+        "surveysrequests": [],
         "users": []
     },
     {
-        "topicId": 52,
+        "topicId": 38,
         "title": "Topic 4",
         "owner": {
             "userid": 5,
-            "username": "cinnamon",
-            "primaryemail": "cinnamon@lambdaschool.local",
-            "roles": [
-                {
-                    "role": {
-                        "roleid": 3,
-                        "name": "DATA"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 2,
-                        "name": "USER"
-                    }
-                }
-            ]
+            "username": "cinnamon"
         },
-        "survey": {
-            "surveyId": 36
-        },
+        "frequency": "WEEKLY",
+        "defaultsurveyid": 34,
+        "surveysrequests": [],
         "users": []
     },
     {
-        "topicId": 53,
+        "topicId": 39,
         "title": "Topic 5",
         "owner": {
             "userid": 5,
-            "username": "cinnamon",
-            "primaryemail": "cinnamon@lambdaschool.local",
-            "roles": [
-                {
-                    "role": {
-                        "roleid": 3,
-                        "name": "DATA"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 2,
-                        "name": "USER"
-                    }
-                }
-            ]
+            "username": "cinnamon"
         },
-        "survey": {
-            "surveyId": 37
-        },
+        "frequency": "MONTHLY",
+        "defaultsurveyid": 34,
+        "surveysrequests": [],
         "users": []
     },
     {
-        "topicId": 54,
+        "topicId": 40,
         "title": "Topic 6",
         "owner": {
             "userid": 5,
-            "username": "cinnamon",
-            "primaryemail": "cinnamon@lambdaschool.local",
-            "roles": [
-                {
-                    "role": {
-                        "roleid": 3,
-                        "name": "DATA"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 2,
-                        "name": "USER"
-                    }
-                }
-            ]
+            "username": "cinnamon"
         },
-        "survey": {
-            "surveyId": 34
-        },
+        "frequency": "MONTHLY",
+        "defaultsurveyid": 34,
+        "surveysrequests": [],
         "users": []
     }
 ]
 ```
 
+</details>
+
+<details>
+Users
+-------
+<summary>GET: http://apollo-b-api.herokuapp.com/users/users Returns user info included topics of which they are a member</summary>
+
+```JSON
+[
+    {
+        "userid": 4,
+        "username": "admin",
+        "ownedtopics": [
+            {
+                "topicId": 35,
+                "title": "Topic 1",
+                "frequency": "MONDAY",
+                "defaultsurveyid": 34,
+                "surveysrequests": [
+                    {
+                        "surveyId": 41
+                    },
+                    {
+                        "surveyId": 42
+                    },
+                    {
+                        "surveyId": 43
+                    },
+                    {
+                        "surveyId": 44
+                    },
+                    {
+                        "surveyId": 45
+                    }
+                ]
+            },
+            {
+                "topicId": 36,
+                "title": "Topic 2",
+                "frequency": "MONDAY",
+                "defaultsurveyid": 34,
+                "surveysrequests": []
+            }
+        ],
+        "topics": [
+            {
+                "topic": {
+                    "topicId": 35,
+                    "title": "Topic 1",
+                    "owner": {
+                        "userid": 4,
+                        "username": "admin"
+                    },
+                    "frequency": "MONDAY",
+                    "defaultsurveyid": 34,
+                    "surveysrequests": [
+                        {
+                            "surveyId": 41
+                        },
+                        {
+                            "surveyId": 42
+                        },
+                        {
+                            "surveyId": 43
+                        },
+                        {
+                            "surveyId": 44
+                        },
+                        {
+                            "surveyId": 45
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "userid": 5,
+        "username": "cinnamon",
+        "ownedtopics": [
+            {
+                "topicId": 37,
+                "title": "Topic 3",
+                "frequency": "WEEKLY",
+                "defaultsurveyid": 34,
+                "surveysrequests": []
+            },
+            {
+                "topicId": 38,
+                "title": "Topic 4",
+                "frequency": "WEEKLY",
+                "defaultsurveyid": 34,
+                "surveysrequests": []
+            },
+            {
+                "topicId": 39,
+                "title": "Topic 5",
+                "frequency": "MONTHLY",
+                "defaultsurveyid": 34,
+                "surveysrequests": []
+            },
+            {
+                "topicId": 40,
+                "title": "Topic 6",
+                "frequency": "MONTHLY",
+                "defaultsurveyid": 34,
+                "surveysrequests": []
+            }
+        ],
+        "topics": [
+            {
+                "topic": {
+                    "topicId": 35,
+                    "title": "Topic 1",
+                    "owner": {
+                        "userid": 4,
+                        "username": "admin"
+                    },
+                    "frequency": "MONDAY",
+                    "defaultsurveyid": 34,
+                    "surveysrequests": [
+                        {
+                            "surveyId": 41
+                        },
+                        {
+                            "surveyId": 42
+                        },
+                        {
+                            "surveyId": 43
+                        },
+                        {
+                            "surveyId": 44
+                        },
+                        {
+                            "surveyId": 45
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "userid": 6,
+        "username": "barnbarn",
+        "ownedtopics": [],
+        "topics": [
+            {
+                "topic": {
+                    "topicId": 35,
+                    "title": "Topic 1",
+                    "owner": {
+                        "userid": 4,
+                        "username": "admin"
+                    },
+                    "frequency": "MONDAY",
+                    "defaultsurveyid": 34,
+                    "surveysrequests": [
+                        {
+                            "surveyId": 41
+                        },
+                        {
+                            "surveyId": 42
+                        },
+                        {
+                            "surveyId": 43
+                        },
+                        {
+                            "surveyId": 44
+                        },
+                        {
+                            "surveyId": 45
+                        }
+                    ]
+                }
+            }
+        ]
+    }]
+
+```
+</details>
+<details>
+Surveys
+-------
+<summary>GET: http://apollo-b-api.herokuapp.com/surveys/all Returns list of surveys</summary>
+
+```JSON
+[
+    {
+        "surveyId": 34,
+        "topic": null,
+        "questions": []
+    },
+    {
+        "surveyId": 41,
+        "topic": {
+            "topicId": 35,
+            "title": "Topic 1",
+            "frequency": "MONDAY"
+        },
+        "questions": [
+            {
+                "questionId": 51,
+                "body": "Leader Question 1",
+                "type": "TEXT",
+                "leader": true
+            },
+            {
+                "questionId": 52,
+                "body": "Leader Question 2",
+                "type": "TEXT",
+                "leader": true
+            },
+            {
+                "questionId": 53,
+                "body": "Member Question 1",
+                "type": "TEXT",
+                "leader": false
+            }
+        ]
+    },
+    {
+        "surveyId": 42,
+        "topic": {
+            "topicId": 35,
+            "title": "Topic 1",
+            "frequency": "MONDAY"
+        },
+        "questions": [
+            {
+                "questionId": 54,
+                "body": "Member Question 2",
+                "type": "TEXT",
+                "leader": false
+            },
+            {
+                "questionId": 55,
+                "body": "Member Question 3",
+                "type": "TEXT",
+                "leader": false
+            }
+        ]
+    },
+    {
+        "surveyId": 43,
+        "topic": {
+            "topicId": 35,
+            "title": "Topic 1",
+            "frequency": "MONDAY"
+        },
+        "questions": []
+    },
+    {
+        "surveyId": 44,
+        "topic": {
+            "topicId": 35,
+            "title": "Topic 1",
+            "frequency": "MONDAY"
+        },
+        "questions": []
+    },
+    {
+        "surveyId": 45,
+        "topic": {
+            "topicId": 35,
+            "title": "Topic 1",
+            "frequency": "MONDAY"
+        },
+        "questions": []
+    }
+]
+
+```
+</details>
+<details>
+Surveys
+-------
+<summary>GET: http://apollo-b-api.herokuapp.com/questions Returns list of questions</summary>
+
+```JSON
+[
+    {
+        "questionId": 51,
+        "body": "Leader Question 1",
+        "type": "TEXT",
+        "survey": {
+            "surveyId": 41,
+            "topic": {
+                "topicId": 35,
+                "title": "Topic 1",
+                "frequency": "MONDAY"
+            }
+        },
+        "leader": true
+    },
+    {
+        "questionId": 52,
+        "body": "Leader Question 2",
+        "type": "TEXT",
+        "survey": {
+            "surveyId": 41,
+            "topic": {
+                "topicId": 35,
+                "title": "Topic 1",
+                "frequency": "MONDAY"
+            }
+        },
+        "leader": true
+    },
+    {
+        "questionId": 53,
+        "body": "Member Question 1",
+        "type": "TEXT",
+        "survey": {
+            "surveyId": 41,
+            "topic": {
+                "topicId": 35,
+                "title": "Topic 1",
+                "frequency": "MONDAY"
+            }
+        },
+        "leader": false
+    },
+    {
+        "questionId": 54,
+        "body": "Member Question 2",
+        "type": "TEXT",
+        "survey": {
+            "surveyId": 42,
+            "topic": {
+                "topicId": 35,
+                "title": "Topic 1",
+                "frequency": "MONDAY"
+            }
+        },
+        "leader": false
+    },
+    {
+        "questionId": 55,
+        "body": "Member Question 3",
+        "type": "TEXT",
+        "survey": {
+            "surveyId": 42,
+            "topic": {
+                "topicId": 35,
+                "title": "Topic 1",
+                "frequency": "MONDAY"
+            }
+        },
+        "leader": false
+    }
+]
+
+```
 </details>

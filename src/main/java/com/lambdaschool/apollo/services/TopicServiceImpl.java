@@ -87,11 +87,11 @@ public class TopicServiceImpl implements TopicService {
             throw new ResourceNotFoundException("User " + topic.getOwner().getUsername() + " Not Found");
         }
 
-        Survey survey = surveyService.findById(topic.getSurvey().getSurveyId());
+        Survey survey = surveyService.findById(topic.getDefaultsurveyid());
         if (survey != null) {
-            newTopic.setSurvey(survey);
+            newTopic.setDefaultsurveyid(survey.getSurveyId());
         } else {
-            throw new ResourceNotFoundException("Survey Id " + topic.getSurvey().getSurveyId() + " Not Found");
+            throw new ResourceNotFoundException("Survey Id " + topic.getDefaultsurveyid() + " Not Found");
         }
 
         newTopic.getUsers().clear();
@@ -105,6 +105,8 @@ public class TopicServiceImpl implements TopicService {
                 addTopicUser(newTopic.getTopicId(), tu.getUser().getUserid());
             }
         }
+
+        newTopic.setFrequency(topic.getFrequency());
 
         return topicRepository.save(newTopic);
 

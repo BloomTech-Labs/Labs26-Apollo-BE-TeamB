@@ -14,5 +14,5 @@ public interface QuestionService {
 
     Question update(Question question);
 
-    List<Question> findAll();
+    List<Question> findAllQuestions();
 }

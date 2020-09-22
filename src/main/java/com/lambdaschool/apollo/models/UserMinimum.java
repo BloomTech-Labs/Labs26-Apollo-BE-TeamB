@@ -13,11 +13,6 @@ public class UserMinimum {
     private String username;
 
     /**
-     * The user's password (String)
-     */
-    private String password;
-
-    /**
      * The user's primary email address (String)
      */
     @Email
@@ -39,25 +34,6 @@ public class UserMinimum {
      */
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    /**
-     * Getter for the password of this user
-     *
-     * @return the password (String) for this user
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * Setter for the password of this user. This object is a temporary model used to create a new user.
-     * The password must remain in clear text until saved into the database.
-     *
-     * @param password the new password (String in clear texts) for this user
-     */
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     /**
