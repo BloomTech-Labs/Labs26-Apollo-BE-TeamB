@@ -16,13 +16,6 @@ Ok so now that you have copied that idtoken property head over to postman, and i
 
 ![Postman](./screenshots/img_3.PNG)
 
-
-
-
-
-
-
-
 Api will be extended
 
 ### Database layout
