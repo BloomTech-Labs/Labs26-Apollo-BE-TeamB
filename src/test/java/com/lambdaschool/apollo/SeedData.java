@@ -1,38 +1,3 @@
-package com.lambdaschool.apollo;
-
-import com.lambdaschool.apollo.models.Role;
-import com.lambdaschool.apollo.models.User;
-import com.lambdaschool.apollo.models.UserRoles;
-import com.lambdaschool.apollo.services.RoleService;
-import com.lambdaschool.apollo.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-
-/**
- * SeedData puts both known and random data into the database. It implements CommandLineRunner.
- * <p>
- * CoomandLineRunner: Spring Boot automatically runs the run method once and only once
- * after the application context has been loaded.
- */
-@Transactional
-@Component
-public class SeedData
-        implements CommandLineRunner {
-    /**
-     * Connects the Role Service to this process
-     */
-    @Autowired
-    RoleService roleService;
-
-    /**
-     * Connects the user service to this process
-     */
-    @Autowired
-    UserService userService;
 
     /**
      * Generates test, seed data for our application

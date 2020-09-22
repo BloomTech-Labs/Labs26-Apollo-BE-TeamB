@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -161,63 +162,68 @@ public class SeedData
 
         /*******************************************************************/
         //List of members to add to topic
-        ArrayList<TopicUsers> topicUsersArrayList1 = new ArrayList<>();
-        topicUsersArrayList1.add(new TopicUsers(new Topic(), u1));
-        topicUsersArrayList1.add(new TopicUsers(new Topic(), u2));
-        topicUsersArrayList1.add(new TopicUsers(new Topic(), u3));
+        //NOT WORKING. LEAVING HERE FOR REFERENCE
 
-        ArrayList<TopicUsers> topicUsersArrayList2 = new ArrayList<>();
-        topicUsersArrayList2.add(new TopicUsers(new Topic(), u3));
-        topicUsersArrayList2.add(new TopicUsers(new Topic(), u4));
-        topicUsersArrayList2.add(new TopicUsers(new Topic(), u5));
+//        ArrayList<TopicUsers> topicUsersArrayList1 = new ArrayList<>();
+//        topicUsersArrayList1.add(new TopicUsers(new Topic(), u1));
+//        topicUsersArrayList1.add(new TopicUsers(new Topic(), u2));
+//        topicUsersArrayList1.add(new TopicUsers(new Topic(), u3));
+//
+//        ArrayList<TopicUsers> topicUsersArrayList2 = new ArrayList<>();
+//        topicUsersArrayList2.add(new TopicUsers(new Topic(), u3));
+//        topicUsersArrayList2.add(new TopicUsers(new Topic(), u4));
+//        topicUsersArrayList2.add(new TopicUsers(new Topic(), u5));
 
         /*******************************************************************/
         // topics
 
-        //Default survey to initialize a Topic with
-        Survey defaultSurvey1 = surveyService.save(new Survey());
 
-        Topic topic1 = new Topic("Topic 1", u1, defaultSurvey1.getSurveyId(), topicUsersArrayList1, TopicFrequency.MONDAY);
-        topic1 = topicService.save(topic1);
 
-        Topic topic2 = new Topic("Topic 2", u1, defaultSurvey1, TopicFrequency.MONDAY);
+        Survey s1 = surveyService.save(new Survey());
+        Topic topic2 = new Topic("Topic 2", u1, s1, TopicFrequency.MONDAY);
         topic2 = topicService.save(topic2);
 
-        Topic topic3 = new Topic("Topic 3", u2, defaultSurvey1, TopicFrequency.WEEKLY);
+        Survey s2 = surveyService.save(new Survey());
+        Topic topic3 = new Topic("Topic 3", u2, s2, TopicFrequency.WEEKLY);
         topic3 = topicService.save(topic3);
 
 
-        Topic topic4 = new Topic("Topic 4", u2, defaultSurvey1, TopicFrequency.WEEKLY);
+        Survey s3 = surveyService.save(new Survey());
+        Topic topic4 = new Topic("Topic 4", u2, s3, TopicFrequency.WEEKLY);
         topic4 = topicService.save(topic4);
 
-        Topic topic5 = new Topic("Topic 5", u2, defaultSurvey1, TopicFrequency.MONTHLY);
+        Survey s4 = surveyService.save(new Survey());
+        Topic topic5 = new Topic("Topic 5", u2, s4, TopicFrequency.MONTHLY);
         topic5 = topicService.save(topic5);
 
-        Topic topic6 = new Topic("Topic 6", u2, defaultSurvey1, TopicFrequency.MONTHLY);
+        Survey s5 = surveyService.save(new Survey());
+        Topic topic6 = new Topic("Topic 6", u2, s5, TopicFrequency.MONTHLY);
         topic6 = topicService.save(topic6);
-
-
 
 
         /******************************************************************/
         // survey
-        Survey survey1 = new Survey(topic1);
+        Survey survey1 = new Survey(topic2);
         survey1 = surveyService.save(survey1);
+        List<Survey> requests = topic2.getSurveysrequests();
+        requests.add(new Survey(topic2));
+        topic2.setSurveysrequests(requests);
 
-        Survey survey2 = new Survey(topic1);
+        Survey survey2 = new Survey(topic3);
         survey2 = surveyService.save(survey2);
 
-        Survey survey3 = new Survey(topic1);
+        Survey survey3 = new Survey(topic4);
         survey3 = surveyService.save(survey3);
 
-        Survey survey4 = new Survey(topic1);
+        Survey survey4 = new Survey(topic5);
         survey4 = surveyService.save(survey4);
 
-        Survey survey5 = new Survey(topic1);
+        Survey survey5 = new Survey(topic6);
         survey5 = surveyService.save(survey5);
 
         // context
         Context context1 = new Context("Product Leadership", survey1);
+
         contextService.save(context1);
 
         Context context2 = new Context("Delivery Management", survey2);
@@ -249,6 +255,5 @@ public class SeedData
 
         Question question5 = new Question("Member Question 3", false, QuestionType.TEXT, survey2);
         question5 = questionService.save(question5);
-
     }
 }

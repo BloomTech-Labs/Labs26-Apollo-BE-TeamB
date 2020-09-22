@@ -2,10 +2,7 @@ package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.exceptions.ResourceFoundException;
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
-import com.lambdaschool.apollo.models.Survey;
-import com.lambdaschool.apollo.models.Topic;
-import com.lambdaschool.apollo.models.TopicUsers;
-import com.lambdaschool.apollo.models.User;
+import com.lambdaschool.apollo.models.*;
 import com.lambdaschool.apollo.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,7 +63,6 @@ public class TopicServiceImpl implements TopicService {
     public Topic save(Topic topic) {
 
         Topic newTopic = new Topic();
-
         if (topic.getTopicId() != 0) {
             Topic oldTopic = topicRepository.findById(topic.getTopicId())
                     .orElseThrow(() -> new ResourceNotFoundException("Topic " + topic.getTopicId() + " Not Found"));
@@ -77,7 +73,6 @@ public class TopicServiceImpl implements TopicService {
             }
             newTopic.setTopicId(oldTopic.getTopicId());
         }
-
         newTopic.setTitle(topic.getTitle());
 
         User owner = userService.findByName(topic.getOwner().getUsername());
@@ -87,29 +82,22 @@ public class TopicServiceImpl implements TopicService {
             throw new ResourceNotFoundException("User " + topic.getOwner().getUsername() + " Not Found");
         }
 
-        Survey survey = surveyService.findById(topic.getDefaultsurveyid());
-        if (survey != null) {
-            newTopic.setDefaultsurveyid(survey.getSurveyId());
-        } else {
-            throw new ResourceNotFoundException("Survey Id " + topic.getDefaultsurveyid() + " Not Found");
-        }
-
-        newTopic.getUsers().clear();
-        if (topic.getTopicId() == 0) {
-            for (TopicUsers tu : topic.getUsers()) {
-                User newUser = userService.findByName(tu.getUser().getUsername());
-                newTopic.addUser(newUser);
-            }
-        } else {
-            for (TopicUsers tu : topic.getUsers()) {
-                addTopicUser(newTopic.getTopicId(), tu.getUser().getUserid());
-            }
-        }
-
         newTopic.setFrequency(topic.getFrequency());
 
-        return topicRepository.save(newTopic);
+        newTopic.setDefaultsurvey(new Survey(newTopic));
+        for (Question sq : topic.getDefaultsurvey().getQuestions()) {
+            newTopic.getDefaultsurvey().addQuestion(new Question(sq.getBody(), sq.isLeader(),sq.getType(),newTopic.getDefaultsurvey()));
+        }
+        newTopic.setJoincode("ABCD");
 
+
+        newTopic.getUsers().clear();
+
+        for (TopicUsers tu : topic.getUsers()) {
+            newTopic.getUsers().add(new TopicUsers(newTopic, tu.getUser()));
+        }
+
+        return topicRepository.save(newTopic);
     }
 
     @Override

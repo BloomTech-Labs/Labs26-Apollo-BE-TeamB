@@ -45,9 +45,9 @@ public class Question extends Auditable {
      * Forms a Many to One relationship between questions and survey.
      * A survey can have many questions.
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "surveyId")
-    @JsonIgnoreProperties(value = "questions", allowSetters = true)
+    @JsonIgnoreProperties(value = {"questions", "topic", "defaulttopic"}, allowSetters = true)
     private Survey survey;
 
     /**

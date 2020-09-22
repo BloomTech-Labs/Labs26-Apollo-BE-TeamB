@@ -20,13 +20,49 @@ Api will be extended
 
 ### Database layout
 
-Table layout will be provide here once finalized
+![Image of Database Layout](db.png)
 
 ### Endpoints:
 
+## Topics
+
 <details>
-Topics
---------
+
+<summary>POST: http://apollo-b-api.herokuapp.com/topics/new - create a new topic</summary>
+
+```JSON
+{
+    "title": "My New Topic",
+    "owner": {
+        "username": "admin"
+    },
+    "frequency": "WEEKLY",
+    "defaultsurvey": {
+        "questions": [
+                    {
+                        "body": "Do you have any blockers?",
+                        "type": "TEXT",
+                        "leader": true
+                    },
+                    {
+                        "body": "What is the teams priority?",
+                        "type": "TEXT",
+                        "leader": true
+                    },
+                    {
+                        "body": "How is your weekend?",
+                        "type": "TEXT",
+                        "leader": false
+                    }
+        ]
+    }
+}
+
+```
+
+</details>
+
+<details>
 
 <summary>GET: http://apollo-b-api.herokuapp.com/topics/topics - Get all topics regardless of user</summary>
 
@@ -147,8 +183,7 @@ GET Endpoint
 </details>
 
 <details>
-Users
--------
+
 <summary>GET: http://apollo-b-api.herokuapp.com/users/users Returns user info included topics of which they are a member</summary>
 
 ```JSON
@@ -323,10 +358,12 @@ Users
     }]
 
 ```
+
 </details>
+
+## Surveys
 <details>
-Surveys
--------
+     
 <summary>GET: http://apollo-b-api.herokuapp.com/surveys/all Returns list of surveys</summary>
 
 ```JSON
@@ -416,10 +453,12 @@ Surveys
 ]
 
 ```
+
 </details>
+
+## Questions
 <details>
-Surveys
--------
+
 <summary>GET: http://apollo-b-api.herokuapp.com/questions Returns list of questions</summary>
 
 ```JSON
@@ -497,4 +536,5 @@ Surveys
 ]
 
 ```
+
 </details>
