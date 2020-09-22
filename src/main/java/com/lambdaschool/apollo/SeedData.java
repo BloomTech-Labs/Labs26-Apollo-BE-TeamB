@@ -107,7 +107,7 @@ public class SeedData
         User u2 = new User("cinnamon",
                 "cinnamon@lambdaschool.local",
                 datas);
-        userService.save(u2);
+        u2 = userService.save(u2);
 
         // user
         ArrayList<UserRoles> users = new ArrayList<>();
@@ -133,6 +133,11 @@ public class SeedData
                 "misskitty@school.lambda",
                 users);
         userService.save(u5);
+
+        User lambdaDummy = new User("llama003@maildrop.cc", "llama003@maildrop.cc");
+        lambdaDummy = userService.save(lambdaDummy);
+
+
 
         // using JavaFaker create a bunch of regular users
         // https://www.baeldung.com/java-faker
@@ -181,7 +186,10 @@ public class SeedData
 
         Survey s1 = surveyService.save(new Survey());
         Topic topic2 = new Topic("Topic 2", u1, s1, TopicFrequency.MONDAY);
+        topic2.getUsers().add(new TopicUsers(topic2, u2));
+        topic2.getUsers().add(new TopicUsers(topic2, lambdaDummy));
         topic2 = topicService.save(topic2);
+        System.out.println(topic2.getTopicId());
 
         Survey s2 = surveyService.save(new Survey());
         Topic topic3 = new Topic("Topic 3", u2, s2, TopicFrequency.WEEKLY);
