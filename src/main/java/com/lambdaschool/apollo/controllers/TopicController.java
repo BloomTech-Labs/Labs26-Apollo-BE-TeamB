@@ -56,16 +56,10 @@ public class TopicController {
     @Transactional
     @PostMapping(value = "/topic/{code}/join", produces = "application/json")
     public ResponseEntity<?> userJoinTopic(@PathVariable String code, Authentication authentication) throws URISyntaxException {
-        System.out.println(code);
-//        Topic topic2 = topicService.findTopicById(37);
-//        String joinCode = topic2.getJoincode();
-//        System.out.println(joinCode);
+
         Topic topic = topicService.findByJoinCode(code);
-        System.out.println(topic);
+
         User user = userService.findByOKTAUserName(authentication.getName());
-
-//        topic.getUsers().add(new TopicUsers(topic, user));
-
 
         topicService.addTopicUser(topic.getTopicId(), user.getUserid());
 

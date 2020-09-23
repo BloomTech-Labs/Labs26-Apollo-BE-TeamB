@@ -78,9 +78,9 @@ public class TopicServiceImpl implements TopicService {
                     .orElseThrow(() -> new ResourceNotFoundException("Topic " + topic.getTopicId() + " Not Found"));
 
             // delete the users for the old topic we are replacing
-//            for (TopicUsers tu : oldTopic.getUsers()) {
-//                deleteTopicUser(tu.getTopic().getTopicId(), tu.getUser().getUserid());
-//            }
+            for (TopicUsers tu : oldTopic.getUsers()) {
+                deleteTopicUser(tu.getTopic().getTopicId(), tu.getUser().getUserid());
+            }
             // use existing joincode when updating existing topic
             newTopic.setJoincode(oldTopic.getJoincode());
             newTopic.setTopicId(oldTopic.getTopicId());
