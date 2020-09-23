@@ -2,6 +2,7 @@ package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.exceptions.ResourceFoundException;
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
+import com.lambdaschool.apollo.handlers.HelperFunctions;
 import com.lambdaschool.apollo.models.*;
 import com.lambdaschool.apollo.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class TopicServiceImpl implements TopicService {
 
     @Autowired
     private UserAuditing userAuditing;
+
+    @Autowired
+    private HelperFunctions helperFunctions;
 
     @Override
     public Topic findTopicById(long id) {
@@ -71,7 +75,12 @@ public class TopicServiceImpl implements TopicService {
             for (TopicUsers tu : oldTopic.getUsers()) {
                 deleteTopicUser(tu.getTopic().getTopicId(), tu.getUser().getUserid());
             }
+            // use existing joincode when updating existing topic
+            newTopic.setJoincode(oldTopic.getJoincode());
             newTopic.setTopicId(oldTopic.getTopicId());
+        } else {
+            // generate new joincode when creating new topic
+            newTopic.setJoincode(helperFunctions.getNewJoinCode());
         }
         newTopic.setTitle(topic.getTitle());
 
@@ -88,8 +97,6 @@ public class TopicServiceImpl implements TopicService {
         for (Question sq : topic.getDefaultsurvey().getQuestions()) {
             newTopic.getDefaultsurvey().addQuestion(new Question(sq.getBody(), sq.isLeader(),sq.getType(),newTopic.getDefaultsurvey()));
         }
-        newTopic.setJoincode("ABCD");
-
 
         newTopic.getUsers().clear();
 
