@@ -74,9 +74,13 @@ public class TopicController {
 
     @Transactional
     @PostMapping(value = "/new", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> createTopic(@RequestBody Topic newtopic) throws URISyntaxException {
+    public ResponseEntity<?> createTopic(@RequestBody Topic newtopic, Authentication authentication) throws URISyntaxException {
         newtopic.setTopicId(0);
+        User user = userService.findByOKTAUserName(authentication.getName());
+        newtopic.setOwner(user);
+        newtopic.getDefaultsurvey().setSurveyId(0);
         newtopic = topicService.save(newtopic);
+
         return new ResponseEntity<>(newtopic, HttpStatus.CREATED);
     }
 }
