@@ -11,7 +11,7 @@
     <groupId>com.lambdaschool</groupId>
     <artifactId>apollo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>foundation</name>
+    <name>apollo</name>
     <description>A Starting project for Spring Boot</description>
 
     <properties>
