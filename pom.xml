@@ -11,7 +11,7 @@
     <groupId>com.lambdaschool</groupId>
     <artifactId>apollo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>foundation</name>
+    <name>apollo</name>
     <description>A Starting project for Spring Boot</description>
 
     <properties>
@@ -115,6 +115,13 @@
             <groupId>com.okta.spring</groupId>
             <artifactId>okta-spring-boot-starter</artifactId>
             <version>1.4.0</version>
+        </dependency>
+
+        <!--        Hash Library -->
+        <dependency>
+            <groupId>org.hashids</groupId>
+            <artifactId>hashids</artifactId>
+            <version>1.0.3</version>
         </dependency>
 
     </dependencies>

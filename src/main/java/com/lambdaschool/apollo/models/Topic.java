@@ -133,8 +133,6 @@ public class Topic extends Auditable {
         users.add(new TopicUsers(this, user));
     }
 
-
-
     public long getDefaultsurveyid() {
         return defaultsurveyid;
     }

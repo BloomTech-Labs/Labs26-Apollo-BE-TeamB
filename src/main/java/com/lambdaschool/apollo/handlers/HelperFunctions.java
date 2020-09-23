@@ -2,6 +2,7 @@ package com.lambdaschool.apollo.handlers;
 
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
 import com.lambdaschool.apollo.models.ValidationError;
+import org.hashids.Hashids;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,5 +74,17 @@ public class HelperFunctions {
             }
         }
         return listVE;
+    }
+
+    public String getNewJoinCode() {
+
+        // current timestamp
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        // create new hash using secret HASHSALT
+        Hashids hashids = new Hashids(System.getenv("HASHSALT"));
+        // use current timestamp in millis as encode body
+        String newJoinCode = hashids.encode(timestamp.getTime());
+
+        return newJoinCode;
     }
 }
