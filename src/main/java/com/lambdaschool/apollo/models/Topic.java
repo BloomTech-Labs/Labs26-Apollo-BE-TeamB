@@ -1,5 +1,6 @@
 package com.lambdaschool.apollo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lambdaschool.apollo.views.TopicFrequency;
 
@@ -43,6 +44,7 @@ public class Topic extends Auditable {
      * A survey can have many topics.
      */
     //ID of the defaul survey a topic uses to prepopulate any survey request
+    @JsonIgnore
     private long defaultsurveyid;
 
     @ManyToOne(cascade = CascadeType.ALL)

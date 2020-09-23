@@ -134,8 +134,11 @@ public class SeedData
                 users);
         userService.save(u5);
 
-        User lambdaDummy = new User("llama003@maildrop.cc", "llama003@maildrop.cc");
-        lambdaDummy = userService.save(lambdaDummy);
+        User lambdaDummy03 = new User("llama003@maildrop.cc", "llama003@maildrop.cc");
+        lambdaDummy03 = userService.save(lambdaDummy03);
+
+        User lambdaDummy01 = new User("llama001@maildrop.cc", "llama001@maildrop.cc");
+        lambdaDummy01 = userService.save(lambdaDummy01);
 
 
 
@@ -187,7 +190,7 @@ public class SeedData
         Survey s1 = surveyService.save(new Survey());
         Topic topic2 = new Topic("Topic 2", u1, s1, TopicFrequency.MONDAY);
         topic2.getUsers().add(new TopicUsers(topic2, u2));
-        topic2.getUsers().add(new TopicUsers(topic2, lambdaDummy));
+        topic2.getUsers().add(new TopicUsers(topic2, lambdaDummy01));
         topic2 = topicService.save(topic2);
         System.out.println(topic2.getTopicId());
 

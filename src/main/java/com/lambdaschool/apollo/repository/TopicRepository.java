@@ -1,6 +1,7 @@
 package com.lambdaschool.apollo.repository;
 
 import com.lambdaschool.apollo.models.Topic;
+import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.views.JustTheCount;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,8 +13,8 @@ import java.util.List;
 public interface TopicRepository extends CrudRepository<Topic, Long> {
 
 
-    @Query(value = "SELECT * as count FROM topics", nativeQuery = true)
-    List<Topic> findByOwnerId(long userid);
+    List<Topic> findByOwnerOrUsersContaining(User owner, User member);
+    List<Topic> findByUsers_userContaining(User member);
 
     /**
      * Counts the number of topic user combinations for the given topicId and userId. Answer should be only 0 or 1.
