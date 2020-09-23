@@ -36,6 +36,7 @@ public class QuestionServiceImpl implements QuestionService {
         return q;
     }
 
+    @Transactional
     @Override
     public void delete(long id) {
 
@@ -44,6 +45,7 @@ public class QuestionServiceImpl implements QuestionService {
         questionRepository.delete(question);
     }
 
+    @Transactional
     @Override
     public Question save(Question question) {
 
@@ -67,6 +69,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     }
 
+    @Transactional
     @Override
     public Question update(Question question) {
         return null;

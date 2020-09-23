@@ -15,8 +15,7 @@ public class Survey extends Auditable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long surveyId;
-
+    private long surveyid;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "topicId")
@@ -43,11 +42,11 @@ public class Survey extends Auditable {
     }
 
     public long getSurveyId() {
-        return surveyId;
+        return surveyid;
     }
 
-    public void setSurveyId(long surveyId) {
-        this.surveyId = surveyId;
+    public void setSurveyId(long surveyid) {
+        this.surveyid = surveyid;
     }
 
     public Topic getTopic() {
