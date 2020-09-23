@@ -33,6 +33,7 @@ public class AnswerServiceImpl implements AnswerService {
                 .orElseThrow(() -> new ResourceNotFoundException("Answer " + id + " Not Found"));
     }
 
+    @Transactional
     @Override
     public void delete(long id) {
         Answer answer = answerRepository.findById(id)
@@ -40,6 +41,7 @@ public class AnswerServiceImpl implements AnswerService {
         answerRepository.delete(answer);
     }
 
+    @Transactional
     @Override
     public Answer save(Answer answer) {
         Answer newAnswer = new Answer();
@@ -75,6 +77,7 @@ public class AnswerServiceImpl implements AnswerService {
         return answerRepository.save(newAnswer);
     }
 
+    @Transactional
     @Override
     public Answer update(Answer answer) {
         return null;
