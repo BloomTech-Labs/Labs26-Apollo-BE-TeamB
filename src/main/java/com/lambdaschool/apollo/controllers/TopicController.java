@@ -31,9 +31,8 @@ public class TopicController {
             produces = {"application/json"})
 
     public ResponseEntity<?> listUserTopics(Authentication authentication) {
-        User user = userService.findByOKTAUserName(authentication.getName());
         List<Topic> myTopics = new ArrayList<>();
-        myTopics = topicService.findTopicsByUser(user);
+        myTopics = topicService.findTopicsByUser(authentication.getName());
         return new ResponseEntity<>(myTopics, HttpStatus.OK);
     }
 
@@ -52,6 +51,25 @@ public class TopicController {
     public ResponseEntity<?> getTopicById(@PathVariable Long topicid) {
         Topic myTopic = topicService.findTopicById(topicid);
         return new ResponseEntity<>(myTopic, HttpStatus.OK);
+    }
+
+    @Transactional
+    @PostMapping(value = "/topic/{code}/join", produces = "application/json")
+    public ResponseEntity<?> userJoinTopic(@PathVariable String code, Authentication authentication) throws URISyntaxException {
+        System.out.println(code);
+//        Topic topic2 = topicService.findTopicById(37);
+//        String joinCode = topic2.getJoincode();
+//        System.out.println(joinCode);
+        Topic topic = topicService.findByJoinCode(code);
+        System.out.println(topic);
+        User user = userService.findByOKTAUserName(authentication.getName());
+
+//        topic.getUsers().add(new TopicUsers(topic, user));
+
+
+        topicService.addTopicUser(topic.getTopicId(), user.getUserid());
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Transactional

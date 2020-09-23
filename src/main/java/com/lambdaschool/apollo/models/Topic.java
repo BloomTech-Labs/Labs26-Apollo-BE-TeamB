@@ -80,16 +80,16 @@ public class Topic extends Auditable {
         this.frequency = frequency;
     }
 
-    public Topic(@NotNull String title, User owner, long defaultsurveyid, List<TopicUsers> users, TopicFrequency frequency) {
-        this.title = title;
-        this.owner = owner;
-        this.defaultsurveyid = defaultsurveyid;
-        for (TopicUsers tu : users) {
-            tu.setTopic(this);
-        }
-        this.users = users;
-        this.frequency = frequency;
-    }
+//    public Topic(@NotNull String title, User owner, long defaultsurveyid, List<TopicUsers> users, TopicFrequency frequency) {
+//        this.title = title;
+//        this.owner = owner;
+//        this.defaultsurveyid = defaultsurveyid;
+//        for (TopicUsers tu : users) {
+//            tu.setTopic(this);
+//        }
+//        this.users = users;
+//        this.frequency = frequency;
+//    }
 
     public long getTopicId() {
         return topicId;

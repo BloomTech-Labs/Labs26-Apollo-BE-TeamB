@@ -55,11 +55,17 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<Topic> findTopicsByUser(User user) {
+    public List<Topic> findTopicsByUser(String username) {
         List<Topic> topics = new ArrayList<>();
-               topics = topicRepository.findByUsers_userContaining(user);
+               topics = topicRepository.findByOwner_usernameOrUsers_user_username(username, username);
 
         return topics;
+    }
+
+    @Override
+    public Topic findByJoinCode(String joincode) {
+        return topicRepository.findByJoincodeEquals(joincode);
+
     }
 
     @Transactional
@@ -72,9 +78,9 @@ public class TopicServiceImpl implements TopicService {
                     .orElseThrow(() -> new ResourceNotFoundException("Topic " + topic.getTopicId() + " Not Found"));
 
             // delete the users for the old topic we are replacing
-            for (TopicUsers tu : oldTopic.getUsers()) {
-                deleteTopicUser(tu.getTopic().getTopicId(), tu.getUser().getUserid());
-            }
+//            for (TopicUsers tu : oldTopic.getUsers()) {
+//                deleteTopicUser(tu.getTopic().getTopicId(), tu.getUser().getUserid());
+//            }
             // use existing joincode when updating existing topic
             newTopic.setJoincode(oldTopic.getJoincode());
             newTopic.setTopicId(oldTopic.getTopicId());
@@ -93,12 +99,26 @@ public class TopicServiceImpl implements TopicService {
 
         newTopic.setFrequency(topic.getFrequency());
 
-        newTopic.setDefaultsurvey(new Survey(newTopic));
+
+        Survey defaultSurvey = surveyService.findById(topic.getDefaultsurvey().getSurveyId());
+        if (defaultSurvey != null) {
+            newTopic.setDefaultsurvey(defaultSurvey);
+        } else {
+            newTopic.setDefaultsurvey(new Survey(newTopic));
+        }
+
         for (Question sq : topic.getDefaultsurvey().getQuestions()) {
             newTopic.getDefaultsurvey().addQuestion(new Question(sq.getBody(), sq.isLeader(),sq.getType(),newTopic.getDefaultsurvey()));
         }
 
         newTopic.getUsers().clear();
+
+        for (Survey survey :topic.getSurveysrequests()) {
+            Survey surveyReq = surveyService.findById(survey.getSurveyId());
+            if (surveyReq != null) {
+                newTopic.getSurveysrequests().add(surveyReq);
+            }
+        }
 
         for (TopicUsers tu : topic.getUsers()) {
             newTopic.getUsers().add(new TopicUsers(newTopic, tu.getUser()));
