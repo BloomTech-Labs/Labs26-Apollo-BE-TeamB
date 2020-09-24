@@ -2,6 +2,7 @@ package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
 import com.lambdaschool.apollo.models.Context;
+import com.lambdaschool.apollo.models.Question;
 import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.repository.ContextRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class ContextServiceImpl implements ContextService {
 
     @Autowired
     private SurveyService surveyService;
+
+    @Autowired
+    private QuestionService questionService;
 
     @Override
     public List<Context> findAll() {
@@ -58,15 +62,31 @@ public class ContextServiceImpl implements ContextService {
                     .orElseThrow(() -> new ResourceNotFoundException("Context Id " + context.getContextId() + " Not Found"));
             newContext.setContextId(context.getContextId());
         }
+
         newContext.setDescription(context.getDescription());
-        Survey survey = surveyService.findById(context.getSurvey().getSurveyId());
-        if (survey != null) {
+
+        if (context.getSurvey().getSurveyId() != 0) {
+            Survey survey = surveyService.findById(context.getSurvey().getSurveyId());
             newContext.setSurvey(survey);
-            return contextRepository.save(newContext);
         } else {
-            throw new ResourceNotFoundException("Survey Id " + context.getSurvey().getSurveyId() + " Not Found");
+            newContext.setSurvey(new Survey());
+            for (Question q : context.getSurvey().getQuestions()) {
+                newContext.getSurvey().addQuestion(new Question(q.getBody(), q.isLeader(), q.getType(),newContext.getSurvey()));
+//                System.out.println("entered loop");
+//                if (q.getQuestionId() != 0) {
+//                    System.out.println("entered if");
+//                    Question q1 = questionService.findById(q.getQuestionId());
+//                    newContext.getSurvey().getQuestions().add(q1);
+//                } else {
+//                    System.out.println("entered else");
+//                    System.out.println(newContext.getSurvey());
+//                    newContext.getSurvey().addQuestion(new Question(q.getBody(), q.isLeader(), q.getType(),context.getSurvey()));
+//                    System.out.println("finished adding question");
+//                }
+            }
         }
 
+        return contextRepository.save(newContext);
     }
 
 }
