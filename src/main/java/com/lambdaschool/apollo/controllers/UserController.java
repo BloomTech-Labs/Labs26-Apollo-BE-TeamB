@@ -349,7 +349,7 @@ public class UserController {
     @GetMapping(value = "/getuserinfo",
             produces = {"application/json"})
     public ResponseEntity<?> getCurrentUserInfo(Authentication authentication) {
-        User u = userService.findByName(authentication.getName());
+        User u = userService.findByOKTAUserName(authentication.getName());
         return new ResponseEntity<>(u,
                 HttpStatus.OK);
     }

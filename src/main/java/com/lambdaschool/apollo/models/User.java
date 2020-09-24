@@ -115,6 +115,13 @@ public class User
         this.roles = userRoles;
     }
 
+    public User(@Size(min = 2,
+            max = 30,
+            message = "User Name must be between 2 and 30 characters") @NotNull String username, @NotNull @Email String primaryemail) {
+        this.username = username;
+        this.primaryemail = primaryemail;
+    }
+
     /**
      * Getter for userid
      *

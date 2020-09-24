@@ -87,6 +87,16 @@ public class UserServiceImpl
         return uu;
     }
 
+    @Override
+    public User findByOKTAUserName(String name) {
+        User existing = userrepos.findByUsername(name.toLowerCase());
+        if (existing == null) {
+            User newUser = new User(name, name);
+            return userrepos.save(newUser);
+        }
+        return existing;
+    }
+
     @Transactional
     @Override
     public User save(User user) {

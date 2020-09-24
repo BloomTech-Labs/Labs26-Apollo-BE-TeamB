@@ -35,15 +35,6 @@ public class Topic extends Auditable {
 
     private TopicFrequency frequency;
 
-    /**
-     * The surveyid of the survey assigned to this topic is what is stored in the database.
-     * This is the entire survey object!
-     * <p>
-     * Forms a Many to One relationship between topics and survey.
-     * A survey can have many topics.
-     */
-    //ID of the defaul survey a topic uses to prepopulate any survey request
-    private long defaultsurveyid;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "surveyId")
@@ -78,16 +69,6 @@ public class Topic extends Auditable {
         this.frequency = frequency;
     }
 
-    public Topic(@NotNull String title, User owner, long defaultsurveyid, List<TopicUsers> users, TopicFrequency frequency) {
-        this.title = title;
-        this.owner = owner;
-        this.defaultsurveyid = defaultsurveyid;
-        for (TopicUsers tu : users) {
-            tu.setTopic(this);
-        }
-        this.users = users;
-        this.frequency = frequency;
-    }
 
     public long getTopicId() {
         return topicId;
@@ -131,14 +112,6 @@ public class Topic extends Auditable {
 
     public void addUser(User user) {
         users.add(new TopicUsers(this, user));
-    }
-
-    public long getDefaultsurveyid() {
-        return defaultsurveyid;
-    }
-
-    public void setDefaultsurveyid(long defaultsurveyid) {
-        this.defaultsurveyid = defaultsurveyid;
     }
 
     public TopicFrequency getFrequency() {
