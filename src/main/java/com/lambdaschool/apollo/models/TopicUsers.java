@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "topicusers", uniqueConstraints = {@UniqueConstraint(columnNames = {"topicId", "userId"})})
+@Table(name = "topicusers", uniqueConstraints = {@UniqueConstraint(columnNames = {"topicid", "userid"})})
 public class TopicUsers extends Auditable implements Serializable {
 
     /**
@@ -16,7 +16,7 @@ public class TopicUsers extends Auditable implements Serializable {
      */
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "topicId")
+    @JoinColumn(name = "topicid")
     @JsonIgnoreProperties(value = {"users", ""}, allowSetters = true)
     private Topic topic;
 
@@ -26,7 +26,7 @@ public class TopicUsers extends Auditable implements Serializable {
      */
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userid")
     @JsonIgnoreProperties(value = {"topics", "ownedtopics","roles","primaryemail"}, allowSetters = true)
     private User user;
 

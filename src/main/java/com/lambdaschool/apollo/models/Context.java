@@ -16,7 +16,7 @@ public class Context extends Auditable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long contextId;
+    private long contextid;
 
     /**
      * The description (String). Cannot be null and must be unique
@@ -43,7 +43,7 @@ public class Context extends Auditable {
      * context connects to survey that contains a list of default questions for current context
      */
     @OneToOne
-    @JoinColumn(name = "surveyId")
+    @JoinColumn(name = "surveyid")
     private Survey survey;
 
     /**
@@ -71,7 +71,7 @@ public class Context extends Auditable {
      * @return the contextId (long) of the context
      */
     public long getContextId() {
-        return contextId;
+        return contextid;
     }
 
     /**
@@ -79,8 +79,8 @@ public class Context extends Auditable {
      *
      * @param contextId the new contextId (long) of the context
      */
-    public void setContextId(long contextId) {
-        this.contextId = contextId;
+    public void setContextId(long contextid) {
+        this.contextid = contextid;
     }
 
     /**
