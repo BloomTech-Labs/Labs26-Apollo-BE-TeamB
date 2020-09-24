@@ -10,7 +10,7 @@ public interface AnswerService {
 
     void delete(long id);
 
-    Answer save(Answer answer, long questionId, long surveyId);
+    Answer save(Answer answer, long questionId, String username);
 
     Answer update(Answer answer);
 

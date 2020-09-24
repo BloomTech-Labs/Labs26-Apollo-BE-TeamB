@@ -7,9 +7,6 @@ import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.repository.AnswerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -46,17 +43,8 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Transactional
     @Override
-    public Answer save(Answer answer, long questionId, long surveyId) {
+    public Answer save(Answer answer, long questionId, String username) {
         Answer newAnswer = new Answer();
-
-        // who is saving this answer username
-//        UserDetails userDetails = (UserDetails) SecurityContextHolder
-//                .getContext().getAuthentication()
-//                .getPrincipal();
-//        String username = userDetails.getUsername();
-        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
-        String username = loggedInUser.getName();
-        // I will probably make this ^^ a helper function later
 
         if (answer.getAnswerId() != 0) {
             Answer oldAnswer = answerRepository.findById(answer.getAnswerId())
@@ -72,7 +60,6 @@ public class AnswerServiceImpl implements AnswerService {
             throw new ResourceNotFoundException("Question Id " + answer.getQuestion().getQuestionId() + " Not Found");
         }
 
-//        User user = userService.findUserById(answer.getUser().getUserid());
         User user = userService.findByOKTAUserName(username);
         if (user != null) {
             newAnswer.setUser(user);
@@ -80,7 +67,7 @@ public class AnswerServiceImpl implements AnswerService {
             throw new ResourceNotFoundException("User Id " + answer.getUser().getUserid() + " Not Found");
         }
 
-        Survey survey = surveyService.findById(surveyId);
+        Survey survey = question.getSurvey();
         if (survey != null) {
             newAnswer.setSurvey(survey);
         } else {
