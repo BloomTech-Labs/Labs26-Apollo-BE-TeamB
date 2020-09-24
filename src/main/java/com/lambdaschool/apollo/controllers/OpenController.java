@@ -64,7 +64,6 @@ public class OpenController {
         User newuser = new User();
 
         newuser.setUsername(newminuser.getUsername());
-//        newuser.setPassword(newminuser.getPassword());
         newuser.setPrimaryemail(newminuser.getPrimaryemail());
 
         // add the default role of user
