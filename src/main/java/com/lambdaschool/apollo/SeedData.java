@@ -9,7 +9,6 @@ import com.lambdaschool.apollo.views.QuestionType;
 import com.lambdaschool.apollo.views.TopicFrequency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ import java.util.Locale;
  * after the application context has been loaded.
  */
 @Transactional
-@Component
+//@Component
 public class SeedData
         implements CommandLineRunner {
     /**
