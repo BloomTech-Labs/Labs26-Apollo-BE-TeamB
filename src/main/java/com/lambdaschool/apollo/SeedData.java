@@ -23,7 +23,7 @@ import java.util.Locale;
  */
 @Transactional
 //Comment this out if the Database is breaking
-@Component
+//@Component
 
 public class SeedData
         implements CommandLineRunner {
