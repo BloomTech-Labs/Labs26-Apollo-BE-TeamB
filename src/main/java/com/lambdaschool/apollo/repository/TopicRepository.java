@@ -12,8 +12,10 @@ import java.util.List;
 public interface TopicRepository extends CrudRepository<Topic, Long> {
 
 
-    @Query(value = "SELECT * as count FROM topics", nativeQuery = true)
-    List<Topic> findByOwnerId(long userid);
+    List<Topic> findByOwner_usernameOrUsers_user_username(String ownername, String membername);
+
+
+    Topic findByJoincodeEquals(String joincode);
 
     /**
      * Counts the number of topic user combinations for the given topicId and userId. Answer should be only 0 or 1.
@@ -22,7 +24,7 @@ public interface TopicRepository extends CrudRepository<Topic, Long> {
      * @param userId  The userId of the user of the topic user combination to check
      * @return A single number, a count
      */
-    @Query(value = "SELECT COUNT(*) as count FROM topicusers WHERE topicId = :topicId AND userId = :userId", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) as count FROM topicusers WHERE topic_Id = :topicId AND user_Id = :userId", nativeQuery = true)
     JustTheCount checkTopicUsersCombo(long topicId, long userId);
 
     /**
@@ -47,7 +49,7 @@ public interface TopicRepository extends CrudRepository<Topic, Long> {
      */
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO topicusers(topicId, userId, created_by, created_date, last_modified_by, last_modified_date) VALUES (:topicId, :userId, :uname, CURRENT_TIMESTAMP, :uname, CURRENT_TIMESTAMP)",
+    @Query(value = "INSERT INTO topicusers(topic_Id, user_Id, created_by, created_date, last_modified_by, last_modified_date) VALUES (:topicId, :userId, :uname, CURRENT_TIMESTAMP, :uname, CURRENT_TIMESTAMP)",
             nativeQuery = true)
     void insertTopicUsers(
             String uname,

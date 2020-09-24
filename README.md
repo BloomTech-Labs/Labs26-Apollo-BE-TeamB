@@ -2,6 +2,10 @@
 
 ### Getting a JWT
 
+<details>
+
+<summary>Instructions for getting a JWT for hitting the endpoints</summary>
+
 once you have signed in through okta on the [client]("https://github.com/Lambda-School-Labs/Labs26-Apollo-FE-TeamB") do
 ```JS
 let tokenObj = JSON.parse(localStorage.getItem("okta-token-storage"));
@@ -16,11 +20,17 @@ Ok so now that you have copied that idtoken property head over to postman, and i
 
 ![Postman](./screenshots/img_3.PNG)
 
-Api will be extended
+</details>
+
+
 
 ### Database layout
 
+<details>
+<summary> Image of Database Layout </summary>
+
 ![Image of Database Layout](db.png)
+</details>
 
 ### Endpoints:
 
@@ -30,12 +40,12 @@ Api will be extended
 
 <summary>POST: http://apollo-b-api.herokuapp.com/topics/new - create a new topic</summary>
 
+Creates a Topic with the current user as the owner.
+
+Expected body
 ```JSON
 {
     "title": "My New Topic",
-    "owner": {
-        "username": "admin"
-    },
     "frequency": "WEEKLY",
     "defaultsurvey": {
         "questions": [
@@ -60,49 +70,102 @@ Api will be extended
 
 ```
 
+Results
+
+```JSON
+{
+    "topicId": 62,
+    "title": "My New Topic",
+    "owner": {
+        "userid": 10,
+        "username": "llama001@maildrop.cc"
+    },
+    "frequency": "WEEKLY",
+    "defaultsurvey": {
+        "surveyId": 63,
+        "questions": [
+            {
+                "questionId": 64,
+                "body": "Do you have any blockers?",
+                "type": "TEXT",
+                "leader": true
+            },
+            {
+                "questionId": 65,
+                "body": "What is the teams priority?",
+                "type": "TEXT",
+                "leader": true
+            },
+            {
+                "questionId": 66,
+                "body": "How is your weekend?",
+                "type": "TEXT",
+                "leader": false
+            }
+        ]
+    },
+    "joincode": "QkJlKGwYM",
+    "surveysrequests": [],
+    "users": []
+}
+```
+
+
 </details>
 
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/topics/topics - Get all topics regardless of user</summary>
+<summary>GET: http://apollo-b-api.herokuapp.com/topics/topics - Get all topics for a user</summary>
+
+Returns all topics that a user is connected to, either as an owner or as a member
 
 GET Endpoint
 
 ```JSON
 [
     {
-        "topicId": 35,
-        "title": "Topic 1",
+        "topicId": 37,
+        "title": "Topic 2",
         "owner": {
             "userid": 4,
             "username": "admin"
         },
         "frequency": "MONDAY",
-        "defaultsurveyid": 34,
+        "defaultsurvey": {
+            "surveyId": 36,
+            "questions": []
+        },
+        "joincode": "lRQlkNGkg",
         "surveysrequests": [
             {
-                "surveyId": 41
+                "surveyId": 46,
+                "questions": [
+                    {
+                        "questionId": 56,
+                        "body": "Leader Question 1",
+                        "type": "TEXT",
+                        "leader": true
+                    },
+                    {
+                        "questionId": 58,
+                        "body": "Leader Question 2",
+                        "type": "TEXT",
+                        "leader": true
+                    },
+                    {
+                        "questionId": 59,
+                        "body": "Member Question 1",
+                        "type": "TEXT",
+                        "leader": false
+                    }
+                ]
             },
             {
-                "surveyId": 42
-            },
-            {
-                "surveyId": 43
-            },
-            {
-                "surveyId": 44
-            },
-            {
-                "surveyId": 45
+                "surveyId": 57,
+                "questions": []
             }
         ],
         "users": [
-            {
-                "user": {
-                    "userid": 4,
-                    "username": "admin"
-                }
-            },
             {
                 "user": {
                     "userid": 5,
@@ -111,70 +174,69 @@ GET Endpoint
             },
             {
                 "user": {
-                    "userid": 6,
-                    "username": "barnbarn"
+                    "userid": 10,
+                    "username": "llama001@maildrop.cc"
                 }
             }
         ]
     },
     {
-        "topicId": 36,
-        "title": "Topic 2",
+        "topicId": 62,
+        "title": "My New Topic",
         "owner": {
-            "userid": 4,
-            "username": "admin"
-        },
-        "frequency": "MONDAY",
-        "defaultsurveyid": 34,
-        "surveysrequests": [],
-        "users": []
-    },
-    {
-        "topicId": 37,
-        "title": "Topic 3",
-        "owner": {
-            "userid": 5,
-            "username": "cinnamon"
+            "userid": 10,
+            "username": "llama001@maildrop.cc"
         },
         "frequency": "WEEKLY",
-        "defaultsurveyid": 34,
-        "surveysrequests": [],
-        "users": []
-    },
-    {
-        "topicId": 38,
-        "title": "Topic 4",
-        "owner": {
-            "userid": 5,
-            "username": "cinnamon"
+        "defaultsurvey": {
+            "surveyId": 63,
+            "questions": [
+                {
+                    "questionId": 64,
+                    "body": "Do you have any blockers?",
+                    "type": "TEXT",
+                    "leader": true
+                },
+                {
+                    "questionId": 65,
+                    "body": "What is the teams priority?",
+                    "type": "TEXT",
+                    "leader": true
+                },
+                {
+                    "questionId": 66,
+                    "body": "How is your weekend?",
+                    "type": "TEXT",
+                    "leader": false
+                }
+            ]
         },
-        "frequency": "WEEKLY",
-        "defaultsurveyid": 34,
-        "surveysrequests": [],
-        "users": []
-    },
-    {
-        "topicId": 39,
-        "title": "Topic 5",
-        "owner": {
-            "userid": 5,
-            "username": "cinnamon"
-        },
-        "frequency": "MONTHLY",
-        "defaultsurveyid": 34,
-        "surveysrequests": [],
-        "users": []
-    },
-    {
-        "topicId": 40,
-        "title": "Topic 6",
-        "owner": {
-            "userid": 5,
-            "username": "cinnamon"
-        },
-        "frequency": "MONTHLY",
-        "defaultsurveyid": 34,
-        "surveysrequests": [],
+        "joincode": "QkJlKGwYM",
+        "surveysrequests": [
+            {
+                "surveyId": 63,
+                "questions": [
+                    {
+                        "questionId": 64,
+                        "body": "Do you have any blockers?",
+                        "type": "TEXT",
+                        "leader": true
+                    },
+                    {
+                        "questionId": 65,
+                        "body": "What is the teams priority?",
+                        "type": "TEXT",
+                        "leader": true
+                    },
+                    {
+                        "questionId": 66,
+                        "body": "How is your weekend?",
+                        "type": "TEXT",
+                        "leader": false
+                    }
+                ]
+            }
+        ],
         "users": []
     }
 ]
@@ -184,182 +246,150 @@ GET Endpoint
 
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/users/users Returns user info included topics of which they are a member</summary>
+<summary>POST: http://appollo-b-api.herokuapp.com/topics/{joinCode} Current user joins a Topic.</summary>
+
+Example: http://appollo-b-api.herokuapp.com/topics/lRQlkNGkg
+
+Returns 200 Success message
+
+</details>
+
+<details>
+<summary>GET: http://appollo-b-api.herokuapp.com/topics/all Returns list of all Topics regardless of user</summary>
+
+N/A
+
+</details>
+
+<details>
+<summary>GET: http://localhost:2019/topics/topic/{topicId} Returns a specific topic</summary>
+
+Example : http://appollo-b-api.herokuapp.com/topics/topic/37
+
+</details>
+
+## Users
+
+<details>
+
+<summary>GET: http://apollo-b-api.herokuapp.com/users/getuserinfo Returns user info included topics of which they are a member</summary>
+
+Example: 
 
 ```JSON
-[
-    {
-        "userid": 4,
-        "username": "admin",
-        "ownedtopics": [
-            {
-                "topicId": 35,
-                "title": "Topic 1",
-                "frequency": "MONDAY",
-                "defaultsurveyid": 34,
-                "surveysrequests": [
+{
+    "userid": 10,
+    "username": "llama001@maildrop.cc",
+    "ownedtopics": [
+        {
+            "topicId": 62,
+            "title": "My New Topic",
+            "frequency": "WEEKLY",
+            "defaultsurvey": {
+                "surveyId": 63,
+                "questions": [
                     {
-                        "surveyId": 41
+                        "questionId": 64,
+                        "body": "Do you have any blockers?",
+                        "type": "TEXT",
+                        "leader": true
                     },
                     {
-                        "surveyId": 42
+                        "questionId": 65,
+                        "body": "What is the teams priority?",
+                        "type": "TEXT",
+                        "leader": true
                     },
                     {
-                        "surveyId": 43
-                    },
-                    {
-                        "surveyId": 44
-                    },
-                    {
-                        "surveyId": 45
+                        "questionId": 66,
+                        "body": "How is your weekend?",
+                        "type": "TEXT",
+                        "leader": false
                     }
                 ]
             },
-            {
-                "topicId": 36,
-                "title": "Topic 2",
-                "frequency": "MONDAY",
-                "defaultsurveyid": 34,
-                "surveysrequests": []
-            }
-        ],
-        "topics": [
-            {
-                "topic": {
-                    "topicId": 35,
-                    "title": "Topic 1",
-                    "owner": {
-                        "userid": 4,
-                        "username": "admin"
-                    },
-                    "frequency": "MONDAY",
-                    "defaultsurveyid": 34,
-                    "surveysrequests": [
+            "joincode": "QkJlKGwYM",
+            "surveysrequests": [
+                {
+                    "surveyId": 63,
+                    "questions": [
                         {
-                            "surveyId": 41
+                            "questionId": 64,
+                            "body": "Do you have any blockers?",
+                            "type": "TEXT",
+                            "leader": true
                         },
                         {
-                            "surveyId": 42
+                            "questionId": 65,
+                            "body": "What is the teams priority?",
+                            "type": "TEXT",
+                            "leader": true
                         },
                         {
-                            "surveyId": 43
-                        },
-                        {
-                            "surveyId": 44
-                        },
-                        {
-                            "surveyId": 45
+                            "questionId": 66,
+                            "body": "How is your weekend?",
+                            "type": "TEXT",
+                            "leader": false
                         }
                     ]
                 }
-            }
-        ]
-    },
-    {
-        "userid": 5,
-        "username": "cinnamon",
-        "ownedtopics": [
-            {
+            ]
+        }
+    ],
+    "topics": [
+        {
+            "topic": {
                 "topicId": 37,
-                "title": "Topic 3",
-                "frequency": "WEEKLY",
-                "defaultsurveyid": 34,
-                "surveysrequests": []
-            },
-            {
-                "topicId": 38,
-                "title": "Topic 4",
-                "frequency": "WEEKLY",
-                "defaultsurveyid": 34,
-                "surveysrequests": []
-            },
-            {
-                "topicId": 39,
-                "title": "Topic 5",
-                "frequency": "MONTHLY",
-                "defaultsurveyid": 34,
-                "surveysrequests": []
-            },
-            {
-                "topicId": 40,
-                "title": "Topic 6",
-                "frequency": "MONTHLY",
-                "defaultsurveyid": 34,
-                "surveysrequests": []
-            }
-        ],
-        "topics": [
-            {
-                "topic": {
-                    "topicId": 35,
-                    "title": "Topic 1",
-                    "owner": {
-                        "userid": 4,
-                        "username": "admin"
+                "title": "Topic 2",
+                "owner": {
+                    "userid": 4,
+                    "username": "admin"
+                },
+                "frequency": "MONDAY",
+                "defaultsurvey": {
+                    "surveyId": 36,
+                    "questions": []
+                },
+                "joincode": "lRQlkNGkg",
+                "surveysrequests": [
+                    {
+                        "surveyId": 46,
+                        "questions": [
+                            {
+                                "questionId": 56,
+                                "body": "Leader Question 1",
+                                "type": "TEXT",
+                                "leader": true
+                            },
+                            {
+                                "questionId": 58,
+                                "body": "Leader Question 2",
+                                "type": "TEXT",
+                                "leader": true
+                            },
+                            {
+                                "questionId": 59,
+                                "body": "Member Question 1",
+                                "type": "TEXT",
+                                "leader": false
+                            }
+                        ]
                     },
-                    "frequency": "MONDAY",
-                    "defaultsurveyid": 34,
-                    "surveysrequests": [
-                        {
-                            "surveyId": 41
-                        },
-                        {
-                            "surveyId": 42
-                        },
-                        {
-                            "surveyId": 43
-                        },
-                        {
-                            "surveyId": 44
-                        },
-                        {
-                            "surveyId": 45
-                        }
-                    ]
-                }
+                    {
+                        "surveyId": 57,
+                        "questions": []
+                    }
+                ]
             }
-        ]
-    },
-    {
-        "userid": 6,
-        "username": "barnbarn",
-        "ownedtopics": [],
-        "topics": [
-            {
-                "topic": {
-                    "topicId": 35,
-                    "title": "Topic 1",
-                    "owner": {
-                        "userid": 4,
-                        "username": "admin"
-                    },
-                    "frequency": "MONDAY",
-                    "defaultsurveyid": 34,
-                    "surveysrequests": [
-                        {
-                            "surveyId": 41
-                        },
-                        {
-                            "surveyId": 42
-                        },
-                        {
-                            "surveyId": 43
-                        },
-                        {
-                            "surveyId": 44
-                        },
-                        {
-                            "surveyId": 45
-                        }
-                    ]
-                }
-            }
-        ]
-    }]
+        }
+    ]
+}
 
 ```
 
 </details>
+
+
 
 ## Surveys
 <details>
