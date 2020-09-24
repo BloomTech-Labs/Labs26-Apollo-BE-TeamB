@@ -7,6 +7,9 @@ import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.repository.AnswerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -43,8 +46,17 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Transactional
     @Override
-    public Answer save(Answer answer) {
+    public Answer save(Answer answer, long questionId, long surveyId) {
         Answer newAnswer = new Answer();
+
+        // who is saving this answer username
+//        UserDetails userDetails = (UserDetails) SecurityContextHolder
+//                .getContext().getAuthentication()
+//                .getPrincipal();
+//        String username = userDetails.getUsername();
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String username = loggedInUser.getName();
+        // I will probably make this ^^ a helper function later
 
         if (answer.getAnswerId() != 0) {
             Answer oldAnswer = answerRepository.findById(answer.getAnswerId())
@@ -53,21 +65,22 @@ public class AnswerServiceImpl implements AnswerService {
         }
 
         newAnswer.setBody(answer.getBody());
-        Question question = questionService.findById(answer.getQuestion().getQuestionId());
+        Question question = questionService.findById(questionId);
         if (question != null) {
             newAnswer.setQuestion(question);
         } else {
             throw new ResourceNotFoundException("Question Id " + answer.getQuestion().getQuestionId() + " Not Found");
         }
 
-        User user = userService.findUserById(answer.getUser().getUserid());
+//        User user = userService.findUserById(answer.getUser().getUserid());
+        User user = userService.findByOKTAUserName(username);
         if (user != null) {
             newAnswer.setUser(user);
         } else {
             throw new ResourceNotFoundException("User Id " + answer.getUser().getUserid() + " Not Found");
         }
 
-        Survey survey = surveyService.findById(answer.getSurvey().getSurveyId());
+        Survey survey = surveyService.findById(surveyId);
         if (survey != null) {
             newAnswer.setSurvey(survey);
         } else {
