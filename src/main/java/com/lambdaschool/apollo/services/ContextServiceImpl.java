@@ -65,24 +65,23 @@ public class ContextServiceImpl implements ContextService {
 
         newContext.setDescription(context.getDescription());
 
+        // If saving existing context with a survey, go get the survey by id
         if (context.getSurvey().getSurveyId() != 0) {
             Survey survey = surveyService.findById(context.getSurvey().getSurveyId());
             newContext.setSurvey(survey);
+        // New context, new survey
         } else {
             newContext.setSurvey(new Survey());
+            // A survey needs questions, add them
             for (Question q : context.getSurvey().getQuestions()) {
-                newContext.getSurvey().addQuestion(new Question(q.getBody(), q.isLeader(), q.getType(),newContext.getSurvey()));
-//                System.out.println("entered loop");
-//                if (q.getQuestionId() != 0) {
-//                    System.out.println("entered if");
-//                    Question q1 = questionService.findById(q.getQuestionId());
-//                    newContext.getSurvey().getQuestions().add(q1);
-//                } else {
-//                    System.out.println("entered else");
-//                    System.out.println(newContext.getSurvey());
-//                    newContext.getSurvey().addQuestion(new Question(q.getBody(), q.isLeader(), q.getType(),context.getSurvey()));
-//                    System.out.println("finished adding question");
-//                }
+                // Hey, an existing question
+                if (q.getQuestionId() != 0) {
+                    Question q1 = questionService.findById(q.getQuestionId());
+                    newContext.getSurvey().addQuestion(q1);
+                // Cool, a new question. I can create that
+                } else {
+                    newContext.getSurvey().addQuestion(new Question(q.getBody(), q.isLeader(), q.getType(),newContext.getSurvey()));
+                }
             }
         }
 
