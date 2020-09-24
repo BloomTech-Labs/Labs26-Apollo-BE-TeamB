@@ -55,11 +55,17 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<Topic> findTopicsByUser(Long userid) {
+    public List<Topic> findTopicsByUser(String username) {
         List<Topic> topics = new ArrayList<>();
-               topics = topicRepository.findByOwnerId(userid);
+               topics = topicRepository.findByOwner_usernameOrUsers_user_username(username, username);
 
         return topics;
+    }
+
+    @Override
+    public Topic findByJoinCode(String joincode) {
+        return topicRepository.findByJoincodeEquals(joincode);
+
     }
 
     @Transactional
@@ -93,12 +99,27 @@ public class TopicServiceImpl implements TopicService {
 
         newTopic.setFrequency(topic.getFrequency());
 
-        newTopic.setDefaultsurvey(new Survey(newTopic));
-        for (Question sq : topic.getDefaultsurvey().getQuestions()) {
-            newTopic.getDefaultsurvey().addQuestion(new Question(sq.getBody(), sq.isLeader(),sq.getType(),newTopic.getDefaultsurvey()));
+        // If updating topic go find the default survey and attach it.
+        if (topic.getDefaultsurvey().getSurveyId() != 0) {
+            Survey defaultSurvey = surveyService.findById(topic.getDefaultsurvey().getSurveyId());
+            newTopic.setDefaultsurvey(defaultSurvey);
+        // If new topic, create a new survey and add questions to it.
+        } else {
+            newTopic.setDefaultsurvey(new Survey(newTopic));
+            for (Question sq : topic.getDefaultsurvey().getQuestions()) {
+                newTopic.getDefaultsurvey().addQuestion(new Question(sq.getBody(), sq.isLeader(),sq.getType(),newTopic.getDefaultsurvey()));
+            }
         }
 
+
         newTopic.getUsers().clear();
+
+        for (Survey survey :topic.getSurveysrequests()) {
+            Survey surveyReq = surveyService.findById(survey.getSurveyId());
+            if (surveyReq != null) {
+                newTopic.getSurveysrequests().add(surveyReq);
+            }
+        }
 
         for (TopicUsers tu : topic.getUsers()) {
             newTopic.getUsers().add(new TopicUsers(newTopic, tu.getUser()));

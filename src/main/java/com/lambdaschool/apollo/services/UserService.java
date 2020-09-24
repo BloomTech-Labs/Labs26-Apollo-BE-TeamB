@@ -43,6 +43,8 @@ public interface UserService {
      */
     User findByName(String name);
 
+    User findByOKTAUserName(String name);
+
     /**
      * Deletes the user record, its role and user combinations, and its useremail items from the database based off of the provided primary key
      *

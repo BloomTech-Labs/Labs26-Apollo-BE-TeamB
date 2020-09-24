@@ -10,7 +10,9 @@ public interface TopicService {
 
     List<Topic> findAllTopics();
 
-    List<Topic> findTopicsByUser(Long userid);
+    Topic findByJoinCode(String joincode);
+
+    List<Topic> findTopicsByUser(String username);
 
     void delete(long id);
 
