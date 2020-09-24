@@ -57,7 +57,7 @@ public class SurveyController {
         Answer newAnswer = new Answer();
         newAnswer.setBody(answer.getBody());
         newAnswer.setAnswerId(0);
-        answerService.save(newAnswer);
+        answerService.save(newAnswer, answer.getQuestionId(), answer.getSurveyId());
 
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newResponseURI = ServletUriComponentsBuilder.fromCurrentRequest()
