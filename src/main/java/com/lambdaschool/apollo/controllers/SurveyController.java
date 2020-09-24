@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -50,14 +51,14 @@ public class SurveyController {
     @PostMapping(value = "/response",
         consumes = {"application/json"},
         produces = {"application/json"})
-    public ResponseEntity<?> createNewResponse(
+    public ResponseEntity<?> createNewResponse(Authentication authentication,
             @Valid
             @RequestBody AnswerMinimum answer)
             throws URISyntaxException {
         Answer newAnswer = new Answer();
         newAnswer.setBody(answer.getBody());
         newAnswer.setAnswerId(0);
-        answerService.save(newAnswer, answer.getQuestionId(), answer.getSurveyId());
+        answerService.save(newAnswer, answer.getQuestionId(), authentication.getName());
 
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newResponseURI = ServletUriComponentsBuilder.fromCurrentRequest()
