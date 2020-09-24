@@ -9,7 +9,6 @@ import com.lambdaschool.apollo.views.QuestionType;
 import com.lambdaschool.apollo.views.TopicFrequency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ import java.util.Locale;
 @Transactional
 //Comment this out if the Database is breaking
 @Component
+
 public class SeedData
         implements CommandLineRunner {
     /**
