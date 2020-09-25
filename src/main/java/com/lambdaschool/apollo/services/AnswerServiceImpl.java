@@ -6,6 +6,7 @@ import com.lambdaschool.apollo.models.Question;
 import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.repository.AnswerRepository;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -43,7 +44,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Transactional
     @Override
-    public Answer save(Answer answer, long questionId, String username) {
+    public Answer save(Answer answer) {
         Answer newAnswer = new Answer();
 
         if (answer.getAnswerId() != 0) {
@@ -53,14 +54,14 @@ public class AnswerServiceImpl implements AnswerService {
         }
 
         newAnswer.setBody(answer.getBody());
-        Question question = questionService.findById(questionId);
+        Question question = questionService.findById(answer.getQuestion().getQuestionId());
         if (question != null) {
             newAnswer.setQuestion(question);
         } else {
             throw new ResourceNotFoundException("Question Id " + answer.getQuestion().getQuestionId() + " Not Found");
         }
 
-        User user = userService.findByOKTAUserName(username);
+        User user = userService.findUserById(answer.getUser().getUserid());
         if (user != null) {
             newAnswer.setUser(user);
         } else {
