@@ -1,7 +1,6 @@
 package com.lambdaschool.apollo.controllers;
 
 import com.lambdaschool.apollo.models.Answer;
-import com.lambdaschool.apollo.models.AnswerMinimum;
 import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.services.AnswerService;
 import com.lambdaschool.apollo.services.SurveyService;
@@ -58,6 +57,9 @@ public class SurveyController {
         Answer newAnswer = new Answer();
         newAnswer.setBody(answer.getBody());
         newAnswer.setAnswerId(0);
+        newAnswer.setQuestion(answer.getQuestion());
+        newAnswer.setSurvey(answer.getSurvey());
+        newAnswer.setUser(answer.getUser());
         answerService.save(newAnswer);
 
         HttpHeaders responseHeaders = new HttpHeaders();
