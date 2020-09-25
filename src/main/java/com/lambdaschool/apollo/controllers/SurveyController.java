@@ -53,12 +53,12 @@ public class SurveyController {
         produces = {"application/json"})
     public ResponseEntity<?> createNewResponse(Authentication authentication,
             @Valid
-            @RequestBody AnswerMinimum answer)
+            @RequestBody Answer answer)
             throws URISyntaxException {
         Answer newAnswer = new Answer();
         newAnswer.setBody(answer.getBody());
         newAnswer.setAnswerId(0);
-        answerService.save(newAnswer, answer.getQuestionId(), authentication.getName());
+        answerService.save(newAnswer);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newResponseURI = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -71,9 +71,6 @@ public class SurveyController {
                 responseHeaders,
                 HttpStatus.CREATED);
     }
-
-
-
 
     @GetMapping(value = "/all", produces = {"application/json"})
     public ResponseEntity<?> getAllSurveys() {
