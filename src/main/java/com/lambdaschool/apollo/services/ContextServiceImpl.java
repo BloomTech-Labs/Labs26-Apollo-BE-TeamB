@@ -2,6 +2,7 @@ package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
 import com.lambdaschool.apollo.models.Context;
+import com.lambdaschool.apollo.models.Question;
 import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.repository.ContextRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class ContextServiceImpl implements ContextService {
 
     @Autowired
     private SurveyService surveyService;
+
+    @Autowired
+    private QuestionService questionService;
 
     @Override
     public List<Context> findAll() {
@@ -58,15 +62,30 @@ public class ContextServiceImpl implements ContextService {
                     .orElseThrow(() -> new ResourceNotFoundException("Context Id " + context.getContextId() + " Not Found"));
             newContext.setContextId(context.getContextId());
         }
+
         newContext.setDescription(context.getDescription());
-        Survey survey = surveyService.findById(context.getSurvey().getSurveyId());
-        if (survey != null) {
+
+        // If saving existing context with a survey, go get the survey by id
+        if (context.getSurvey().getSurveyId() != 0) {
+            Survey survey = surveyService.findById(context.getSurvey().getSurveyId());
             newContext.setSurvey(survey);
-            return contextRepository.save(newContext);
+        // New context, new survey
         } else {
-            throw new ResourceNotFoundException("Survey Id " + context.getSurvey().getSurveyId() + " Not Found");
+            newContext.setSurvey(new Survey());
+            // A survey needs questions, add them
+            for (Question q : context.getSurvey().getQuestions()) {
+                // Hey, an existing question
+                if (q.getQuestionId() != 0) {
+                    Question q1 = questionService.findById(q.getQuestionId());
+                    newContext.getSurvey().addQuestion(q1);
+                // Cool, a new question. I can create that
+                } else {
+                    newContext.getSurvey().addQuestion(new Question(q.getBody(), q.isLeader(), q.getType(),newContext.getSurvey()));
+                }
+            }
         }
 
+        return contextRepository.save(newContext);
     }
 
 }

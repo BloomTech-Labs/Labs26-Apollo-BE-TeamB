@@ -79,6 +79,12 @@ public class SurveyController {
         List<Survey> surveys = surveyService.findAllSurveys();
         return new ResponseEntity<>(surveys, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/survey/{surveyid}", produces = {"application/json"})
+    public ResponseEntity<?> getAllSurveys(@PathVariable long surveyid) {
+        Survey survey = surveyService.findById(surveyid);
+        return new ResponseEntity<>(survey, HttpStatus.OK);
+    }
     
 
 }

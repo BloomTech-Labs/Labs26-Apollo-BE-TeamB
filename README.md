@@ -583,12 +583,83 @@ Example:
 ## Context
 
 <details>
-<summary> Title of endpoint </summary>
+<summary> GET http://apollo-b-api.herokuapp.com/contexts/contexts - Returns all of the contexts</summary>
 
 Extra details here
 
 ```JSON
-JSON HERE
+[
+    {
+        "description": "product leadership",
+        "survey": {
+            "questions": [
+                {
+                    "body": "Leader Question 1",
+                    "type": "TEXT",
+                    "answers": [],
+                    "questionId": 56,
+                    "leader": true
+                },
+                {
+                    "body": "Leader Question 2",
+                    "type": "TEXT",
+                    "answers": [],
+                    "questionId": 58,
+                    "leader": true
+                },
+                {
+                    "body": "Member Question 1",
+                    "type": "TEXT",
+                    "answers": [],
+                    "questionId": 59,
+                    "leader": false
+                }
+            ],
+            "surveyId": 46
+        },
+        "contextId": 51
+    },
+    {...},
+    {...}
+]
+```
+
+</details>
+
+<details>
+<summary>POST http://apollo-b-api.herokuapp.com Create a new context </summary>
+
+Expected JSON in the body of the post
+
+
+```JSON
+{
+    "description": "Super Duper Cool leadership v 9",
+    "survey": {
+        "questions": [
+            {
+                "body": "What is the highest priority for the current sprint",
+                "type": "TEXT",
+                "leader": true
+            },
+            {
+                "body": "What is my availability for the current sprint?",
+                "type": "TEXT",
+                "leader": true
+            },
+            {
+                "body": "Do you have any blockers?",
+                "type": "TEXT",
+                "leader": false
+            },
+            {
+                "body": "Will you be working remote?",
+                "type": "TEXT",
+                "leader": false
+            }
+        ]
+    }
+}
 
 ```
 

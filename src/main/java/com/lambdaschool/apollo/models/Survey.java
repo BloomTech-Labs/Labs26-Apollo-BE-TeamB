@@ -76,4 +76,14 @@ public class Survey extends Auditable {
     public void setDefaulttopic(List<Topic> defaulttopic) {
         this.defaulttopic = defaulttopic;
     }
+
+    @Override
+    public String toString() {
+        return "Survey{" +
+                "surveyid=" + surveyid +
+                ", topic=" + topic +
+                ", defaulttopic=" + defaulttopic +
+                ", questions=" + questions +
+                '}';
+    }
 }
