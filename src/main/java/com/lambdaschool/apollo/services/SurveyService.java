@@ -14,4 +14,6 @@ public interface SurveyService {
 
     Survey save(Survey survey);
 
+    Survey saveRequest(Survey survey, long topicId);
+
 }

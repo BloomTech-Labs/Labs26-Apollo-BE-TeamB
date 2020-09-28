@@ -1,8 +1,10 @@
 package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
-import com.lambdaschool.apollo.models.Survey;
+import com.lambdaschool.apollo.models.*;
 import com.lambdaschool.apollo.repository.SurveyRepository;
+import com.lambdaschool.apollo.repository.TopicRepository;
+import com.lambdaschool.apollo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,12 @@ public class SurveyServiceImpl implements SurveyService {
 
     @Autowired
     private SurveyRepository surveyRepository;
+
+    @Autowired
+    private TopicRepository topicRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Survey findById(long id) {
@@ -37,6 +45,39 @@ public class SurveyServiceImpl implements SurveyService {
     @Override
     public Survey save(Survey survey) {
         return surveyRepository.save(survey);
+    }
+
+    @Transactional
+    @Override
+    public Survey saveRequest(Survey survey, long topicId) {
+        // We need to know what topic to add the survey to
+        Topic topic  = topicRepository.findById(topicId)
+                .orElseThrow(() -> new ResourceNotFoundException("Hey, this topic doesn't exist"));
+        // We need to know who is answering the leader questions
+        User user = topic.getOwner();
+
+        Survey newSurvey = new Survey(topic);
+
+        for (Question q: survey.getQuestions()) {
+            // Create the question
+            Question question = new Question(q.getBody(), q.isLeader(), q.getType(), newSurvey);
+            // If it is a leader question, attach an answer
+            if (question.isLeader()) {
+                // answers are a list, so we must loop through them. Should only be 1 answer though
+                for (Answer a : q.getAnswers()) {
+                    question.getAnswers().add(new Answer(a.getBody(), question, user, newSurvey));
+                }
+            }
+            // add question to survey
+            newSurvey.addQuestion(question);
+
+            //Save
+            return surveyRepository.save(newSurvey);
+        }
+
+
+
+        return null;
     }
 
     @Override
