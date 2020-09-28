@@ -1,8 +1,12 @@
 package com.lambdaschool.apollo.controllers;
+
 import com.lambdaschool.apollo.models.Topic;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.services.TopicService;
 import com.lambdaschool.apollo.services.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +30,12 @@ public class TopicController {
     @Autowired
     private UserService userService;
 
-
+    @ApiOperation(value = "Get all topics of current user ")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved list", response = Topic.class, responseContainer = "List"),
+            @ApiResponse(code = 401, message = "Not authorized"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
     @GetMapping(value = "/topics",
             produces = {"application/json"})
 
@@ -36,6 +45,12 @@ public class TopicController {
         return new ResponseEntity<>(myTopics, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "List all topics")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved list", response = Topic.class, responseContainer = "List"),
+            @ApiResponse(code = 401, message = "Not authorized"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
     @GetMapping(value = "/all",
             produces = {"application/json"})
 
@@ -46,13 +61,25 @@ public class TopicController {
         return new ResponseEntity<>(myTopics, HttpStatus.OK);
     }
 
-
+    @ApiOperation(value = "Get topic by Id ")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved topic", response = Topic.class),
+            @ApiResponse(code = 401, message = "Not authorized"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
     @GetMapping(value = "/topic/{topicid}", produces = "application/json")
     public ResponseEntity<?> getTopicById(@PathVariable Long topicid) {
         Topic myTopic = topicService.findTopicById(topicid);
         return new ResponseEntity<>(myTopic, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Join topic by the join code")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully joined topic", response = Topic.class),
+            @ApiResponse(code = 401, message = "Not authorized"),
+            @ApiResponse(code = 404, message = "Topic Not Found"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
     @Transactional
     @PostMapping(value = "/topic/{code}", produces = "application/json")
     public ResponseEntity<?> userJoinTopic(@PathVariable String code, Authentication authentication) throws URISyntaxException {
@@ -66,6 +93,12 @@ public class TopicController {
         return new ResponseEntity<>(topic, HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "Create new topic for current user")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully created a new topic", response = Topic.class),
+            @ApiResponse(code = 401, message = "Not authorized"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
     @Transactional
     @PostMapping(value = "/new", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> createTopic(@RequestBody Topic newtopic, Authentication authentication) throws URISyntaxException {

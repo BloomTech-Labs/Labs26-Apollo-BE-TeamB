@@ -27,7 +27,7 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors
-                        .basePackage("com.lambdaschool.usermodel"))
+                        .basePackage("com.lambdaschool.apollo"))
                 .paths(PathSelectors.regex("/.*"))
                 .build()
                 .useDefaultResponseMessages(false) // Allows only my exception responses
@@ -40,13 +40,13 @@ public class Swagger2Config {
      * @return ApiInfo a Swagger object containing identification information for this application
      */
     private ApiInfo apiEndPointsInfo() {
-        return new ApiInfoBuilder().title("User Model Example")
-                .description("User Model Example")
-                .contact(new Contact("John Mitchell",
-                        "http://www.lambdaschool.com",
-                        "john@lambdaschool.com"))
+        return new ApiInfoBuilder().title("Apollo")
+                .description("Apollo")
+                .contact(new Contact("Lambda Apollo B Team",
+                        "https://github.com/Lambda-School-Labs/Labs26-Apollo-BE-TeamB",
+                        "lambda@lambdaschool.com"))
                 .license("MIT")
-                .licenseUrl("https://github.com/LambdaSchool/java-usermodel/blob/master/LICENSE")
+                .licenseUrl("https://github.com/Lambda-School-Labs/Labs26-Apollo-BE-TeamB/blob/master/LICENSE")
                 .version("1.0.0")
                 .build();
     }
