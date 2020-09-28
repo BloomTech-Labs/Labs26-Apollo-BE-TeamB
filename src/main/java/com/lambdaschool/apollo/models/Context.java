@@ -42,8 +42,9 @@ public class Context extends Auditable {
      * One to One relationship between context and survey
      * context connects to survey that contains a list of default questions for current context
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "surveyid")
+    @JsonIgnoreProperties(value = {"topic", "defaulttopic"}, allowSetters = true)
     private Survey survey;
 
     /**
