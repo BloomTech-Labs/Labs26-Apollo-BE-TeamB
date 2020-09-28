@@ -23,7 +23,7 @@ public class Survey extends Auditable {
 
     @ApiModelProperty(name = "Topic id", value = "Topic id for this survey request, can be null if this is used as survey", allowEmptyValue = true)
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "topicId")
+    @JoinColumn(name = "topicid")
     @JsonIgnoreProperties(value = {"surveysrequests", "owner", "defaultsurveyid", "users"}, allowSetters = true)
     private Topic topic;
 
@@ -82,5 +82,15 @@ public class Survey extends Auditable {
 
     public void setDefaulttopic(List<Topic> defaulttopic) {
         this.defaulttopic = defaulttopic;
+    }
+
+    @Override
+    public String toString() {
+        return "Survey{" +
+                "surveyid=" + surveyid +
+                ", topic=" + topic +
+                ", defaulttopic=" + defaulttopic +
+                ", questions=" + questions +
+                '}';
     }
 }

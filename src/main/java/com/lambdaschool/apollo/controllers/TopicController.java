@@ -81,7 +81,7 @@ public class TopicController {
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
     @Transactional
-    @PostMapping(value = "/topic/{code}/join", produces = "application/json")
+    @PostMapping(value = "/topic/{code}", produces = "application/json")
     public ResponseEntity<?> userJoinTopic(@PathVariable String code, Authentication authentication) throws URISyntaxException {
 
         Topic topic = topicService.findByJoinCode(code);
@@ -90,7 +90,7 @@ public class TopicController {
 
         topicService.addTopicUser(topic.getTopicId(), user.getUserid());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(topic, HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Create new topic for current user")

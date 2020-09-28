@@ -23,7 +23,9 @@ import java.util.Locale;
  * after the application context has been loaded.
  */
 @Transactional
-@Component
+//Comment this out if the Database is breaking
+//@Component
+
 public class SeedData
         implements CommandLineRunner {
     /**

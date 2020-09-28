@@ -71,7 +71,7 @@ public class Question extends Auditable {
 
     @ApiModelProperty(name = "answer", value = "answers for this question")
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = "question", allowGetters = true)
+    @JsonIgnoreProperties(value = "question", allowSetters = true)
     private List<Answer> answers;
 
     /**
@@ -95,7 +95,7 @@ public class Question extends Auditable {
         setLeader(isLeader);
         setType(type);
         setSurvey(survey);
-        answers = new ArrayList<>();
+        this.answers = new ArrayList<>();
     }
 
     /**
@@ -184,5 +184,18 @@ public class Question extends Auditable {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionid=" + questionid +
+                ", body='" + body + '\'' +
+                ", isLeader=" + isLeader +
+                ", type=" + type +
+                ", contexts=" + contexts +
+                ", survey=" + survey +
+                ", answers=" + answers +
+                '}';
     }
 }

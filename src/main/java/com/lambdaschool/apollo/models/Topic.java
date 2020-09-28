@@ -22,7 +22,7 @@ public class Topic extends Auditable {
     @ApiModelProperty(name = "Topic id", value = "primary key for Topic", required = true, example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "topicId")
+    @Column(name = "topicid")
     private long topicId;
 
     /**
@@ -44,7 +44,7 @@ public class Topic extends Auditable {
 
     @ApiModelProperty(name = "Survey id", value = "Default Survey Id used for this topic")
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "surveyId")
+    @JoinColumn(name = "surveyid")
     @JsonIgnoreProperties(value = {"defaulttopic", "topic"}, allowSetters = true)
     private Survey defaultsurvey;
 

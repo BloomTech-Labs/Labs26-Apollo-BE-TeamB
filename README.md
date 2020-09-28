@@ -74,7 +74,7 @@ Results
 
 ```JSON
 {
-    "topicId": 62,
+    "topicid": 62,
     "title": "My New Topic",
     "owner": {
         "userid": 10,
@@ -82,7 +82,7 @@ Results
     },
     "frequency": "WEEKLY",
     "defaultsurvey": {
-        "surveyId": 63,
+        "surveyid": 63,
         "questions": [
             {
                 "questionId": 64,
@@ -124,7 +124,7 @@ GET Endpoint
 ```JSON
 [
     {
-        "topicId": 37,
+        "topicid": 37,
         "title": "Topic 2",
         "owner": {
             "userid": 4,
@@ -132,13 +132,13 @@ GET Endpoint
         },
         "frequency": "MONDAY",
         "defaultsurvey": {
-            "surveyId": 36,
+            "surveyid": 36,
             "questions": []
         },
         "joincode": "lRQlkNGkg",
         "surveysrequests": [
             {
-                "surveyId": 46,
+                "surveyid": 46,
                 "questions": [
                     {
                         "questionId": 56,
@@ -161,7 +161,7 @@ GET Endpoint
                 ]
             },
             {
-                "surveyId": 57,
+                "surveyid": 57,
                 "questions": []
             }
         ],
@@ -181,7 +181,7 @@ GET Endpoint
         ]
     },
     {
-        "topicId": 62,
+        "topicid": 62,
         "title": "My New Topic",
         "owner": {
             "userid": 10,
@@ -189,7 +189,7 @@ GET Endpoint
         },
         "frequency": "WEEKLY",
         "defaultsurvey": {
-            "surveyId": 63,
+            "surveyid": 63,
             "questions": [
                 {
                     "questionId": 64,
@@ -214,7 +214,7 @@ GET Endpoint
         "joincode": "QkJlKGwYM",
         "surveysrequests": [
             {
-                "surveyId": 63,
+                "surveyid": 63,
                 "questions": [
                     {
                         "questionId": 64,
@@ -262,7 +262,7 @@ N/A
 </details>
 
 <details>
-<summary>GET: http://localhost:2019/topics/topic/{topicId} Returns a specific topic</summary>
+<summary>GET: http://localhost:2019/topics/topic/{topicid} Returns a specific topic</summary>
 
 Example : http://appollo-b-api.herokuapp.com/topics/topic/37
 
@@ -282,11 +282,11 @@ Example:
     "username": "llama001@maildrop.cc",
     "ownedtopics": [
         {
-            "topicId": 62,
+            "topicid": 62,
             "title": "My New Topic",
             "frequency": "WEEKLY",
             "defaultsurvey": {
-                "surveyId": 63,
+                "surveyid": 63,
                 "questions": [
                     {
                         "questionId": 64,
@@ -311,7 +311,7 @@ Example:
             "joincode": "QkJlKGwYM",
             "surveysrequests": [
                 {
-                    "surveyId": 63,
+                    "surveyid": 63,
                     "questions": [
                         {
                             "questionId": 64,
@@ -339,7 +339,7 @@ Example:
     "topics": [
         {
             "topic": {
-                "topicId": 37,
+                "topicid": 37,
                 "title": "Topic 2",
                 "owner": {
                     "userid": 4,
@@ -347,13 +347,13 @@ Example:
                 },
                 "frequency": "MONDAY",
                 "defaultsurvey": {
-                    "surveyId": 36,
+                    "surveyid": 36,
                     "questions": []
                 },
                 "joincode": "lRQlkNGkg",
                 "surveysrequests": [
                     {
-                        "surveyId": 46,
+                        "surveyid": 46,
                         "questions": [
                             {
                                 "questionId": 56,
@@ -376,7 +376,7 @@ Example:
                         ]
                     },
                     {
-                        "surveyId": 57,
+                        "surveyid": 57,
                         "questions": []
                     }
                 ]
@@ -399,14 +399,14 @@ Example:
 ```JSON
 [
     {
-        "surveyId": 34,
+        "surveyid": 34,
         "topic": null,
         "questions": []
     },
     {
-        "surveyId": 41,
+        "surveyid": 41,
         "topic": {
-            "topicId": 35,
+            "topicid": 35,
             "title": "Topic 1",
             "frequency": "MONDAY"
         },
@@ -432,9 +432,9 @@ Example:
         ]
     },
     {
-        "surveyId": 42,
+        "surveyid": 42,
         "topic": {
-            "topicId": 35,
+            "topicid": 35,
             "title": "Topic 1",
             "frequency": "MONDAY"
         },
@@ -454,27 +454,27 @@ Example:
         ]
     },
     {
-        "surveyId": 43,
+        "surveyid": 43,
         "topic": {
-            "topicId": 35,
+            "topicid": 35,
             "title": "Topic 1",
             "frequency": "MONDAY"
         },
         "questions": []
     },
     {
-        "surveyId": 44,
+        "surveyid": 44,
         "topic": {
-            "topicId": 35,
+            "topicid": 35,
             "title": "Topic 1",
             "frequency": "MONDAY"
         },
         "questions": []
     },
     {
-        "surveyId": 45,
+        "surveyid": 45,
         "topic": {
-            "topicId": 35,
+            "topicid": 35,
             "title": "Topic 1",
             "frequency": "MONDAY"
         },
@@ -498,9 +498,9 @@ Example:
         "body": "Leader Question 1",
         "type": "TEXT",
         "survey": {
-            "surveyId": 41,
+            "surveyid": 41,
             "topic": {
-                "topicId": 35,
+                "topicid": 35,
                 "title": "Topic 1",
                 "frequency": "MONDAY"
             }
@@ -512,9 +512,9 @@ Example:
         "body": "Leader Question 2",
         "type": "TEXT",
         "survey": {
-            "surveyId": 41,
+            "surveyid": 41,
             "topic": {
-                "topicId": 35,
+                "topicid": 35,
                 "title": "Topic 1",
                 "frequency": "MONDAY"
             }
@@ -526,9 +526,9 @@ Example:
         "body": "Member Question 1",
         "type": "TEXT",
         "survey": {
-            "surveyId": 41,
+            "surveyid": 41,
             "topic": {
-                "topicId": 35,
+                "topicid": 35,
                 "title": "Topic 1",
                 "frequency": "MONDAY"
             }
@@ -540,9 +540,9 @@ Example:
         "body": "Member Question 2",
         "type": "TEXT",
         "survey": {
-            "surveyId": 42,
+            "surveyid": 42,
             "topic": {
-                "topicId": 35,
+                "topicid": 35,
                 "title": "Topic 1",
                 "frequency": "MONDAY"
             }
@@ -554,9 +554,9 @@ Example:
         "body": "Member Question 3",
         "type": "TEXT",
         "survey": {
-            "surveyId": 42,
+            "surveyid": 42,
             "topic": {
-                "topicId": 35,
+                "topicid": 35,
                 "title": "Topic 1",
                 "frequency": "MONDAY"
             }
@@ -564,6 +564,119 @@ Example:
         "leader": false
     }
 ]
+
+```
+
+</details>
+
+## Context
+
+<details>
+<summary> GET http://apollo-b-api.herokuapp.com/contexts/contexts - Returns all of the contexts</summary>
+
+Extra details here
+
+```JSON
+[
+    {
+        "description": "product leadership",
+        "survey": {
+            "questions": [
+                {
+                    "body": "Leader Question 1",
+                    "type": "TEXT",
+                    "answers": [],
+                    "questionId": 56,
+                    "leader": true
+                },
+                {
+                    "body": "Leader Question 2",
+                    "type": "TEXT",
+                    "answers": [],
+                    "questionId": 58,
+                    "leader": true
+                },
+                {
+                    "body": "Member Question 1",
+                    "type": "TEXT",
+                    "answers": [],
+                    "questionId": 59,
+                    "leader": false
+                }
+            ],
+            "surveyId": 46
+        },
+        "contextId": 51
+    },
+    {...},
+    {...}
+]
+```
+
+</details>
+
+<details>
+<summary>POST http://apollo-b-api.herokuapp.com Create a new context </summary>
+
+Expected JSON in the body of the post
+
+
+```JSON
+{
+    "description": "Super Duper Cool leadership v 9",
+    "survey": {
+        "questions": [
+            {
+                "body": "What is the highest priority for the current sprint",
+                "type": "TEXT",
+                "leader": true
+            },
+            {
+                "body": "What is my availability for the current sprint?",
+                "type": "TEXT",
+                "leader": true
+            },
+            {
+                "body": "Do you have any blockers?",
+                "type": "TEXT",
+                "leader": false
+            },
+            {
+                "body": "Will you be working remote?",
+                "type": "TEXT",
+                "leader": false
+            }
+        ]
+    }
+}
+
+```
+
+</details>
+
+## Messages
+
+<details>
+<summary> Title of endpoint </summary>
+
+Extra details here
+
+```JSON
+JSON HERE
+
+```
+
+</details>
+
+## Answers
+
+<details>
+<summary> Title of endpoint </summary>
+
+Extra details here
+
+```JSON
+JSON HERE
 
 ```
 
