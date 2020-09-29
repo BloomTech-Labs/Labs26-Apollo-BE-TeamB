@@ -297,15 +297,22 @@ public class UserControllerTest {
     public void deleteUserRoleByIds() throws Exception {
         String apiUrl = "/users/user/3/role/2";
 
-        RequestBuilder rb = MockMvcRequestBuilders.delete(apiUrl);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.delete(apiUrl);
 
-        mockMvc.perform(rb)
+        mockMvc.perform(requestBuilder)
                 .andExpect(status().is2xxSuccessful())
                 .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
     public void postUserRoleByIds() throws Exception {
+        String apiUrl = "/users/user/3/role/2";
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post(apiUrl);
+
+        mockMvc.perform(requestBuilder)
+                .andExpect(status().is2xxSuccessful())
+                .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
