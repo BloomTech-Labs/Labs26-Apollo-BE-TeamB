@@ -47,6 +47,7 @@ public class TopicServiceImplTest {
 
     @Test
     public void c_findTopicsByUser() {
+        assertEquals(5, topicService.findTopicsByUser("user1").size());
     }
 
     @Test
