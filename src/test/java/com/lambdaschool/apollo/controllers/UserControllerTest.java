@@ -66,6 +66,7 @@ public class UserControllerTest {
         admins.add(new UserRoles(new User(), r2));
         admins.add(new UserRoles(new User(), r3));
         User u1 = new User("admin", "admin@lambdaschool.local", admins);
+        u1.setUserid(101);
         userList.add(u1); // id 4
 
         // data, user
@@ -73,22 +74,26 @@ public class UserControllerTest {
         datas.add(new UserRoles(new User(), r3));
         datas.add(new UserRoles(new User(), r2));
         User u2 = new User("user1", "user1@user.com", datas);
+        u1.setUserid(102);
         userList.add(u2); // id 5
 
         // user
         ArrayList<UserRoles> users = new ArrayList<>();
         users.add(new UserRoles(new User(), r2));
         User u3 = new User("user2", "user2@user.com", users);
+        u1.setUserid(103);
         userList.add(u3); // id 6
 
         users = new ArrayList<>();
         users.add(new UserRoles(new User(), r2));
         User u4 = new User("user3", "user3@user.com", users);
+        u1.setUserid(104);
         userList.add(u4); // id 7
 
         users = new ArrayList<>();
         users.add(new UserRoles(new User(), r2));
         User u5 = new User("user4", "user4@user.com", users);
+        u1.setUserid(105);
         userList.add(u5); // id 8
 
         RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
@@ -126,10 +131,10 @@ public class UserControllerTest {
 
     @Test
     public void getUserById() throws Exception {
-        String apiUrl = "/users/user/4";
+        String apiUrl = "/users/user/101";
 
-        Mockito.when(userService.findUserById(4))
-                .thenReturn(userList.get(1));
+        Mockito.when(userService.findUserById(101))
+                .thenReturn(userList.get(0));
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(apiUrl).accept(MediaType.APPLICATION_JSON);
 
@@ -137,7 +142,7 @@ public class UserControllerTest {
         String actual = result.getResponse().getContentAsString();
 
         ObjectMapper mapper = new ObjectMapper();
-        String expected = mapper.writeValueAsString(userList.get(1));
+        String expected = mapper.writeValueAsString(userList.get(0));
 
         System.out.println("Expect: " + expected);
         System.out.println("Actual: " + actual);
@@ -147,6 +152,23 @@ public class UserControllerTest {
 
     @Test
     public void getUserByName() throws Exception {
+        String apiUrl = "/users/user/name/admin";
+
+        Mockito.when(userService.findByName("admin"))
+                .thenReturn(userList.get(0));
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(apiUrl).accept(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String actual = result.getResponse().getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        String expected = mapper.writeValueAsString(userList.get(0));
+
+        System.out.println("Expect: " + expected);
+        System.out.println("Actual: " + actual);
+
+        assertEquals("Rest API Returns List", expected, actual);
     }
 
     @Test
