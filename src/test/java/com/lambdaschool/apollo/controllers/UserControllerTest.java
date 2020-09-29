@@ -295,6 +295,13 @@ public class UserControllerTest {
 
     @Test
     public void deleteUserRoleByIds() throws Exception {
+        String apiUrl = "/users/user/3/role/2";
+
+        RequestBuilder rb = MockMvcRequestBuilders.delete(apiUrl);
+
+        mockMvc.perform(rb)
+                .andExpect(status().is2xxSuccessful())
+                .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
