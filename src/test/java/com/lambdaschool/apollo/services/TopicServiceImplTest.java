@@ -32,39 +32,40 @@ public class TopicServiceImplTest {
     }
 
     @Test
-    public void findTopicById() {
+    public void a_findTopicById() {
         assertEquals("Topic 2", topicService.findTopicById(10).getTitle());
     }
 
     @Test
-    public void delete() {
+    public void e_delete() {
     }
 
     @Test
-    public void findAllTopics() {
+    public void b_findAllTopics() {
+        assertEquals(5, topicService.findAllTopics().size());
     }
 
     @Test
-    public void findTopicsByUser() {
+    public void c_findTopicsByUser() {
     }
 
     @Test
-    public void findByJoinCode() {
+    public void d_findByJoinCode() {
     }
 
     @Test
-    public void save() {
+    public void f_save() {
     }
 
     @Test
-    public void update() {
+    public void g_update() {
     }
 
     @Test
-    public void deleteTopicUser() {
+    public void h_deleteTopicUser() {
     }
 
     @Test
-    public void addTopicUser() {
+    public void i_addTopicUser() {
     }
 }
