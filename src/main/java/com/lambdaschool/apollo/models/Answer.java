@@ -1,12 +1,13 @@
 package com.lambdaschool.apollo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "answers")
+@JsonIgnoreProperties(value = {"question", "user", "survey"}, allowSetters = true)
 public class Answer extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,7 +19,6 @@ public class Answer extends Auditable{
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "questionid")
-//    @JsonIgnoreProperties(value = {""})
     private Question question;
 
     @ManyToOne(cascade = CascadeType.ALL)
