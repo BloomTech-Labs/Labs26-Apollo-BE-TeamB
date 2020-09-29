@@ -46,6 +46,7 @@ public class AnswerServiceImpl implements AnswerService {
     @Transactional
     @Override
     public void save(List<QuestionBody> qbList, User user) {
+
         for (QuestionBody qb : qbList) {
             Answer newAnswer = new Answer();
             if (qb.getBody() != null) {
@@ -71,9 +72,7 @@ public class AnswerServiceImpl implements AnswerService {
                 throw new ResourceNotFoundException("Survey Id " + question.getSurvey().getSurveyId() + "Nor Found");
             }
 
-            // if we made it this far than save the answer
             answerRepository.save(newAnswer);
-
         }
 
 //        yes this is dead code but it will get implemented in an future save method overload
