@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -223,8 +224,33 @@ public class UserControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    @WithUserDetails("user2")
     @Test
     public void updateFullUser() throws Exception {
+        String apiUrl = "/users/user/103";
+
+        // build a user
+        ArrayList<UserRoles> thisRole = new ArrayList<>();
+        User u2 = new User();
+        u2.setUserid(103);
+        u2.setUsername("user2");
+        u2.setPrimaryemail("updated@user.com");
+        u2.setRoles(thisRole);
+
+        Mockito.when(userService.save(any(User.class)))
+                .thenReturn(u2);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String expected = mapper.writeValueAsString(u2);
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.put(apiUrl)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(expected);
+
+        mockMvc.perform(requestBuilder)
+                .andExpect(status().isOk())
+                .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
