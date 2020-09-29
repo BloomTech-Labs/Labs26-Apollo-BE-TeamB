@@ -33,13 +33,11 @@ public class SurveyController {
     @Autowired
     private SurveyService surveyService;
 
-
     @Autowired
     private AnswerService answerService;
 
     @Autowired
     private UserService userService;
-
 
     @ApiOperation(value = "Create new survey ")
     @ApiResponses(value = {
@@ -47,7 +45,6 @@ public class SurveyController {
             @ApiResponse(code = 401, message = "Not authorized"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-
     @PostMapping(value = "/new",
             consumes = {"application/json"},
             produces = {"application/json"})
@@ -66,7 +63,6 @@ public class SurveyController {
         return new ResponseEntity<>(newSurvey, HttpStatus.CREATED);
     }
 
-
     @PostMapping(value = "/response",
         consumes = {"application/json"},
         produces = {"application/json"})
@@ -79,8 +75,7 @@ public class SurveyController {
 
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
-
-
+  
     @ApiOperation(value = "List all surveys ")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list", response = Survey.class, responseContainer = "List"),

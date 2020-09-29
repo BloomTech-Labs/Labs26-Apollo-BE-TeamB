@@ -194,7 +194,6 @@ public class SeedData
         topic2.getUsers().add(new TopicUsers(topic2, u2));
         topic2.getUsers().add(new TopicUsers(topic2, lambdaDummy01));
         topic2 = topicService.save(topic2);
-        System.out.println(topic2.getTopicId());
 
         Survey s2 = surveyService.save(new Survey());
         Topic topic3 = new Topic("Topic 3", u2, s2, TopicFrequency.WEEKLY);

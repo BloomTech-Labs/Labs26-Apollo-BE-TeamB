@@ -1,11 +1,14 @@
 package com.lambdaschool.apollo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@ApiModel(value = "TopicUser", description = "Relationship between topics and users(members)")
 @Entity
 @Table(name = "topicusers", uniqueConstraints = {@UniqueConstraint(columnNames = {"topicid", "userid"})})
 public class TopicUsers extends Auditable implements Serializable {
@@ -14,6 +17,7 @@ public class TopicUsers extends Auditable implements Serializable {
      * 1/2 of the primary key (long) for topicusers.
      * Also is a foreign key into the topics table
      */
+    @ApiModelProperty(name = "Topic id", value = "Topic id")
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "topicid")
@@ -24,6 +28,7 @@ public class TopicUsers extends Auditable implements Serializable {
      * 1/2 of the primary key (long) for topicusers.
      * Also is a foreign key into the users table
      */
+    @ApiModelProperty(name = "User id (member)", value = "User id")
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userid")
