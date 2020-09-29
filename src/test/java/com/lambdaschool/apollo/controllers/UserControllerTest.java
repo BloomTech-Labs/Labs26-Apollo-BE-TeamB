@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -30,6 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -194,6 +197,30 @@ public class UserControllerTest {
 
     @Test
     public void addNewUser() throws Exception {
+        String apiUrl = "/users/user";
+
+        // build a user
+        ArrayList<UserRoles> thisRole = new ArrayList<>();
+        User u1 = new User();
+        u1.setUserid(110);
+        u1.setUsername("new");
+        u1.setPrimaryemail("new@user.com");
+        u1.setRoles(thisRole);
+
+        Mockito.when(userService.save(any(User.class)))
+                .thenReturn(u1);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String expected = mapper.writeValueAsString(u1);
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post(apiUrl)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(expected);
+
+        mockMvc.perform(requestBuilder)
+                .andExpect(status().isCreated())
+                .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
