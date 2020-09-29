@@ -283,6 +283,14 @@ public class UserControllerTest {
 
     @Test
     public void deleteUserById() throws Exception {
+        String apiUrl = "/users/user/105";
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.delete(apiUrl)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+        mockMvc.perform(requestBuilder)
+                .andExpect(status().is2xxSuccessful())
+                .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
