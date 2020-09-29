@@ -1,5 +1,6 @@
 package com.lambdaschool.apollo.controllers;
 
+import com.lambdaschool.apollo.handlers.HelperFunctions;
 import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.services.AnswerService;
 import com.lambdaschool.apollo.services.SurveyService;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import org.hibernate.id.uuid.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,9 @@ import java.util.List;
 @RequestMapping("/surveys")
 @Api(value = "Operations pertaining to topics")
 public class SurveyController {
+
+    @Autowired
+    private HelperFunctions helperFunctions;
 
     @Autowired
     private SurveyService surveyService;
@@ -84,14 +89,18 @@ public class SurveyController {
     })
 
     @GetMapping(value = "/all", produces = {"application/json"})
-    public ResponseEntity<?> getAllSurveys() {
+    public ResponseEntity<?> getAllSurveys(Authentication authentication) {
         List<Survey> surveys = surveyService.findAllSurveys();
+        helperFunctions.hasResponded(surveys, userService.findByOKTAUserName(authentication.getName()));
+
         return new ResponseEntity<>(surveys, HttpStatus.OK);
     }
 
     @GetMapping(value = "/survey/{surveyid}", produces = {"application/json"})
-    public ResponseEntity<?> getAllSurveys(@PathVariable long surveyid) {
+    public ResponseEntity<?> getAllSurveys(Authentication authentication, @PathVariable long surveyid) {
         Survey survey = surveyService.findById(surveyid);
+
+        helperFunctions.hasResponded(survey, userService.findByOKTAUserName(authentication.getName()));
         return new ResponseEntity<>(survey, HttpStatus.OK);
     }
 
