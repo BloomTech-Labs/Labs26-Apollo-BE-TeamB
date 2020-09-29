@@ -94,7 +94,7 @@ public class SurveyController {
     }
 
     @Transactional
-    @PostMapping(value = "/topic/{topicid}/", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/topic/{topicid}", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> createSurveyRequest(@RequestBody @NotNull List<SurveyQuestion> questions, Authentication authentication, @PathVariable long topicid) {
         //Check that the current use is thw owner of the topic for which they are trying to create a request
             // TO-DO
