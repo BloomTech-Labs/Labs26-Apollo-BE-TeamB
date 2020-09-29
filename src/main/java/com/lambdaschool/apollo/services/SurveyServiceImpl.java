@@ -5,6 +5,7 @@ import com.lambdaschool.apollo.models.*;
 import com.lambdaschool.apollo.repository.SurveyRepository;
 import com.lambdaschool.apollo.repository.TopicRepository;
 import com.lambdaschool.apollo.repository.UserRepository;
+import com.lambdaschool.apollo.views.SurveyQuestion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,24 +50,27 @@ public class SurveyServiceImpl implements SurveyService {
 
     @Transactional
     @Override
-    public Survey saveRequest(Survey survey, long topicId) {
+    public Survey saveRequest(List<SurveyQuestion> questions, long topicId) {
         // We need to know what topic to add the survey to
         Topic topic  = topicRepository.findById(topicId)
                 .orElseThrow(() -> new ResourceNotFoundException("Hey, this topic doesn't exist"));
         // We need to know who is answering the leader questions
+        // User user = userRepository.findById(userId)
+        //         .orElseThrow(() -> new ResourceNotFoundException("This user doesn't exist"));
         User user = topic.getOwner();
 
         Survey newSurvey = new Survey(topic);
 
-        for (Question q: survey.getQuestions()) {
+        for (SurveyQuestion q: questions) {
             // Create the question
-            Question question = new Question(q.getBody(), q.isLeader(), q.getType(), newSurvey);
+            Question question = new Question(q.getBody(), q.getLeader(), q.getType(), newSurvey);
             // If it is a leader question, attach an answer
             if (question.isLeader()) {
                 // answers are a list, so we must loop through them. Should only be 1 answer though
-                for (Answer a : q.getAnswers()) {
-                    question.getAnswers().add(new Answer(a.getBody(), question, user, newSurvey));
-                }
+                // for (Answer a : q.getAnswers()) {
+                //     question.getAnswers().add(new Answer(a.getBody(), question, user, newSurvey));
+                // }
+                question.getAnswers().add(new Answer(q.getAnswer(), question, user, newSurvey));
             }
             // add question to survey
             newSurvey.addQuestion(question);

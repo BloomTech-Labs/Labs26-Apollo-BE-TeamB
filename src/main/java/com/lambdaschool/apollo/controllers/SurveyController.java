@@ -5,6 +5,7 @@ import com.lambdaschool.apollo.services.AnswerService;
 import com.lambdaschool.apollo.services.SurveyService;
 import com.lambdaschool.apollo.services.UserService;
 import com.lambdaschool.apollo.views.QuestionBody;
+import com.lambdaschool.apollo.views.SurveyQuestion;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -94,14 +95,19 @@ public class SurveyController {
 
     @Transactional
     @PostMapping(value = "/topic/{topicid}/", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> createSurveyRequest(@RequestBody @NotNull Survey surveyRequest, Authentication authentication, @PathVariable long topicid) {
+    public ResponseEntity<?> createSurveyRequest(@RequestBody @NotNull List<SurveyQuestion> questions, Authentication authentication, @PathVariable long topicid) {
         //Check that the current use is thw owner of the topic for which they are trying to create a request
             // TO-DO
         // We do not accept existing surveys, Always save as a new survey
-        surveyRequest.setSurveyId(0);
-        surveyRequest = surveyService.saveRequest(surveyRequest, topicid);
+        // surveyRequest.setSurveyId(0);
+        Survey survey = surveyService.saveRequest(questions, topicid);
+        // for (SurveyQuestion q: questions) {
+        //     System.out.println(q);
+        // }
 
-        return new ResponseEntity<>(surveyRequest, HttpStatus.CREATED);
+
+
+        return new ResponseEntity<>(survey, HttpStatus.CREATED);
     }
 
 }
