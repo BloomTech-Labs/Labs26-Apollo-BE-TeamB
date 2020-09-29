@@ -173,6 +173,23 @@ public class UserControllerTest {
 
     @Test
     public void getUserLikeName() throws Exception {
+        String apiUrl = "/users/user/name/like/user";
+
+        Mockito.when(userService.findByNameContaining("user"))
+                .thenReturn(userList.subList(1, 5));
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(apiUrl).accept(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String actual = result.getResponse().getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        String expected = mapper.writeValueAsString(userList.subList(1, 5));
+
+        System.out.println("Expect: " + expected);
+        System.out.println("Actual: " + actual);
+
+        assertEquals("Rest API Returns List", expected, actual);
     }
 
     @Test
