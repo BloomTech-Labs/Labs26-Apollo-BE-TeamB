@@ -55,7 +55,6 @@ public class Topic extends Auditable {
     @ApiModelProperty(name = "Survery Request id", value = "Survey requested using this topic")
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"topic", "defaulttopic"}, allowSetters = true)
-    @JsonIgnore
     private List<Survey> surveysrequests = new ArrayList<>();
 
     /**
