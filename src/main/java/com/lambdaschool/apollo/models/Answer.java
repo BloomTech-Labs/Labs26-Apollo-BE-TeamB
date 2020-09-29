@@ -1,7 +1,7 @@
 package com.lambdaschool.apollo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -23,6 +23,7 @@ public class Answer extends Auditable{
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userid")
+    @JsonIgnoreProperties(value = {"primaryemail", "topics"})
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)

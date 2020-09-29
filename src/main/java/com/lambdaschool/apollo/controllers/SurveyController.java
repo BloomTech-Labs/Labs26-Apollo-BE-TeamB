@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -70,12 +71,12 @@ public class SurveyController {
 
     @Transactional
     @PostMapping(value = "/topic/{topicid}/", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> createSurveyRequest(@RequestBody Survey surveyRequest, Authentication authentication, @PathVariable long topicid) {
+    public ResponseEntity<?> createSurveyRequest(@RequestBody @NotNull Survey surveyRequest, Authentication authentication, @PathVariable long topicid) {
         //Check that the current use is thw owner of the topic for which they are trying to create a request
             // TO-DO
         // We do not accept existing surveys, Always save as a new survey
         surveyRequest.setSurveyId(0);
-        surveyRequest = surveyService.save(surveyRequest);
+        surveyRequest = surveyService.saveRequest(surveyRequest, topicid);
 
         return new ResponseEntity<>(surveyRequest, HttpStatus.CREATED);
     }

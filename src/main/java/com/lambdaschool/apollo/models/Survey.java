@@ -1,5 +1,6 @@
 package com.lambdaschool.apollo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -24,12 +25,12 @@ public class Survey extends Auditable {
     @ApiModelProperty(name = "Topic id", value = "Topic id for this survey request, can be null if this is used as survey", allowEmptyValue = true)
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "topicid")
-    @JsonIgnoreProperties(value = {"surveysrequests", "owner", "defaultsurveyid", "users"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"surveysrequests", "owner", "defaultsurvey", "users", "frequency"}, allowSetters = true)
     private Topic topic;
 
     @ApiModelProperty(name = "Topic id", value = "Topic id ")
     @OneToMany(mappedBy = "defaultsurvey", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = {"defaultsurvey", "survey"}, allowSetters = true)
+    @JsonIgnore
     private List<Topic> defaulttopic;
 
     @ApiModelProperty(name = "Question id", value = "Question associated with this survey")

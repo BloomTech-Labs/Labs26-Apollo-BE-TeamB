@@ -70,14 +70,10 @@ public class SurveyServiceImpl implements SurveyService {
             }
             // add question to survey
             newSurvey.addQuestion(question);
-
-            //Save
-            return surveyRepository.save(newSurvey);
         }
 
-
-
-        return null;
+        //Save
+        return surveyRepository.save(newSurvey);
     }
 
     @Override
