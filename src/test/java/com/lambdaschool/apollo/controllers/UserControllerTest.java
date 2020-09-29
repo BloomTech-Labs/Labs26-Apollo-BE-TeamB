@@ -17,7 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -33,6 +32,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -224,7 +224,6 @@ public class UserControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @WithUserDetails("user2")
     @Test
     public void updateFullUser() throws Exception {
         String apiUrl = "/users/user/103";
@@ -317,6 +316,25 @@ public class UserControllerTest {
 
     @Test
     public void getCurrentUserInfo() throws Exception {
+        String apiUrl = "/users/getuserinfo";
+
+        Mockito.when(userService.findByOKTAUserName(anyString()))
+                .thenReturn(userList.get(0));
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(apiUrl)
+                .accept(MediaType.APPLICATION_JSON);
+        MvcResult result = mockMvc.perform(requestBuilder)
+                .andReturn(); // this could throw an exception
+        String actual = result.getResponse()
+                .getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        String expected = mapper.writeValueAsString(userList.get(0));
+
+        System.out.println("Expect: " + expected);
+        System.out.println("Actual: " + actual);
+
+        assertEquals("Rest API Returns List", expected, actual);
     }
 
     @Test
