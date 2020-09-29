@@ -109,14 +109,11 @@ public class UserControllerTest {
         Mockito.when(userService.findAll())
                 .thenReturn(userList);
 
-        RequestBuilder rb = MockMvcRequestBuilders.get(apiUrl)
-                .accept(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(apiUrl).accept(MediaType.APPLICATION_JSON);
 
         // the following actually performs a real controller call
-        MvcResult result = mockMvc.perform(rb)
-                .andReturn(); // this could throw an exception
-        String actual = result.getResponse()
-                .getContentAsString();
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn(); // this could throw an exception
+        String actual = result.getResponse().getContentAsString();
 
         ObjectMapper mapper = new ObjectMapper();
         String expected = mapper.writeValueAsString(userList);
@@ -129,7 +126,23 @@ public class UserControllerTest {
 
     @Test
     public void getUserById() throws Exception {
+        String apiUrl = "/users/user/4";
 
+        Mockito.when(userService.findUserById(4))
+                .thenReturn(userList.get(1));
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(apiUrl).accept(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String actual = result.getResponse().getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        String expected = mapper.writeValueAsString(userList.get(1));
+
+        System.out.println("Expect: " + expected);
+        System.out.println("Actual: " + actual);
+
+        assertEquals("Rest API Returns List", expected, actual);
     }
 
     @Test
