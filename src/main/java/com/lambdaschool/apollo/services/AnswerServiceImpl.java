@@ -6,6 +6,8 @@ import com.lambdaschool.apollo.models.Question;
 import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.repository.AnswerRepository;
+import com.lambdaschool.apollo.views.QuestionBody;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -43,38 +45,43 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Transactional
     @Override
-    public Answer save(Answer answer) {
-        Answer newAnswer = new Answer();
+    public void save(List<QuestionBody> qbList, User user) {
 
-        if (answer.getAnswerId() != 0) {
-            Answer oldAnswer = answerRepository.findById(answer.getAnswerId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Answer " + answer.getAnswerId() + " Not Found"));
-            newAnswer.setAnswerId(answer.getAnswerId());
+        for (QuestionBody qb : qbList) {
+            Answer newAnswer = new Answer();
+            if (qb.getBody() != null) {
+                newAnswer.setBody(qb.getBody());
+            } else {
+                throw new ResourceNotFoundException("Answer has no body!");
+            }
+            Question question = questionService.findById(qb.getQuestionid());
+            if (question != null) {
+                newAnswer.setQuestion(question);
+            } else {
+                throw new ResourceNotFoundException("Question Id " + qb.getQuestionid() + " Not Found");
+            }
+            if (user == userService.findUserById(user.getUserid())) {
+                newAnswer.setUser(user);
+            } else {
+                throw new ResourceNotFoundException("User Id " + user.getUserid() + " Not Found");
+            }
+            Survey survey = question.getSurvey();
+            if (survey != null) {
+                newAnswer.setSurvey(survey);
+            } else {
+                throw new ResourceNotFoundException("Survey Id " + question.getSurvey().getSurveyId() + "Nor Found");
+            }
+
+            answerRepository.save(newAnswer);
         }
 
-        newAnswer.setBody(answer.getBody());
-        Question question = questionService.findById(answer.getQuestion().getQuestionId());
-        if (question != null) {
-            newAnswer.setQuestion(question);
-        } else {
-            throw new ResourceNotFoundException("Question Id " + answer.getQuestion().getQuestionId() + " Not Found");
-        }
+//        yes this is dead code but it will get implemented in an future save method overload
+//        if (answer.getAnswerId() != 0) {
+//            Answer oldAnswer = answerRepository.findById(answer.getAnswerId())
+//                    .orElseThrow(() -> new ResourceNotFoundException("Answer " + answer.getAnswerId() + " Not Found"));
+//            newAnswer.setAnswerId(answer.getAnswerId());
+//        }
 
-        User user = userService.findUserById(answer.getUser().getUserid());
-        if (user != null) {
-            newAnswer.setUser(user);
-        } else {
-            throw new ResourceNotFoundException("User Id " + answer.getUser().getUserid() + " Not Found");
-        }
-
-        Survey survey = surveyService.findById(answer.getSurvey().getSurveyId());
-        if (survey != null) {
-            newAnswer.setSurvey(survey);
-        } else {
-            throw new ResourceNotFoundException("Survey Id " + answer.getSurvey().getSurveyId() + "Nor Found");
-        }
-
-        return answerRepository.save(newAnswer);
     }
 
     @Transactional
