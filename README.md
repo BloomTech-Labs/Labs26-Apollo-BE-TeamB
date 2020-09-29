@@ -22,6 +22,17 @@ Ok so now that you have copied that idtoken property head over to postman, and i
 
 </details>
 
+### Local Development Setup
+
+<details>
+
+<summary>When working with the api locally you may configure env variables to make testing easier</summary>
+
+![Env Vars](./screenshots/img_4.PNG)
+
+</details>
+
+
 
 
 ### Database layout
