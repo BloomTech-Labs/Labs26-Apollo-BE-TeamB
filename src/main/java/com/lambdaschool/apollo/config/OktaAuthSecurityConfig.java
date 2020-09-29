@@ -1,6 +1,8 @@
 package com.lambdaschool.apollo.config;
 
 import com.okta.spring.boot.oauth.Okta;
+import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -10,25 +12,29 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests()
-                    .antMatchers("/",
-                            "/h2-console/**",
-                            "/swagger-resources/**",
-                            "/swagger-resource/**",
-                            "/swagger-ui.html",
-                            "/v2/api-docs",
-                            "/webjars/**")
-                    .permitAll()
-                    .antMatchers("/users/**",
-                            "/topics/**",
-                            "/contexts/**",
-                            "/questions/**",
-                            "/surveys/**")
-                    .authenticated()
-                    .and()
-                    .oauth2ResourceServer().jwt();
-//                        .antMatchers("*")
-//                        .permitAll();
+                    if (System.getenv("IS_DEV") == null) {
+                        http.authorizeRequests()
+                            .antMatchers("/",
+                                        "/h2-console/**",
+                                        "/swagger-resources/**",
+                                        "/swagger-resource/**",
+                                        "/swagger-ui.html",
+                                        "/v2/api-docs",
+                                        "/webjars/**")
+                                        .permitAll()
+                                        .antMatchers("/users/**",
+                                                "/topics/**",
+                                                "/contexts/**",
+                                                "/questions/**",
+                                                "/surveys/**")
+                                        .authenticated()
+                                        .and()
+                                        .oauth2ResourceServer().jwt();
+                    } else {
+                        http.authorizeRequests()
+                                .antMatchers("*")
+                                .permitAll();
+                    }
 
             // process CORS annotations
             http.cors().and().csrf().disable();
