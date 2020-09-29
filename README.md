@@ -654,30 +654,54 @@ Expected JSON in the body of the post
 
 </details>
 
+## Survey Requests
+
+<details>
+<summary> POST  http://apollo-b-api.herokuapp.com/surveys/new - Create Survey Request</summary>
+
+
+```JSON
+[
+    {
+        "body": "Do you have any blockers?",
+        "type": "TEXT",
+        "leader": true,
+        "answer" : "LEADER ANSWER HERE"
+    },
+    {
+        "body": "What is the teams priority?",
+        "type": "TEXT",
+        "leader": true,
+        "answer" : "LEADER ANSWER HERE"
+    },
+    {
+        "body": "How is your weekend?",
+        "type": "TEXT",
+        "leader": false
+    }
+]
+
+```
+
+</details>
+
+<details>
+<summary>  POST http://apollo-b-api.herokuapp.com/surveys/response - Answer a survey request </summary>
+
+
+```JSON
+[
+    {
+        "questionId" : 12,
+        "body" : "STUFF"
+    },
+    {}
+]
+
+```
+
+</details>
+
 ## Messages
 
-<details>
-<summary> Title of endpoint </summary>
-
-Extra details here
-
-```JSON
-JSON HERE
-
-```
-
-</details>
-
 ## Answers
-
-<details>
-<summary> Title of endpoint </summary>
-
-Extra details here
-
-```JSON
-JSON HERE
-
-```
-
-</details>

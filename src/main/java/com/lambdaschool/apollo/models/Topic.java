@@ -1,13 +1,17 @@
 package com.lambdaschool.apollo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lambdaschool.apollo.views.TopicFrequency;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApiModel(value = "Topic", description = "Topic model")
 @Entity
 @Table(name = "topics")
 public class Topic extends Auditable {
@@ -15,6 +19,7 @@ public class Topic extends Auditable {
     /**
      * The primary key (long) of the topics table.
      */
+    @ApiModelProperty(name = "Topic id", value = "primary key for Topic", required = true, example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "topicid")
@@ -23,37 +28,44 @@ public class Topic extends Auditable {
     /**
      * The title (String). Cannot be null
      */
+    @ApiModelProperty(name = "Topic title", value = "Topic title", example = "Some title")
     @NotNull
     @Column(nullable = false)
     private String title;
 
-
+    @ApiModelProperty(name = "Owner", value = "Owner id for this topic")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties(value = {"ownedtopics", "topics", "primaryemail", "roles", ""}, allowSetters = true)
     private User owner;
 
+    @ApiModelProperty(name = "Frequency", value = "Topic Frequency", example = "Daily")
     private TopicFrequency frequency;
 
-
+    @ApiModelProperty(name = "Survey id", value = "Default Survey Id used for this topic")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "surveyid")
     @JsonIgnoreProperties(value = {"defaulttopic", "topic"}, allowSetters = true)
     private Survey defaultsurvey;
 
+    @ApiModelProperty(name = "Join code", value = "Join code for this topic", example = "xt23sRvxD")
     private String joincode;
 
     //Survey Requests that an owner of a topic has generated
+    @ApiModelProperty(name = "Survery Request id", value = "Survey requested using this topic")
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"topic", "defaulttopic"}, allowSetters = true)
+    @JsonIgnore
     private List<Survey> surveysrequests = new ArrayList<>();
 
     /**
      * Forms an One to Many relationship between topic and users.
      * A topic can have many users.
      */
+    @ApiModelProperty(name = "Members", value = "Users (Members) of this topic")
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"topic", "primaryemail", "roles", "ownedtopics"}, allowSetters = true)
+    @JsonIgnore
     private List<TopicUsers> users = new ArrayList<>();
 
     /**

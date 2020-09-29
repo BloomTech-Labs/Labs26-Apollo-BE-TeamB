@@ -3,12 +3,15 @@ package com.lambdaschool.apollo.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lambdaschool.apollo.views.QuestionType;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApiModel(value = "Question", description = "Question model")
 @Entity
 @Table(name = "questions")
 public class Question extends Auditable {
@@ -16,6 +19,7 @@ public class Question extends Auditable {
     /**
      * The primary key (long) of the questions table.
      */
+    @ApiModelProperty(name = "question id", value = "primary key for question")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long questionid;
@@ -23,6 +27,7 @@ public class Question extends Auditable {
     /**
      * The body (String) describes the question. Cannot be null
      */
+    @ApiModelProperty(name = "body", value = "question body")
     @NotNull
     @Column(nullable = false)
     private String body;
@@ -30,6 +35,7 @@ public class Question extends Auditable {
     /**
      * The isLeader (boolean) differs leader questions. Cannot be null
      */
+    @ApiModelProperty(name = "isleader", value = "True if this question is a context question")
     @NotNull
     @Column(nullable = false)
     private boolean isLeader;
@@ -37,6 +43,7 @@ public class Question extends Auditable {
     /**
      * The type (String) of question. Cannot be null
      */
+    @ApiModelProperty(name = "type", value = "questions type (e.g. text, star rating, etc.)")
     @NotNull
     @Column(nullable = false)
     private QuestionType type;
@@ -44,6 +51,7 @@ public class Question extends Auditable {
     /**
      * A list of contexts the question is associated with
      */
+    @ApiModelProperty(name = "context type", value = "context types for this question")
     @ManyToMany(mappedBy = "contextquestions")
     @JsonIgnore
     private List<Context> contexts = new ArrayList<>();
@@ -55,12 +63,13 @@ public class Question extends Auditable {
      * Forms a Many to One relationship between questions and survey.
      * A survey can have many questions.
      */
+    @ApiModelProperty(name = "survey", value = "survey attached to this question")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "surveyid")
     @JsonIgnoreProperties(value = {"questions", "topic", "defaulttopic"}, allowSetters = true)
     private Survey survey;
 
-
+    @ApiModelProperty(name = "answer", value = "answers for this question")
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = "question", allowSetters = true)
     private List<Answer> answers;

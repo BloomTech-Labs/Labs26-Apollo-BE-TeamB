@@ -60,7 +60,6 @@ public class User
     @Column(nullable = false,
             unique = true)
     @Email
-    @JsonIgnore
     private String primaryemail;
 
 
@@ -76,16 +75,20 @@ public class User
     @JsonIgnore
     private List<UserRoles> roles = new ArrayList<>();
 
+    @ApiModelProperty(name = "owner topics", value = "List of topics owned by this user (Topic Leader)")
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"owner", "users"}, allowSetters = true)
+    @JsonIgnore
     private List<Topic> ownedtopics = new ArrayList<>();
 
     /**
      * This field represents which topics a user is a member of
      * EXCLUSIVE of owned topics
      */
+    @ApiModelProperty(name = "member topics", value = "List of topics this user is a member of (Topic Member)")
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
+    @JsonIgnore
     private List<TopicUsers> topics = new ArrayList<>();
 
     /**
