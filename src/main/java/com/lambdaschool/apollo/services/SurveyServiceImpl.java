@@ -55,8 +55,6 @@ public class SurveyServiceImpl implements SurveyService {
         Topic topic  = topicRepository.findById(topicId)
                 .orElseThrow(() -> new ResourceNotFoundException("Hey, this topic doesn't exist"));
         // We need to know who is answering the leader questions
-        // User user = userRepository.findById(userId)
-        //         .orElseThrow(() -> new ResourceNotFoundException("This user doesn't exist"));
         User user = topic.getOwner();
 
         Survey newSurvey = new Survey(topic);
@@ -66,10 +64,6 @@ public class SurveyServiceImpl implements SurveyService {
             Question question = new Question(q.getBody(), q.getLeader(), q.getType(), newSurvey);
             // If it is a leader question, attach an answer
             if (question.isLeader()) {
-                // answers are a list, so we must loop through them. Should only be 1 answer though
-                // for (Answer a : q.getAnswers()) {
-                //     question.getAnswers().add(new Answer(a.getBody(), question, user, newSurvey));
-                // }
                 question.getAnswers().add(new Answer(q.getAnswer(), question, user, newSurvey));
             }
             // add question to survey

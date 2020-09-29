@@ -98,14 +98,7 @@ public class SurveyController {
     public ResponseEntity<?> createSurveyRequest(@RequestBody @NotNull List<SurveyQuestion> questions, Authentication authentication, @PathVariable long topicid) {
         //Check that the current use is thw owner of the topic for which they are trying to create a request
             // TO-DO
-        // We do not accept existing surveys, Always save as a new survey
-        // surveyRequest.setSurveyId(0);
         Survey survey = surveyService.saveRequest(questions, topicid);
-        // for (SurveyQuestion q: questions) {
-        //     System.out.println(q);
-        // }
-
-
 
         return new ResponseEntity<>(survey, HttpStatus.CREATED);
     }
