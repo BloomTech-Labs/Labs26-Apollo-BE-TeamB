@@ -255,6 +255,30 @@ public class UserControllerTest {
 
     @Test
     public void updateUser() throws Exception {
+        String apiUrl = "/users/user/103";
+
+        // build a user
+        ArrayList<UserRoles> thisRole = new ArrayList<>();
+        User u2 = new User();
+        u2.setUserid(103);
+        u2.setUsername("user2");
+        u2.setPrimaryemail("new@user.com");
+        u2.setRoles(thisRole);
+
+        Mockito.when(userService.update(u2, 103))
+                .thenReturn(userList.get(2));
+
+        ObjectMapper mapper = new ObjectMapper();
+        String expected = mapper.writeValueAsString(u2);
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.patch(apiUrl)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(expected);
+
+        mockMvc.perform(requestBuilder)
+                .andExpect(status().isOk())
+                .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
