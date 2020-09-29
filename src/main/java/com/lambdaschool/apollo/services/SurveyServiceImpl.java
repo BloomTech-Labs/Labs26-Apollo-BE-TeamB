@@ -3,7 +3,6 @@ package com.lambdaschool.apollo.services;
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
 import com.lambdaschool.apollo.models.*;
 import com.lambdaschool.apollo.repository.SurveyRepository;
-import com.lambdaschool.apollo.repository.TopicRepository;
 import com.lambdaschool.apollo.repository.UserRepository;
 import com.lambdaschool.apollo.views.SurveyQuestion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,6 @@ public class SurveyServiceImpl implements SurveyService {
 
     @Autowired
     private SurveyRepository surveyRepository;
-
-    @Autowired
-    private TopicRepository topicRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -50,10 +46,7 @@ public class SurveyServiceImpl implements SurveyService {
 
     @Transactional
     @Override
-    public Survey saveRequest(List<SurveyQuestion> questions, long topicId) {
-        // We need to know what topic to add the survey to
-        Topic topic  = topicRepository.findById(topicId)
-                .orElseThrow(() -> new ResourceNotFoundException("Hey, this topic doesn't exist"));
+    public Survey saveRequest(List<SurveyQuestion> questions, Topic topic) {
         // We need to know who is answering the leader questions
         User user = topic.getOwner();
 
