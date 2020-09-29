@@ -52,6 +52,7 @@ public class TopicServiceImplTest {
 
     @Test
     public void d_findByJoinCode() {
+        assertEquals("Topic 2", topicService.findByJoinCode("topic2joincode").getTitle());
     }
 
     @Test

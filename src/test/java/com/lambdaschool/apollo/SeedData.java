@@ -109,6 +109,7 @@ public class SeedData implements CommandLineRunner {
         topic2 = topicRepository.save(topic2); // id 10
         topicService.addTopicUser(topic2.getTopicId(), u2.getUserid());
         topicService.addTopicUser(topic2.getTopicId(), u3.getUserid());
+        topic2.setJoincode("topic2joincode");
 
         Survey s2 = surveyRepository.save(new Survey()); // id 11
         Topic topic3 = new Topic("Topic 3", u2, s2, TopicFrequency.WEEKLY);
