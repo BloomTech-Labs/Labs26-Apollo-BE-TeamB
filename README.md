@@ -669,7 +669,7 @@ Expected JSON in the body of the post
 
 <details>
 <summary> POST  http://apollo-b-api.herokuapp.com/surveys/topic/{topicid} - Create Survey Request</summary>
-Example - http://apollo-b-api.herokuapp.com/surveys/topic/37/
+Example - http://apollo-b-api.herokuapp.com/surveys/topic/37
 
 This is the format of data we are expecting to receive
 
