@@ -15,4 +15,6 @@ public interface QuestionService {
     Question update(Question question);
 
     List<Question> findAllQuestions();
+
+    List<Question> findAllBySurveyId(long surveyId);
 }
