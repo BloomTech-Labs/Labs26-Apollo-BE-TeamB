@@ -3,8 +3,6 @@ package com.lambdaschool.apollo.controllers;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.models.UserMinimum;
 import com.lambdaschool.apollo.models.UserRoles;
-import com.lambdaschool.apollo.services.RoleService;
-import com.lambdaschool.apollo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
@@ -16,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import springfox.documentation.annotations.ApiIgnore;
+import com.lambdaschool.apollo.services.UserService;
+import com.lambdaschool.apollo.services.RoleService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -23,6 +23,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * The class allows access to endpoints that are open to all users regardless of authentication status.
