@@ -1,8 +1,12 @@
 package com.lambdaschool.apollo.controllers;
 
+import com.lambdaschool.apollo.exceptions.ResourceFoundException;
 import com.lambdaschool.apollo.models.Survey;
+import com.lambdaschool.apollo.models.Topic;
+import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.services.AnswerService;
 import com.lambdaschool.apollo.services.SurveyService;
+import com.lambdaschool.apollo.services.TopicService;
 import com.lambdaschool.apollo.services.UserService;
 import com.lambdaschool.apollo.views.QuestionBody;
 import com.lambdaschool.apollo.views.SurveyQuestion;
@@ -36,6 +40,9 @@ public class SurveyController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TopicService topicService;
 
     @ApiOperation(value = "Create new survey ")
     @ApiResponses(value = {
@@ -96,11 +103,16 @@ public class SurveyController {
     @Transactional
     @PostMapping(value = "/topic/{topicid}", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> createSurveyRequest(@RequestBody @NotNull List<SurveyQuestion> questions, Authentication authentication, @PathVariable long topicid) {
-        //Check that the current use is thw owner of the topic for which they are trying to create a request
-            // TO-DO
-        Survey survey = surveyService.saveRequest(questions, topicid);
-
-        return new ResponseEntity<>(survey, HttpStatus.CREATED);
+        //Check that the current use is the owner of the topic for which they are trying to create a request
+        User u = userService.findByOKTAUserName(authentication.getName());
+        //Get topic from url path variable
+        Topic topic  = topicService.findTopicById(topicid);
+        //if user is owner of topic return new survey otherwise throw exception saying user is not authorized
+        if (u.getUserid() == topic.getOwner().getUserid()) {
+            Survey survey = surveyService.saveRequest(questions, topic);
+            return new ResponseEntity<>(survey, HttpStatus.CREATED);
+        } else {
+            throw new ResourceFoundException("Current user not authorized to make this request");
+        }
     }
-
 }
