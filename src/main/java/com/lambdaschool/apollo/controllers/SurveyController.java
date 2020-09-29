@@ -1,9 +1,10 @@
 package com.lambdaschool.apollo.controllers;
 
-import com.lambdaschool.apollo.models.Answer;
 import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.services.AnswerService;
 import com.lambdaschool.apollo.services.SurveyService;
+import com.lambdaschool.apollo.services.UserService;
+import com.lambdaschool.apollo.views.QuestionBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,9 +15,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.net.URI;
 
 @RestController
 @RequestMapping("/surveys")
@@ -27,6 +28,9 @@ public class SurveyController {
 
     @Autowired
     private AnswerService answerService;
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping(value = "/new",
         consumes = {"application/json"},
@@ -46,32 +50,17 @@ public class SurveyController {
         return new ResponseEntity<>(newSurvey, HttpStatus.CREATED);
     }
 
-
     @PostMapping(value = "/response",
         consumes = {"application/json"},
         produces = {"application/json"})
     public ResponseEntity<?> createNewResponse(Authentication authentication,
             @Valid
-            @RequestBody Answer answer)
+            @RequestBody List<QuestionBody> myList)
             throws URISyntaxException {
-        Answer newAnswer = new Answer();
-        newAnswer.setBody(answer.getBody());
-        newAnswer.setAnswerId(0);
-        newAnswer.setQuestion(answer.getQuestion());
-        newAnswer.setSurvey(answer.getSurvey());
-        newAnswer.setUser(answer.getUser());
-        answerService.save(newAnswer);
 
-        HttpHeaders responseHeaders = new HttpHeaders();
-        URI newResponseURI = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{responseid")
-                .buildAndExpand(newAnswer.getAnswerId())
-                .toUri();
-        responseHeaders.setLocation(newResponseURI);
+        answerService.save(myList, userService.findByOKTAUserName(authentication.getName()));
 
-        return new ResponseEntity<>(null,
-                responseHeaders,
-                HttpStatus.CREATED);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/all", produces = {"application/json"})
