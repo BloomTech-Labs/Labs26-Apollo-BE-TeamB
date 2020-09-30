@@ -860,7 +860,9 @@ Expected JSON in the body of the post
 
 <details>
 <summary> POST  http://apollo-b-api.herokuapp.com/surveys/topic/{topicid} - Create Survey Request</summary>
-Example - http://apollo-b-api.herokuapp.com/surveys/topic/37/
+Example - http://apollo-b-api.herokuapp.com/surveys/topic/37 - (this endpoint won't work in this patch because the owner is username 'admin' with userid of 4)
+To test locally or with the api - I recommend logging in as a test user and creating a topic, then using the topic id to create a survey request
+If you try to make this request not being the owner of the topic you will get this error message - ("Current user not authorized to make this request")
 
 This is the format of data we are expecting to receive
 
