@@ -38,6 +38,7 @@ public class ContextServiceImplTest {
 
     @Test
     public void b_findById() {
+        assertEquals("Product Leadership", contextService.findById(24).getDescription());
     }
 
     @Test
