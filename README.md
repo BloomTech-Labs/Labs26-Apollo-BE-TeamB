@@ -285,7 +285,7 @@ Example : http://appollo-b-api.herokuapp.com/topics/topic/37
 
 <summary>GET: http://apollo-b-api.herokuapp.com/users/getuserinfo Returns user info included topics of which they are a member</summary>
 
-Example: 
+Example:
 
 ```JSON
 {
@@ -404,7 +404,7 @@ Example:
 
 ## Surveys
 <details>
-     
+
 <summary>GET: http://apollo-b-api.herokuapp.com/surveys/all Returns list of surveys</summary>
 
 ```JSON
@@ -859,8 +859,10 @@ Expected JSON in the body of the post
 ## Survey Requests
 
 <details>
-<summary> POST  http://apollo-b-api.herokuapp.com/surveys/new - Create Survey Request</summary>
+<summary> POST  http://apollo-b-api.herokuapp.com/surveys/topic/{topicid} - Create Survey Request</summary>
+Example - http://apollo-b-api.herokuapp.com/surveys/topic/37/
 
+This is the format of data we are expecting to receive
 
 ```JSON
 [
@@ -883,6 +885,52 @@ Expected JSON in the body of the post
     }
 ]
 
+```
+
+This is a successful response
+
+```JSON
+{
+    "topic": {
+        "topicId": 37,
+        "title": "Topic 2",
+        "joincode": "qQRBovxGD"
+    },
+    "questions": [
+        {
+            "body": "Do you have any blockers?",
+            "type": "TEXT",
+            "answers": [
+                {
+                    "body": "LEADER ANSWER HERE",
+                    "answerId": 64
+                }
+            ],
+            "questionId": 63,
+            "leader": true
+        },
+        {
+            "body": "What is the teams priority?",
+            "type": "TEXT",
+            "answers": [
+                {
+                    "body": "LEADER ANSWER HERE",
+                    "answerId": 66
+                }
+            ],
+            "questionId": 65,
+            "leader": true
+        },
+        {
+            "body": "How is your weekend?",
+            "type": "TEXT",
+            "answers": [],
+            "questionId": 67,
+            "leader": false
+        }
+    ],
+    "surveyId": 62
+}
 ```
 
 </details>

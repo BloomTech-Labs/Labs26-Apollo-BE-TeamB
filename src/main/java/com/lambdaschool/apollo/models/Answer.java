@@ -23,6 +23,7 @@ public class Answer extends Auditable{
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userid")
+    @JsonIgnoreProperties(value = {"primaryemail", "topics"})
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)

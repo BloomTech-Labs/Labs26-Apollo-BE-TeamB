@@ -71,7 +71,7 @@ public class Question extends Auditable {
 
     @ApiModelProperty(name = "answer", value = "answers for this question")
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = "question", allowSetters = true)
+    @JsonIgnoreProperties(value = {"question", "survey"}, allowSetters = true)
     private List<Answer> answers;
 
     /**
