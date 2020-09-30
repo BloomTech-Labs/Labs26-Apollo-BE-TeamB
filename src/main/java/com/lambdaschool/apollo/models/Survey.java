@@ -38,6 +38,9 @@ public class Survey extends Auditable {
     @JsonIgnoreProperties(value = "survey", allowSetters = true)
     private List<Question> questions = new ArrayList<>();
 
+    @ApiModelProperty(name = "Responded boolean", value = "Info regarding if the user has responded to this survey")
+    @Transient
+    private boolean responded = false;
 
     /**
      * Default constructor used primarily by the JPA.
@@ -83,6 +86,22 @@ public class Survey extends Auditable {
 
     public void setDefaulttopic(List<Topic> defaulttopic) {
         this.defaulttopic = defaulttopic;
+    }
+
+    public long getSurveyid() {
+        return surveyid;
+    }
+
+    public void setSurveyid(long surveyid) {
+        this.surveyid = surveyid;
+    }
+
+    public boolean isResponded() {
+        return responded;
+    }
+
+    public void setHasResponded(boolean isResponded) {
+        this.responded = isResponded;
     }
 
     @Override

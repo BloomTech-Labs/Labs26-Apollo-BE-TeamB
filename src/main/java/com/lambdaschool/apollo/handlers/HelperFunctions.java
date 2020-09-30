@@ -1,8 +1,11 @@
 package com.lambdaschool.apollo.handlers;
 
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
-import com.lambdaschool.apollo.models.ValidationError;
+import com.lambdaschool.apollo.models.*;
+import com.lambdaschool.apollo.services.AnswerService;
+import com.lambdaschool.apollo.services.QuestionService;
 import org.hashids.Hashids;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +23,13 @@ import java.util.List;
  */
 @Component
 public class HelperFunctions {
+
+    @Autowired
+    private AnswerService answerService;
+
+    @Autowired
+    private QuestionService questionService;
+
     /**
      * Checks to see if the authenticated user has access to modify the requested user's information
      *
@@ -86,5 +96,35 @@ public class HelperFunctions {
         String newJoinCode = hashids.encode(timestamp.getTime());
 
         return newJoinCode;
+    }
+
+    public void hasResponded(Survey survey, User user) {
+        List<Question> questions;
+        questions = questionService.findAllBySurveyId(survey.getSurveyId());
+
+        for (Question q : questions) {
+            for (Answer a : q.getAnswers()) {
+                if (a.getUser() == user) {
+                    survey.setHasResponded(true);
+                }
+            }
+        }
+    }
+
+    public void hasResponded(List<Survey> surveys,  User user) {
+        List<Question> questions;
+        for (Survey s : surveys) {
+            // only get questions that are associated with the survey
+            questions = questionService.findAllBySurveyId(s.getSurveyId());
+            // if the user has is tied to an answer that lives in questions than
+            // has responded is set to true
+            for (Question q : questions) {
+                for (Answer a : q.getAnswers()) {
+                    if (a.getUser() == user) {
+                        s.setHasResponded(true);
+                    }
+                }
+            }
+        }
     }
 }
