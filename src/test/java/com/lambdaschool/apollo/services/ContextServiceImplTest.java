@@ -43,6 +43,7 @@ public class ContextServiceImplTest {
 
     @Test
     public void c_findByDescription() {
+        assertEquals(24, contextService.findByDescription("Product Leadership").getContextId());
     }
 
     @Test

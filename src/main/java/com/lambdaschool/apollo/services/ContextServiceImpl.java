@@ -43,7 +43,7 @@ public class ContextServiceImpl implements ContextService {
     @Override
     public Context findByDescription(String description) {
 
-        Context context = contextRepository.findContextByDescription(description.toLowerCase());
+        Context context = contextRepository.findContextByDescription(description);
         if (context == null) {
             throw new ResourceNotFoundException("Context Description: " + description + " Not Found");
         }
