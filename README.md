@@ -81,7 +81,7 @@ Expected body
 
 ```
 
-Results
+Response
 
 ```JSON
 {
@@ -120,7 +120,13 @@ Results
     "users": []
 }
 ```
+</details>
 
+<details>
+
+<summary>DELETE: http://apollo-b-api.herokuapp.com/topics/leave/{topicid} - leave topic</summary>
+
+User leaves topic.
 
 </details>
 
