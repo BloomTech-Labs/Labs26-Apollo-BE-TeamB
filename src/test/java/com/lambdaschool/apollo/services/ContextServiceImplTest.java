@@ -1,6 +1,7 @@
 package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.ApolloApplication;
+import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
 import com.lambdaschool.apollo.models.Context;
 import com.lambdaschool.apollo.models.Survey;
 import org.junit.After;
@@ -46,6 +47,11 @@ public class ContextServiceImplTest {
     @Test
     public void c_findByDescription() {
         assertEquals(24, contextService.findByDescription("Product Leadership").getContextId());
+    }
+
+    @Test(expected = ResourceNotFoundException.class)
+    public void ca_findByDescriptionNotFound() {
+        assertEquals(ResourceNotFoundException.class, contextService.findByDescription("No").getContextId());
     }
 
     @Test
