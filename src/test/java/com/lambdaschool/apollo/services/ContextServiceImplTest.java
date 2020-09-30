@@ -1,6 +1,8 @@
 package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.ApolloApplication;
+import com.lambdaschool.apollo.models.Context;
+import com.lambdaschool.apollo.models.Survey;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -48,5 +50,9 @@ public class ContextServiceImplTest {
 
     @Test
     public void d_save() {
+        Context context = new Context("New Context", new Survey());
+        contextService.save(context);
+
+        assertEquals(6, contextService.findAll().size());
     }
 }
