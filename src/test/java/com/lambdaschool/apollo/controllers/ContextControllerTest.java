@@ -97,7 +97,24 @@ public class ContextControllerTest {
     }
 
     @Test
-    public void getContextById() {
+    public void getContextById() throws Exception {
+        String apiUrl = "/contexts/contexts/101";
+
+        Mockito.when(contextService.findById(101))
+                .thenReturn(contextList.get(0));
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(apiUrl).accept(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String actual = result.getResponse().getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        String expected = mapper.writeValueAsString(contextList.get(0));
+
+        System.out.println("Expect: " + expected);
+        System.out.println("Actual: " + actual);
+
+        assertEquals("Rest API Returns List", expected, actual);
     }
 
     @Test
