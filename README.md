@@ -12,7 +12,7 @@ let tokenObj = JSON.parse(localStorage.getItem("okta-token-storage"));
 ```
 ![Client Dev Console](./screenshots/img_1.PNG)
 ```JS
-tokenObj.idToken.value
+tokenObj.accessToken.value
 ```
 ![Another Dev Console](./screenshots/img_2.PNG)
 
