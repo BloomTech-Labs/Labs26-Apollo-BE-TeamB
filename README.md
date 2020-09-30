@@ -410,89 +410,280 @@ Example:
 ```JSON
 [
     {
-        "surveyid": 34,
+        "surveyid": 36,
         "topic": null,
-        "questions": []
+        "defaulttopic": [
+            {
+                "topicId": 37,
+                "title": "Topic 2",
+                "owner": {
+                    "userid": 4,
+                    "username": "admin"
+                },
+                "frequency": "MONDAY",
+                "joincode": "46mZD66zk"
+            }
+        ],
+        "questions": [],
+        "responded": false,
+        "surveyId": 36
     },
     {
-        "surveyid": 41,
-        "topic": {
-            "topicid": 35,
-            "title": "Topic 1",
-            "frequency": "MONDAY"
-        },
-        "questions": [
+        "surveyid": 38,
+        "topic": null,
+        "defaulttopic": [
             {
-                "questionId": 51,
-                "body": "Leader Question 1",
-                "type": "TEXT",
-                "leader": true
-            },
-            {
-                "questionId": 52,
-                "body": "Leader Question 2",
-                "type": "TEXT",
-                "leader": true
-            },
-            {
-                "questionId": 53,
-                "body": "Member Question 1",
-                "type": "TEXT",
-                "leader": false
+                "topicId": 39,
+                "title": "Topic 3",
+                "owner": {
+                    "userid": 5,
+                    "username": "cinnamon"
+                },
+                "frequency": "WEEKLY",
+                "joincode": "08qZy889N"
             }
-        ]
+        ],
+        "questions": [],
+        "responded": false,
+        "surveyId": 38
+    },
+    {
+        "surveyid": 40,
+        "topic": null,
+        "defaulttopic": [
+            {
+                "topicId": 41,
+                "title": "Topic 4",
+                "owner": {
+                    "userid": 5,
+                    "username": "cinnamon"
+                },
+                "frequency": "WEEKLY",
+                "joincode": "oZRz9ZZOL"
+            }
+        ],
+        "questions": [],
+        "responded": false,
+        "surveyId": 40
     },
     {
         "surveyid": 42,
-        "topic": {
-            "topicid": 35,
-            "title": "Topic 1",
-            "frequency": "MONDAY"
-        },
-        "questions": [
+        "topic": null,
+        "defaulttopic": [
             {
-                "questionId": 54,
-                "body": "Member Question 2",
-                "type": "TEXT",
-                "leader": false
-            },
-            {
-                "questionId": 55,
-                "body": "Member Question 3",
-                "type": "TEXT",
-                "leader": false
+                "topicId": 43,
+                "title": "Topic 5",
+                "owner": {
+                    "userid": 5,
+                    "username": "cinnamon"
+                },
+                "frequency": "MONTHLY",
+                "joincode": "r2ZDN22YL"
             }
-        ]
-    },
-    {
-        "surveyid": 43,
-        "topic": {
-            "topicid": 35,
-            "title": "Topic 1",
-            "frequency": "MONDAY"
-        },
-        "questions": []
+        ],
+        "questions": [],
+        "responded": false,
+        "surveyId": 42
     },
     {
         "surveyid": 44,
-        "topic": {
-            "topicid": 35,
-            "title": "Topic 1",
-            "frequency": "MONDAY"
-        },
-        "questions": []
+        "topic": null,
+        "defaulttopic": [
+            {
+                "topicId": 45,
+                "title": "Topic 6",
+                "owner": {
+                    "userid": 5,
+                    "username": "cinnamon"
+                },
+                "frequency": "MONTHLY",
+                "joincode": "x6qMN66lP"
+            }
+        ],
+        "questions": [],
+        "responded": false,
+        "surveyId": 44
     },
     {
-        "surveyid": 45,
+        "surveyid": 46,
         "topic": {
-            "topicid": 35,
-            "title": "Topic 1",
-            "frequency": "MONDAY"
+            "topicId": 37,
+            "title": "Topic 2",
+            "frequency": "MONDAY",
+            "defaultsurvey": {
+                "surveyid": 36,
+                "questions": [],
+                "responded": false,
+                "surveyId": 36
+            },
+            "joincode": "46mZD66zk"
         },
-        "questions": []
+        "defaulttopic": [],
+        "questions": [
+            {
+                "body": "Leader Question 1",
+                "type": "TEXT",
+                "answers": [],
+                "questionId": 57,
+                "leader": true
+            },
+            {
+                "body": "Leader Question 2",
+                "type": "TEXT",
+                "answers": [],
+                "questionId": 58,
+                "leader": true
+            },
+            {
+                "body": "Member Question 1",
+                "type": "TEXT",
+                "answers": [],
+                "questionId": 59,
+                "leader": false
+            }
+        ],
+        "responded": false,
+        "surveyId": 46
+    },
+    {
+        "surveyid": 47,
+        "topic": {
+            "topicId": 39,
+            "title": "Topic 3",
+            "frequency": "WEEKLY",
+            "defaultsurvey": {
+                "surveyid": 38,
+                "questions": [],
+                "responded": false,
+                "surveyId": 38
+            },
+            "joincode": "08qZy889N"
+        },
+        "defaulttopic": [],
+        "questions": [
+            {
+                "body": "Member Question 2",
+                "type": "TEXT",
+                "answers": [],
+                "questionId": 60,
+                "leader": false
+            },
+            {
+                "body": "Member Question 3",
+                "type": "TEXT",
+                "answers": [],
+                "questionId": 61,
+                "leader": false
+            }
+        ],
+        "responded": false,
+        "surveyId": 47
+    },
+    {
+        "surveyid": 48,
+        "topic": {
+            "topicId": 41,
+            "title": "Topic 4",
+            "frequency": "WEEKLY",
+            "defaultsurvey": {
+                "surveyid": 40,
+                "questions": [],
+                "responded": false,
+                "surveyId": 40
+            },
+            "joincode": "oZRz9ZZOL"
+        },
+        "defaulttopic": [],
+        "questions": [],
+        "responded": false,
+        "surveyId": 48
+    },
+    {
+        "surveyid": 49,
+        "topic": {
+            "topicId": 43,
+            "title": "Topic 5",
+            "frequency": "MONTHLY",
+            "defaultsurvey": {
+                "surveyid": 42,
+                "questions": [],
+                "responded": false,
+                "surveyId": 42
+            },
+            "joincode": "r2ZDN22YL"
+        },
+        "defaulttopic": [],
+        "questions": [],
+        "responded": false,
+        "surveyId": 49
+    },
+    {
+        "surveyid": 50,
+        "topic": {
+            "topicId": 45,
+            "title": "Topic 6",
+            "frequency": "MONTHLY",
+            "defaultsurvey": {
+                "surveyid": 44,
+                "questions": [],
+                "responded": false,
+                "surveyId": 44
+            },
+            "joincode": "x6qMN66lP"
+        },
+        "defaulttopic": [],
+        "questions": [],
+        "responded": false,
+        "surveyId": 50
+    },
+    {
+        "surveyid": 52,
+        "topic": {
+            "topicId": 37,
+            "title": "Topic 2",
+            "frequency": "MONDAY",
+            "defaultsurvey": {
+                "surveyid": 36,
+                "questions": [],
+                "responded": false,
+                "surveyId": 36
+            },
+            "joincode": "46mZD66zk"
+        },
+        "defaulttopic": [],
+        "questions": [],
+        "responded": false,
+        "surveyId": 52
     }
 ]
+```
 
+</details>
+
+<details>
+     
+<summary>GET: http://apollo-b-api.herokuapp.com/surveys/survey/{id} Returns survey by id</summary>
+
+```JSON
+{
+    "surveyid": 48,
+    "topic": {
+        "topicId": 41,
+        "title": "Topic 4",
+        "frequency": "WEEKLY",
+        "defaultsurvey": {
+            "surveyid": 40,
+            "questions": [],
+            "responded": false,
+            "surveyId": 40
+        },
+        "joincode": "oZRz9ZZOL"
+    },
+    "defaulttopic": [],
+    "questions": [],
+    "responded": false,
+    "surveyId": 48
+}
 ```
 
 </details>
@@ -754,9 +945,12 @@ This is a successful response
 [
     {
         "questionId" : 12,
-        "body" : "STUFF"
+        "body" : "stuff"
     },
-    {}
+    { 
+       "questionId" : 13,
+       "body" : "more stuff"
+    }
 ]
 
 ```

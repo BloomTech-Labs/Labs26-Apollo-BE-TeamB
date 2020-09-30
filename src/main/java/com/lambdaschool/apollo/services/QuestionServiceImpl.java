@@ -36,6 +36,14 @@ public class QuestionServiceImpl implements QuestionService {
         return q;
     }
 
+    @Override
+    public List<Question> findAllBySurveyId(long surveyId) {
+        List<Question> q = new ArrayList<>();
+
+        questionRepository.findAllBySurvey_Surveyid(surveyId).iterator().forEachRemaining(q::add);
+        return q;
+    }
+
     @Transactional
     @Override
     public void delete(long id) {

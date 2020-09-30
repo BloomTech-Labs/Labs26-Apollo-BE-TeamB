@@ -1,10 +1,11 @@
 package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.ApolloApplication;
+import com.lambdaschool.apollo.exceptions.ResourceFoundException;
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
-import com.lambdaschool.apollo.models.Role;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.models.UserRoles;
+import com.lambdaschool.apollo.repository.UserRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -20,138 +21,123 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApolloApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserServiceImplTest {
+
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RoleService roleService;
+
     @Before
-    public void setUp() throws
-            Exception {
+    public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
     }
 
     @After
-    public void tearDown() throws
-            Exception {
+    public void tearDown() throws Exception {
     }
 
     @Test
-    public void B_findUserById() {
-        assertEquals("admin", userService.findUserById(4)
-                .getUsername());
+    public void a_findUserById() {
+        assertEquals("admin", userService.findUserById(4).getUsername());
+    }
+
+    @Test
+    public void b_findByNameContaining() {
+        assertEquals(1, userService.findByNameContaining("adm").size());
+    }
+
+    @Test
+    public void c_findAll() {
+        assertEquals(5, userService.findAll().size());
+    }
+
+    @Test
+    public void d_delete() {
+        userService.delete(8);
+        assertEquals(4, userService.findAll().size());
+    }
+
+    @Test
+    public void e_findByName() {
+        assertEquals(4, userService.findByName("admin").getUserid());
     }
 
     @Test(expected = ResourceNotFoundException.class)
-    public void BA_findUserByIdNotFound() {
-        assertEquals("admin", userService.findUserById(10)
-                .getUsername());
+    public void ea_findByNameException() {
+        assertEquals(ResourceNotFoundException.class, userService.findByName("no").getUserid());
     }
 
     @Test
-    public void C_findAll() {
-        assertEquals(5, userService.findAll()
-                .size());
+    public void f_findByOKTAUserName() {
+        assertEquals(5, userService.findByOKTAUserName("user1").getUserid());
     }
 
     @Test
-    public void D_delete() {
-        userService.delete(13);
-        assertEquals(4, userService.findAll()
-                .size());
-    }
-
-    @Test(expected = ResourceNotFoundException.class)
-    public void DA_notFoundDelete() {
-        userService.delete(100);
-        assertEquals(4, userService.findAll()
-                .size());
+    public void fa_findByOKTAUserNameNewUser() {
+        assertEquals("okta@okta.com", userService.findByOKTAUserName("okta@okta.com").getPrimaryemail());
     }
 
     @Test
-    public void E_findByUsername() {
-        assertEquals("admin", userService.findByName("admin")
-                .getUsername());
-    }
+    public void g_save() {
+        ArrayList<UserRoles> users = new ArrayList<>();
+        users.add(new UserRoles(new User(), roleService.findRoleById(2)));
+        User newUser = new User("tiger", "tiger@school.lambda", users);
+        userService.save(newUser);
 
-    @Test(expected = ResourceNotFoundException.class)
-    public void AA_findByUsernameNotfound() {
-        assertEquals("admin", userService.findByName("turtle")
-                .getUsername());
-    }
-
-    @Test
-    public void AB_findByNameContaining() {
-        assertEquals(4, userService.findByNameContaining("a")
-                .size());
+        assertEquals("tiger@school.lambda", userService.findByName("tiger").getPrimaryemail());
     }
 
     @Test
-    public void F_save() {
+    public void ga_saveUpdate() {
         ArrayList<UserRoles> datas = new ArrayList<>();
-        User u2 = new User("tiger", "tiger@school.lambda", datas);
+        datas.add(new UserRoles(new User(), roleService.findRoleById(2)));
+        datas.add(new UserRoles(new User(), roleService.findRoleById(3)));
+        User user = userService.findByName("user2");
+        user.setPrimaryemail("update@update.com");
+        user.setRoles(datas);
+        userService.save(user);
 
-        User saveU2 = userService.save(u2);
-
-        System.out.println("*** DATA ***");
-        System.out.println(saveU2);
-        System.out.println("*** DATA ***");
-
+        assertEquals("update@update.com", userService.findByName("user2").getPrimaryemail());
     }
 
     @Transactional
-    @WithUserDetails("cinnamon")
+    @WithUserDetails("user2")
     @Test
-    public void G_update() {
+    public void h_update() {
         ArrayList<UserRoles> datas = new ArrayList<>();
-        User u2 = new User("cinnamon", "cinnamon@school.lambda", datas);
+        datas.add(new UserRoles(new User(), roleService.findRoleById(2)));
+        datas.add(new UserRoles(new User(), roleService.findRoleById(3)));
+        User user2 = new User("user2", "update@user.com", datas);
+        userService.update(user2, 6);
 
-        User updatedu2 = userService.update(u2, 7);
-
-        System.out.println("*** DATA ***");
-        System.out.println(updatedu2);
-        System.out.println("*** DATA ***");
-
+        assertEquals("update@user.com", userService.findByName("user2").getPrimaryemail());
     }
 
     @Transactional
-    @WithUserDetails("cinnamon")
+    @WithUserDetails("user3")
     @Test(expected = ResourceNotFoundException.class)
-    public void GB_updateNotCurrentUserNorAdmin() {
-        Role r2 = new Role("user");
+    public void ha_updateNotAuthorized() {
+        User user2 = new User("user2", "update@user.com", new ArrayList<>());
+        userService.update(user2, 6);
 
-        ArrayList<UserRoles> datas = new ArrayList<>();
-        User u2 = new User("cinnamon", "cinnamon@school.lambda", datas);
-
-        User updatedu2 = userService.update(u2, 8);
-
-        System.out.println("*** DATA ***");
-        System.out.println(updatedu2);
-        System.out.println("*** DATA ***");
-
+        assertEquals(ResourceNotFoundException.class, userService.findByName("user2").getPrimaryemail());
     }
 
     @Test(expected = ResourceNotFoundException.class)
-    public void HA_deleteUserRoleRoleNotFound() {
-        userService.deleteUserRole(7, 50);
+    public void ia_deleteUserRoleRoleNotFound() {
+        userService.deleteUserRole(7, 1);
     }
 
-    @Test(expected = ResourceNotFoundException.class)
-    public void HB_deleteUserRoleUserNotFound() {
-        userService.deleteUserRole(50, 2);
+    @Test(expected = ResourceFoundException.class)
+    public void ib_addUserRoleRoleFound() {
+        userService.addUserRole(4, 1);
     }
 
-    @Test(expected = ResourceNotFoundException.class)
-    public void IC_addUserRoleRoleNotFound() {
-        userService.addUserRole(7, 50);
-    }
-
-    @Test(expected = ResourceNotFoundException.class)
-    public void ID_addUserRoleUserNotFound() {
-        userService.addUserRole(50, 2);
-    }
 }

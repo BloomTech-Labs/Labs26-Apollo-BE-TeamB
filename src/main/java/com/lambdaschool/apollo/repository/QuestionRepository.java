@@ -8,4 +8,6 @@ import java.util.List;
 public interface QuestionRepository extends CrudRepository<Question, Long> {
 
     List<Question> findAll();
+
+    List<Question> findAllBySurvey_Surveyid(long id);
 }
