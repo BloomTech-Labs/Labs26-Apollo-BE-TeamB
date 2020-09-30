@@ -3,7 +3,9 @@ package com.lambdaschool.apollo.services;
 import com.lambdaschool.apollo.ApolloApplication;
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
 import com.lambdaschool.apollo.models.Context;
+import com.lambdaschool.apollo.models.Question;
 import com.lambdaschool.apollo.models.Survey;
+import com.lambdaschool.apollo.views.QuestionType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -14,6 +16,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -71,5 +76,24 @@ public class ContextServiceImplTest {
         contextService.save(context);
 
         assertEquals(22, contextService.findById(28).getSurvey().getSurveyId());
+    }
+
+    @Test
+    public void db_saveWithQuestions() {
+
+        Survey survey = new Survey();
+
+        List<Question> questionList = new ArrayList<>();
+        questionList.add(new Question("New Question", true, QuestionType.TEXT, survey));
+        Question oldQuestion = new Question("Old Question", true, QuestionType.TEXT, survey);
+        oldQuestion.setQuestionId(29);
+        questionList.add(oldQuestion);
+        survey.setQuestions(questionList);
+
+        Context context = new Context("New", survey);
+
+        contextService.save(context);
+
+        assertEquals(7, contextService.findAll().size());
     }
 }
