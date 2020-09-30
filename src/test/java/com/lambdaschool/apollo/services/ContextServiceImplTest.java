@@ -61,4 +61,15 @@ public class ContextServiceImplTest {
 
         assertEquals(6, contextService.findAll().size());
     }
+
+    @Test
+    public void da_saveUpdateSurvey() {
+        Context context = contextService.findById(28);
+        Survey survey = new Survey();
+        survey.setSurveyId(22);
+        context.setSurvey(survey);
+        contextService.save(context);
+
+        assertEquals(22, contextService.findById(28).getSurvey().getSurveyId());
+    }
 }
