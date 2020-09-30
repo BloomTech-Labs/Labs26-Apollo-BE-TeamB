@@ -110,4 +110,13 @@ public class TopicController {
 
         return new ResponseEntity<>(newtopic, HttpStatus.CREATED);
     }
+
+    @Transactional
+    @DeleteMapping(value = "/leave/{topicid}")
+    public ResponseEntity<?> leaveTopic(@PathVariable long topicid,
+                                        Authentication authentication) {
+        topicService.deleteTopicUser(topicid, userService.findByOKTAUserName(authentication.getName()).getUserid());
+        return new ResponseEntity<>(null, HttpStatus.GONE);
+    }
+
 }

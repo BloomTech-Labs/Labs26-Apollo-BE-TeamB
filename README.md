@@ -12,7 +12,7 @@ let tokenObj = JSON.parse(localStorage.getItem("okta-token-storage"));
 ```
 ![Client Dev Console](./screenshots/img_1.PNG)
 ```JS
-tokenObj.idToken.value
+tokenObj.accessToken.value
 ```
 ![Another Dev Console](./screenshots/img_2.PNG)
 
@@ -81,7 +81,7 @@ Expected body
 
 ```
 
-Results
+Response
 
 ```JSON
 {
@@ -120,7 +120,13 @@ Results
     "users": []
 }
 ```
+</details>
 
+<details>
+
+<summary>DELETE: http://apollo-b-api.herokuapp.com/topics/leave/{topicid} - leave topic</summary>
+
+User leaves topic.
 
 </details>
 
