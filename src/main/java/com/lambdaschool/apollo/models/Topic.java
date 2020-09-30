@@ -64,7 +64,6 @@ public class Topic extends Auditable {
     @ApiModelProperty(name = "Members", value = "Users (Members) of this topic")
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = {"topic", "primaryemail", "roles", "ownedtopics"}, allowSetters = true)
-    @JsonIgnore
     private List<TopicUsers> users = new ArrayList<>();
 
     /**
