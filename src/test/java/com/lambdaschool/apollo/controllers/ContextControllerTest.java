@@ -20,12 +20,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -118,6 +121,24 @@ public class ContextControllerTest {
     }
 
     @Test
-    public void createContext() {
+    public void createContext() throws Exception {
+        String apiUrl = "/contexts/new";
+
+        Context newContext = new Context("New Context", new Survey());
+
+        Mockito.when(contextService.save(any(Context.class)))
+                .thenReturn(newContext);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String expected = mapper.writeValueAsString(newContext);
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post(apiUrl)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(expected);
+
+        mockMvc.perform(requestBuilder)
+                .andExpect(status().isCreated())
+                .andDo(MockMvcResultHandlers.print());
     }
 }
