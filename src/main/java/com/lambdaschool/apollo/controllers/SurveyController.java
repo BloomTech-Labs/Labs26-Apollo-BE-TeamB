@@ -82,6 +82,11 @@ public class SurveyController {
         User user = userService.findByOKTAUserName(authentication.getName());
         for (QuestionBody qb: myList) {
             Question question = questionService.findById(qb.getQuestionid());
+            for (Answer a: question.getAnswers()) {
+                if (user.getUserid() == a.getUser().getUserid()) {
+                    throw new ResourceFoundException("Current user already answered question with id - " + question.getQuestionId());
+                }
+            }
             Survey survey = surveyService.findById(question.getSurvey().getSurveyid());
             Topic topic = topicService.findTopicById(survey.getTopic().getTopicId());
             List<TopicUsers> topicUsers = topic.getUsers();
