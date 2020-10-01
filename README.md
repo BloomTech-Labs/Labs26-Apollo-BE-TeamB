@@ -263,9 +263,9 @@ GET Endpoint
 
 <details>
 
-<summary>POST: http://appollo-b-api.herokuapp.com/topics/{joinCode} Current user joins a Topic.</summary>
+<summary>POST: http://appollo-b-api.herokuapp.com/topics/topic/{joinCode} Current user joins a Topic.</summary>
 
-Example: http://appollo-b-api.herokuapp.com/topics/lRQlkNGkg
+Example: http://appollo-b-api.herokuapp.com/topics/topic/lRQlkNGkg
 
 Returns 200 Success message
 
@@ -953,7 +953,7 @@ This is a successful response
         "questionid" : 12,
         "body" : "stuff"
     },
-    { 
+    {
        "questionid" : 13,
        "body" : "more stuff"
     }
