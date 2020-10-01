@@ -945,7 +945,9 @@ This is a successful response
 
 <details>
 <summary>  POST http://apollo-b-api.herokuapp.com/surveys/response - Answer a survey request </summary>
-
+Users that aren't owners of a topic cannot answer leader questions, but the owner of a topic can answer both leader and member questions
+Users that aren't members of a topic cannot answer questions from that topic
+After submitting their answers, a user cannot add another answer or edit their existing answer
 
 ```JSON
 [
