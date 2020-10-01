@@ -97,7 +97,9 @@ public class SurveyController {
                     throw new ResourceFoundException("Current user not owner of topic with id - " + topic.getTopicId());
                 }
             } else {
-                if ((!users.contains(user)) && (user.getUserid() != topic.getOwner().getUserid())) {
+                if (user.getUserid() == topic.getOwner().getUserid()) {
+                    throw new ResourceFoundException("Topic owner cannot answer request questions");
+                } else if (!users.contains(user)) {
                     throw new ResourceFoundException("Current user not a member of topic with id - " + topic.getTopicId());
                 }
             }
