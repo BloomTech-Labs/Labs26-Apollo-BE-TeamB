@@ -667,7 +667,7 @@ Example:
 </details>
 
 <details>
-     
+
 <summary>GET: http://apollo-b-api.herokuapp.com/surveys/survey/{id} Returns survey by id</summary>
 
 ```JSON
@@ -950,11 +950,11 @@ This is a successful response
 ```JSON
 [
     {
-        "questionId" : 12,
+        "questionid" : 12,
         "body" : "stuff"
     },
     { 
-       "questionId" : 13,
+       "questionid" : 13,
        "body" : "more stuff"
     }
 ]
