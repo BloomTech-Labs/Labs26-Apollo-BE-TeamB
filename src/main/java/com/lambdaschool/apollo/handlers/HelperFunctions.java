@@ -127,4 +127,16 @@ public class HelperFunctions {
             }
         }
     }
+
+
+    public List<Question> isLeaderQuestion(List<Question> questions) {
+        List<Question> leaderQuestions = new ArrayList<>();
+        for (Question q : questions) {
+            if (q.isLeader()) {
+                leaderQuestions.add(q);
+            }
+        }
+        return leaderQuestions;
+    }
+
 }
