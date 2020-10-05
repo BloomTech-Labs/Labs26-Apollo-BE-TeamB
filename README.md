@@ -697,7 +697,7 @@ Example:
 ## Questions
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/questions Returns list of questions</summary>
+<summary>GET: http://apollo-b-api.herokuapp.com/questions/all Returns list of questions</summary>
 
 ```JSON
 [
@@ -773,6 +773,47 @@ Example:
     }
 ]
 
+```
+
+</details>
+
+
+<details>
+
+<summary>GET: http://apollo-b-api.herokuapp.com/questions/leader/{surveyid} Returns list of leader questions for a given survey</summary>
+
+```JSON
+[
+    {
+        "createdDate": "2020-10-02 13:26:25",
+        "lastModifiedDate": "2020-10-02 13:26:25",
+        "body": "Leader Question 1",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-02 13:26:25",
+            "lastModifiedDate": "2020-10-02 13:26:25",
+            "surveyid": 46,
+            "responded": false,
+            "surveyId": 46
+        },
+        "answers": [],
+        "leader": true,
+        "questionId": 57
+    },
+    {
+        "createdDate": "2020-10-02 13:26:25",
+        "lastModifiedDate": "2020-10-02 13:26:25",
+        "body": "Leader Question 2",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-02 13:26:25",
+            "lastModifiedDate": "2020-10-02 13:26:25",
+            "surveyid": 46,
+            "responded": false,
+            "surveyId": 46
+        },
+    }
+]
 ```
 
 </details>
