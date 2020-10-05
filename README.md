@@ -263,9 +263,9 @@ GET Endpoint
 
 <details>
 
-<summary>POST: http://appollo-b-api.herokuapp.com/topics/{joinCode} Current user joins a Topic.</summary>
+<summary>POST: http://appollo-b-api.herokuapp.com/topics/topic/{joinCode} Current user joins a Topic.</summary>
 
-Example: http://appollo-b-api.herokuapp.com/topics/lRQlkNGkg
+Example: http://appollo-b-api.herokuapp.com/topics/topic/lRQlkNGkg
 
 Returns 200 Success message
 
@@ -667,7 +667,7 @@ Example:
 </details>
 
 <details>
-     
+
 <summary>GET: http://apollo-b-api.herokuapp.com/surveys/survey/{id} Returns survey by id</summary>
 
 ```JSON
@@ -945,16 +945,18 @@ This is a successful response
 
 <details>
 <summary>  POST http://apollo-b-api.herokuapp.com/surveys/response - Answer a survey request </summary>
-
+Users that aren't owners of a topic cannot answer leader questions and topic owner cannot answer request questions
+Users that aren't members of a topic cannot answer request questions from that topic
+After submitting their answers, a user cannot add another answer or edit their existing answer
 
 ```JSON
 [
     {
-        "questionId" : 12,
+        "questionid" : 12,
         "body" : "stuff"
     },
-    { 
-       "questionId" : 13,
+    {
+       "questionid" : 13,
        "body" : "more stuff"
     }
 ]

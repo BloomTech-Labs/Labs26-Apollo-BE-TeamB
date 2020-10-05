@@ -2,13 +2,8 @@ package com.lambdaschool.apollo.controllers;
 
 import com.lambdaschool.apollo.exceptions.ResourceFoundException;
 import com.lambdaschool.apollo.handlers.HelperFunctions;
-import com.lambdaschool.apollo.models.Survey;
-import com.lambdaschool.apollo.models.Topic;
-import com.lambdaschool.apollo.models.User;
-import com.lambdaschool.apollo.services.AnswerService;
-import com.lambdaschool.apollo.services.SurveyService;
-import com.lambdaschool.apollo.services.TopicService;
-import com.lambdaschool.apollo.services.UserService;
+import com.lambdaschool.apollo.models.*;
+import com.lambdaschool.apollo.services.*;
 import com.lambdaschool.apollo.views.QuestionBody;
 import com.lambdaschool.apollo.views.SurveyQuestion;
 import io.swagger.annotations.Api;
@@ -27,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -48,6 +44,9 @@ public class SurveyController {
 
     @Autowired
     private TopicService topicService;
+
+    @Autowired
+    private QuestionService questionService;
 
     @ApiOperation(value = "Create new survey ")
     @ApiResponses(value = {
@@ -80,9 +79,32 @@ public class SurveyController {
             @Valid
             @RequestBody List<QuestionBody> myList)
             throws URISyntaxException {
-
-        answerService.save(myList, userService.findByOKTAUserName(authentication.getName()));
-
+        User user = userService.findByOKTAUserName(authentication.getName());
+        for (QuestionBody qb: myList) {
+            Question question = questionService.findById(qb.getQuestionid());
+            for (Answer a: question.getAnswers()) {
+                if (user.getUserid() == a.getUser().getUserid()) {
+                    throw new ResourceFoundException("Current user already answered question with id - " + question.getQuestionId());
+                }
+            }
+            Survey survey = surveyService.findById(question.getSurvey().getSurveyid());
+            Topic topic = topicService.findTopicById(survey.getTopic().getTopicId());
+            List<TopicUsers> topicUsers = topic.getUsers();
+            List<User> users = new ArrayList<>();
+            for (TopicUsers tu: topicUsers) users.add(tu.getUser());
+            if (question.isLeader()) {
+                if (user.getUserid() != topic.getOwner().getUserid()) {
+                    throw new ResourceFoundException("Current user not owner of topic with id - " + topic.getTopicId());
+                }
+            } else {
+                if (user.getUserid() == topic.getOwner().getUserid()) {
+                    throw new ResourceFoundException("Topic owner cannot answer request questions");
+                } else if (!users.contains(user)) {
+                    throw new ResourceFoundException("Current user not a member of topic with id - " + topic.getTopicId());
+                }
+            }
+            answerService.save(qb, user);
+        }
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
