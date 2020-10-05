@@ -149,9 +149,7 @@ public class SurveyController {
     @GetMapping(value = "/survey/{surveyid}/responses", produces = {"application/json"})
     public ResponseEntity<?> getResponses(Authentication authentication, @PathVariable long surveyid) {
         Survey survey = surveyService.findById(surveyid);
-        System.out.println(survey);
         List<Answer> responses = answerService.findBySurveyId(surveyid);
-
 
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
