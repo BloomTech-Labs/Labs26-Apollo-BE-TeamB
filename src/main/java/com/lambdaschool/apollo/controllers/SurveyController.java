@@ -10,7 +10,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -145,5 +144,15 @@ public class SurveyController {
         } else {
             throw new ResourceFoundException("Current user not authorized to make this request");
         }
+    }
+
+    @GetMapping(value = "/survey/{surveyid}/responses", produces = {"application/json"})
+    public ResponseEntity<?> getResponses(Authentication authentication, @PathVariable long surveyid) {
+        Survey survey = surveyService.findById(surveyid);
+        System.out.println(survey);
+        List<Answer> responses = answerService.findBySurveyId(surveyid);
+
+
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 }
