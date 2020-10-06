@@ -49,7 +49,7 @@ Ok so now that you have copied that idtoken property head over to postman, and i
 
 <details>
 
-<summary>POST: http://apollo-b-api.herokuapp.com/topics/new - create a new topic</summary>
+<summary>POST: https://apollo-b-api.herokuapp.com/topics/new - create a new topic</summary>
 
 Creates a Topic with the current user as the owner.
 
@@ -124,7 +124,7 @@ Response
 
 <details>
 
-<summary>DELETE: http://apollo-b-api.herokuapp.com/topics/leave/{topicid} - leave topic</summary>
+<summary>DELETE: https://apollo-b-api.herokuapp.com/topics/leave/{topicid} - leave topic</summary>
 
 User leaves topic.
 
@@ -132,7 +132,7 @@ User leaves topic.
 
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/topics/topics - Get all topics for a user</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/topics/topics - Get all topics for a user</summary>
 
 Returns all topics that a user is connected to, either as an owner or as a member
 
@@ -263,25 +263,33 @@ GET Endpoint
 
 <details>
 
-<summary>POST: http://appollo-b-api.herokuapp.com/topics/topic/{joinCode} Current user joins a Topic.</summary>
+<summary>POST: https://appollo-b-api.herokuapp.com/topics/topic/{joinCode} Current user joins a Topic.</summary>
 
-Example: http://appollo-b-api.herokuapp.com/topics/topic/lRQlkNGkg
+Example: https://appollo-b-api.herokuapp.com/topics/topic/lRQlkNGkg
 
 Returns 200 Success message
 
 </details>
 
 <details>
-<summary>GET: http://appollo-b-api.herokuapp.com/topics/all Returns list of all Topics regardless of user</summary>
+<summary>GET: https://appollo-b-api.herokuapp.com/topics/all Returns list of all Topics regardless of user</summary>
 
 N/A
 
 </details>
 
 <details>
-<summary>GET: http://localhost:2019/topics/topic/{topicid} Returns a specific topic</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/topics/topic/{topicid} Returns a specific topic</summary>
 
-Example : http://appollo-b-api.herokuapp.com/topics/topic/37
+Example : https://appollo-b-api.herokuapp.com/topics/topic/37
+
+</details>
+
+<details>
+
+<summary>DELETE: https://apollo-b-api.herokuapp.com/topics/topic/{topicid} - delete topic</summary>
+
+Delete topic as well as all surveys, questions, responses associated with it.
 
 </details>
 
@@ -289,7 +297,7 @@ Example : http://appollo-b-api.herokuapp.com/topics/topic/37
 
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/users/getuserinfo Returns user info included topics of which they are a member</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/users/getuserinfo Returns user info included topics of which they are a member</summary>
 
 Example:
 
@@ -411,7 +419,7 @@ Example:
 ## Surveys
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/surveys/all Returns list of surveys</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/surveys/all Returns list of surveys</summary>
 
 ```JSON
 [
@@ -668,7 +676,7 @@ Example:
 
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/surveys/survey/{id} Returns survey by id</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/surveys/survey/{id} Returns survey by id</summary>
 
 ```JSON
 {
@@ -697,7 +705,7 @@ Example:
 ## Questions
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/questions/all Returns list of questions</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/questions/all Returns list of questions</summary>
 
 ```JSON
 [
@@ -780,7 +788,7 @@ Example:
 
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/questions/leader/{surveyid} Returns list of leader questions for a given survey</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/questions/leader/{surveyid} Returns list of leader questions for a given survey</summary>
 
 ```JSON
 [
@@ -821,7 +829,7 @@ Example:
 ## Context
 
 <details>
-<summary> GET http://apollo-b-api.herokuapp.com/contexts/contexts - Returns all of the contexts</summary>
+<summary> GET https://apollo-b-api.herokuapp.com/contexts/contexts - Returns all of the contexts</summary>
 
 Extra details here
 
@@ -865,7 +873,7 @@ Extra details here
 </details>
 
 <details>
-<summary>POST http://apollo-b-api.herokuapp.com Create a new context </summary>
+<summary>POST https://apollo-b-api.herokuapp.com Create a new context </summary>
 
 Expected JSON in the body of the post
 
@@ -906,8 +914,8 @@ Expected JSON in the body of the post
 ## Survey Requests
 
 <details>
-<summary> POST  http://apollo-b-api.herokuapp.com/surveys/topic/{topicid} - Create Survey Request</summary>
-Example - http://apollo-b-api.herokuapp.com/surveys/topic/37 - (this endpoint won't work in this patch because the owner is username 'admin' with userid of 4)
+<summary> POST  https://apollo-b-api.herokuapp.com/surveys/topic/{topicid} - Create Survey Request</summary>
+Example - https://apollo-b-api.herokuapp.com/surveys/topic/37 - (this endpoint won't work in this patch because the owner is username 'admin' with userid of 4)
 To test locally or with the api - I recommend logging in as a test user and creating a topic, then using the topic id to create a survey request
 If you try to make this request not being the owner of the topic you will get this error message - ("Current user not authorized to make this request")
 
@@ -985,7 +993,7 @@ This is a successful response
 </details>
 
 <details>
-<summary>  GET http://apollo-b-api.herokuapp.com/surveys/survey/172/responses - Returns a list of all answers to a Survey </summary>
+<summary>  GET https://apollo-b-api.herokuapp.com/surveys/survey/172/responses - Returns a list of all answers to a Survey </summary>
 
 ```JSON
 [
