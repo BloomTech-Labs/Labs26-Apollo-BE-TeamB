@@ -19,7 +19,7 @@ public class Answer extends Auditable{
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "questionid")
-    @JsonIgnoreProperties(value = {"contextx", "survey", "answers"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"contexts", "survey", "answers"}, allowSetters = true)
     private Question question;
 
     @ManyToOne(cascade = CascadeType.ALL)
