@@ -285,6 +285,14 @@ Example : http://appollo-b-api.herokuapp.com/topics/topic/37
 
 </details>
 
+<details>
+
+<summary>DELETE: http://apollo-b-api.herokuapp.com/topics/topic/{topicid} - delete topic</summary>
+
+Delete topic as well as all surveys, questions, responses associated with it.
+
+</details>
+
 ## Users
 
 <details>
