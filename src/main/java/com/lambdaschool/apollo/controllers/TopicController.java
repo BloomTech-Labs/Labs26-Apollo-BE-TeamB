@@ -119,4 +119,18 @@ public class TopicController {
         return new ResponseEntity<>(null, HttpStatus.GONE);
     }
 
+    @ApiOperation(value = "Delete topic by topic id (## This also delete all surveys, questions, and responses associated with this topic ##)")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully deleted the topic"),
+            @ApiResponse(code = 401, message = "Not authorized"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
+    @Transactional
+    @DeleteMapping(value = "/topic/{topicid}")
+    public ResponseEntity<?> deleteTopic(@PathVariable long topicid,
+                                         Authentication authentication) {
+        User user = userService.findByOKTAUserName(authentication.getName());
+        topicService.delete(topicid, user);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 }
