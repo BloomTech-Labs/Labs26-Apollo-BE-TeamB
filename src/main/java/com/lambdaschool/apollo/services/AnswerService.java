@@ -17,4 +17,6 @@ public interface AnswerService {
     Answer update(Answer answer);
 
     List<Answer> findAllAnswers();
+
+    List<Answer> findBySurveyId(long surveyid);
 }
