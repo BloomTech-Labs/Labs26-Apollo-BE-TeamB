@@ -7,9 +7,9 @@ import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.repository.AnswerRepository;
 import com.lambdaschool.apollo.views.QuestionBody;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,5 +94,11 @@ public class AnswerServiceImpl implements AnswerService {
 
         answerRepository.findAll().iterator().forEachRemaining(a::add);
         return a;
+    }
+
+    @Override
+    public List<Answer> findBySurveyId(long surveyid) {
+        List<Answer> answers = answerRepository.findBySurvey_surveyid(surveyid);
+        return answers;
     }
 }

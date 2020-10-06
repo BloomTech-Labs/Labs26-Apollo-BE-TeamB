@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "answers")
-@JsonIgnoreProperties(value = {"question", "user", "survey"}, allowSetters = true)
+@JsonIgnoreProperties(value = {"survey"}, allowSetters = true)
 public class Answer extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,11 +19,12 @@ public class Answer extends Auditable{
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "questionid")
+    @JsonIgnoreProperties(value = {"contexts", "survey", "answers"}, allowSetters = true)
     private Question question;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userid")
-    @JsonIgnoreProperties(value = {"primaryemail", "topics"})
+    @JsonIgnoreProperties(value = {"primaryemail", "topics", "roles", "ownedtopics"})
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)
