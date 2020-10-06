@@ -985,26 +985,57 @@ This is a successful response
 </details>
 
 <details>
-<summary>  POST http://apollo-b-api.herokuapp.com/surveys/response - Answer a survey request </summary>
-Users that aren't owners of a topic cannot answer leader questions and topic owner cannot answer request questions
-Users that aren't members of a topic cannot answer request questions from that topic
-After submitting their answers, a user cannot add another answer or edit their existing answer
+<summary>  GET http://apollo-b-api.herokuapp.com/surveys/survey/172/responses - Returns a list of all answers to a Survey </summary>
 
 ```JSON
 [
     {
-        "questionid" : 12,
-        "body" : "stuff"
+        "createdDate": "2020-09-29 10:09:51",
+        "lastModifiedDate": "2020-09-29 10:09:51",
+        "body": "LEADER ANSWER HERE",
+        "question": {
+            "createdDate": "2020-09-29 10:09:51",
+            "lastModifiedDate": "2020-09-29 10:09:51",
+            "body": "Do you have any blockers?",
+            "type": "TEXT",
+            "questionId": 173,
+            "leader": true
+        },
+        "user": {
+            "createdDate": "2020-09-24 11:52:27",
+            "lastModifiedDate": "2020-09-24 11:52:27",
+            "userid": 4,
+            "username": "admin"
+        },
+        "answerId": 174
     },
     {
-       "questionid" : 13,
-       "body" : "more stuff"
+        "createdDate": "2020-09-29 10:09:51",
+        "lastModifiedDate": "2020-09-29 10:09:51",
+        "body": "ANOTHER LEADER ANSWER HERE",
+        "question": {
+            "createdDate": "2020-09-29 10:09:51",
+            "lastModifiedDate": "2020-09-29 10:09:51",
+            "body": "What is the teams priority?",
+            "type": "TEXT",
+            "questionId": 175,
+            "leader": true
+        },
+        "user": {
+            "createdDate": "2020-09-24 11:52:27",
+            "lastModifiedDate": "2020-09-24 11:52:27",
+            "userid": 4,
+            "username": "admin"
+        },
+        "answerId": 176
     }
 ]
 
 ```
 
 </details>
+
+
 
 ## Messages
 
