@@ -51,19 +51,24 @@ public class SurveyControllerTest {
     public void setUp() throws Exception {
         surveyList = new ArrayList<>();
 
-        Survey s1 = new Survey(new Topic());
+        Survey s1 = new Survey(new Topic()); // id - 9
+        s1.setSurveyId(9);
         surveyList.add(s1);
 
-        Survey s2 = new Survey(new Topic());
+        Survey s2 = new Survey(new Topic()); // id - 11
+        s2.setSurveyId(11);
         surveyList.add(s2);
 
-        Survey s3 = new Survey(new Topic());
+        Survey s3 = new Survey(new Topic()); // id - 13
+        s3.setSurveyId(13);
         surveyList.add(s3);
 
-        Survey s4 = new Survey(new Topic());
+        Survey s4 = new Survey(new Topic()); // id - 15
+        s4.setSurveyId(15);
         surveyList.add(s4);
 
-        Survey s5 = new Survey(new Topic());
+        Survey s5 = new Survey(new Topic()); // id - 17
+        s5.setSurveyId(17);
         surveyList.add(s5);
     }
 
@@ -127,7 +132,22 @@ public class SurveyControllerTest {
     }
 
     @Test
-    public void testGetAllSurveys() throws Exception {
+    public void getSurveyById() throws Exception {
+        String apiUrl = "/surveys/survey/17";
+
+        Mockito.when(surveyService.findById(17)).thenReturn(surveyList.get(4));
+
+        RequestBuilder rb = MockMvcRequestBuilders.get(apiUrl).accept(MediaType.APPLICATION_JSON);
+        MvcResult r = mockMvc.perform(rb).andReturn();
+        String tr = r.getResponse().getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        String er = mapper.writeValueAsString(surveyList.get(4));
+
+        System.out.println("Expect: " + er);
+        System.out.println("Actual: " + tr);
+
+        assertEquals("Rest API Returns List", er, tr);
     }
 
     @Test
