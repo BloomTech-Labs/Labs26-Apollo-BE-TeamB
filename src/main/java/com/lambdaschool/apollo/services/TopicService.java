@@ -1,6 +1,7 @@
 package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.models.Topic;
+import com.lambdaschool.apollo.models.User;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface TopicService {
 
     List<Topic> findTopicsByUser(String username);
 
-    void delete(long id);
+    void delete(long id, User user);
 
     Topic save(Topic topic);
 
