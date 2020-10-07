@@ -61,5 +61,7 @@ public class QuestionServiceImplTest {
 
     @Test
     public void update() {
+        // asserted to be null until update function is actually added
+        assertNull(questionService.update(new Question()));
     }
 }
