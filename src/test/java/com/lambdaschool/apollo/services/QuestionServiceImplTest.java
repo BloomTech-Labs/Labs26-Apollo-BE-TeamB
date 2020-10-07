@@ -38,6 +38,7 @@ public class QuestionServiceImplTest {
 
     @Test
     public void findAllBySurveyId() {
+        assertEquals(3, questionService.findAllBySurveyId(9).size());
     }
 
     @Test
