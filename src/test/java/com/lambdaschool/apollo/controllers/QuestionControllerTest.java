@@ -37,12 +37,9 @@ import static org.junit.Assert.*;
 @WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
 public class QuestionControllerTest {
     @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
+    @MockBean
     HelperFunctions helperFunctions;
 
     @MockBean

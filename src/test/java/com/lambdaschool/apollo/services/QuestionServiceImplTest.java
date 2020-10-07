@@ -1,15 +1,25 @@
 package com.lambdaschool.apollo.services;
 
+import com.lambdaschool.apollo.ApolloApplication;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
-
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ApolloApplication.class)
 public class QuestionServiceImplTest {
+    @Autowired
+    private QuestionService questionService;
 
     @Before
     public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
     }
 
     @After
@@ -18,6 +28,7 @@ public class QuestionServiceImplTest {
 
     @Test
     public void findById() {
+        assertEquals("Leader Question 1", questionService.findById(29).getBody());
     }
 
     @Test
