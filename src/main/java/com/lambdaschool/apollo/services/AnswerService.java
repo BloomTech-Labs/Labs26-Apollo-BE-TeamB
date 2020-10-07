@@ -12,9 +12,11 @@ public interface AnswerService {
 
     void delete(long id);
 
-    void save(List<QuestionBody> l, User user);
+    void save(QuestionBody qb, User user);
 
     Answer update(Answer answer);
 
     List<Answer> findAllAnswers();
+
+    List<Answer> findBySurveyId(long surveyid);
 }

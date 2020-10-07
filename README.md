@@ -263,9 +263,9 @@ GET Endpoint
 
 <details>
 
-<summary>POST: http://appollo-b-api.herokuapp.com/topics/{joinCode} Current user joins a Topic.</summary>
+<summary>POST: http://appollo-b-api.herokuapp.com/topics/topic/{joinCode} Current user joins a Topic.</summary>
 
-Example: http://appollo-b-api.herokuapp.com/topics/lRQlkNGkg
+Example: http://appollo-b-api.herokuapp.com/topics/topic/lRQlkNGkg
 
 Returns 200 Success message
 
@@ -667,7 +667,7 @@ Example:
 </details>
 
 <details>
-     
+
 <summary>GET: http://apollo-b-api.herokuapp.com/surveys/survey/{id} Returns survey by id</summary>
 
 ```JSON
@@ -697,7 +697,7 @@ Example:
 ## Questions
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/questions Returns list of questions</summary>
+<summary>GET: http://apollo-b-api.herokuapp.com/questions/all Returns list of questions</summary>
 
 ```JSON
 [
@@ -773,6 +773,47 @@ Example:
     }
 ]
 
+```
+
+</details>
+
+
+<details>
+
+<summary>GET: http://apollo-b-api.herokuapp.com/questions/leader/{surveyid} Returns list of leader questions for a given survey</summary>
+
+```JSON
+[
+    {
+        "createdDate": "2020-10-02 13:26:25",
+        "lastModifiedDate": "2020-10-02 13:26:25",
+        "body": "Leader Question 1",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-02 13:26:25",
+            "lastModifiedDate": "2020-10-02 13:26:25",
+            "surveyid": 46,
+            "responded": false,
+            "surveyId": 46
+        },
+        "answers": [],
+        "leader": true,
+        "questionId": 57
+    },
+    {
+        "createdDate": "2020-10-02 13:26:25",
+        "lastModifiedDate": "2020-10-02 13:26:25",
+        "body": "Leader Question 2",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-02 13:26:25",
+            "lastModifiedDate": "2020-10-02 13:26:25",
+            "surveyid": 46,
+            "responded": false,
+            "surveyId": 46
+        },
+    }
+]
 ```
 
 </details>
@@ -944,24 +985,57 @@ This is a successful response
 </details>
 
 <details>
-<summary>  POST http://apollo-b-api.herokuapp.com/surveys/response - Answer a survey request </summary>
-
+<summary>  GET http://apollo-b-api.herokuapp.com/surveys/survey/172/responses - Returns a list of all answers to a Survey </summary>
 
 ```JSON
 [
     {
-        "questionId" : 12,
-        "body" : "stuff"
+        "createdDate": "2020-09-29 10:09:51",
+        "lastModifiedDate": "2020-09-29 10:09:51",
+        "body": "LEADER ANSWER HERE",
+        "question": {
+            "createdDate": "2020-09-29 10:09:51",
+            "lastModifiedDate": "2020-09-29 10:09:51",
+            "body": "Do you have any blockers?",
+            "type": "TEXT",
+            "questionId": 173,
+            "leader": true
+        },
+        "user": {
+            "createdDate": "2020-09-24 11:52:27",
+            "lastModifiedDate": "2020-09-24 11:52:27",
+            "userid": 4,
+            "username": "admin"
+        },
+        "answerId": 174
     },
-    { 
-       "questionId" : 13,
-       "body" : "more stuff"
+    {
+        "createdDate": "2020-09-29 10:09:51",
+        "lastModifiedDate": "2020-09-29 10:09:51",
+        "body": "ANOTHER LEADER ANSWER HERE",
+        "question": {
+            "createdDate": "2020-09-29 10:09:51",
+            "lastModifiedDate": "2020-09-29 10:09:51",
+            "body": "What is the teams priority?",
+            "type": "TEXT",
+            "questionId": 175,
+            "leader": true
+        },
+        "user": {
+            "createdDate": "2020-09-24 11:52:27",
+            "lastModifiedDate": "2020-09-24 11:52:27",
+            "userid": 4,
+            "username": "admin"
+        },
+        "answerId": 176
     }
 ]
 
 ```
 
 </details>
+
+
 
 ## Messages
 

@@ -194,7 +194,7 @@ public class Question extends Auditable {
                 ", isLeader=" + isLeader +
                 ", type=" + type +
                 ", contexts=" + contexts +
-                ", survey=" + survey +
+                ", survey=" + survey.getSurveyId() +
                 ", answers=" + answers +
                 '}';
     }
