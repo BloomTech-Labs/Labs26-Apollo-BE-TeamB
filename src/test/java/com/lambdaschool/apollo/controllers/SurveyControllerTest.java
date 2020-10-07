@@ -1,8 +1,13 @@
 package com.lambdaschool.apollo.controllers;
 
 import com.lambdaschool.apollo.ApolloApplication;
+import com.lambdaschool.apollo.models.Question;
 import com.lambdaschool.apollo.models.Survey;
+import com.lambdaschool.apollo.models.Topic;
+import com.lambdaschool.apollo.models.User;
+import com.lambdaschool.apollo.services.AnswerService;
 import com.lambdaschool.apollo.services.SurveyService;
+import com.lambdaschool.apollo.views.QuestionBody;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,19 +48,19 @@ public class SurveyControllerTest {
     public void setUp() throws Exception {
         surveyList = new ArrayList<>();
 
-        Survey s1 = new Survey();
+        Survey s1 = new Survey(new Topic());
         surveyList.add(s1);
 
-        Survey s2 = new Survey();
+        Survey s2 = new Survey(new Topic());
         surveyList.add(s2);
 
-        Survey s3 = new Survey();
+        Survey s3 = new Survey(new Topic());
         surveyList.add(s3);
 
-        Survey s4 = new Survey();
+        Survey s4 = new Survey(new Topic());
         surveyList.add(s4);
 
-        Survey s5 = new Survey();
+        Survey s5 = new Survey(new Topic());
         surveyList.add(s5);
     }
 
@@ -80,22 +85,38 @@ public class SurveyControllerTest {
     }
 
     @Test
-    public void createNewResponse() {
+    public void createNewResponse() throws Exception {
+        // String apiUrl = "/surveys/response";
+
+        // Mockito.when(answerService.save(any(QuestionBody.class), any(User.class))).thenReturn(null);
+
+        // for (Survey s: surveyService.findAllSurveys()) {
+        //     System.out.println(s.getSurveyId());
+        // }
+
+        // RequestBuilder rb = MockMvcRequestBuilders.post(apiUrl)
+        //     .contentType(MediaType.APPLICATION_JSON)
+        //     .accept(MediaType.APPLICATION_JSON)
+        //     .content("[{\"questionid\":60, \"body\": \"test response\"}]");
+        //
+        // mockMvc.perform(rb)
+        //     .andExpect(status().isCreated())
+        //     .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
-    public void getAllSurveys() {
+    public void getAllSurveys() throws Exception {
     }
 
     @Test
-    public void testGetAllSurveys() {
+    public void testGetAllSurveys() throws Exception {
     }
 
     @Test
-    public void createSurveyRequest() {
+    public void createSurveyRequest() throws Exception {
     }
 
     @Test
-    public void getResponses() {
+    public void getResponses() throws Exception {
     }
 }
