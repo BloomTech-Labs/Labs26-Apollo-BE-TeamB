@@ -1,6 +1,8 @@
 package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.ApolloApplication;
+import com.lambdaschool.apollo.models.Topic;
+import com.lambdaschool.apollo.views.TopicFrequency;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -32,7 +34,7 @@ public class SurveyServiceImplTest {
 
     @Test
     public void findById() {
-        // assertEquals(10, surveyService.findById(9).getTopic().getTopicId());
+        assertEquals(9, surveyService.findById(9).getSurveyId());
     }
 
     @Test
