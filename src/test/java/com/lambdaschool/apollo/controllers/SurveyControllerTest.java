@@ -2,13 +2,11 @@ package com.lambdaschool.apollo.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lambdaschool.apollo.ApolloApplication;
-import com.lambdaschool.apollo.models.Question;
-import com.lambdaschool.apollo.models.Survey;
-import com.lambdaschool.apollo.models.Topic;
-import com.lambdaschool.apollo.models.User;
+import com.lambdaschool.apollo.models.*;
 import com.lambdaschool.apollo.services.AnswerService;
 import com.lambdaschool.apollo.services.SurveyService;
 import com.lambdaschool.apollo.views.QuestionBody;
+import com.lambdaschool.apollo.views.QuestionType;
 import com.lambdaschool.apollo.views.SurveyQuestion;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -60,6 +58,14 @@ public class SurveyControllerTest {
         s1.setSurveyId(9);
         s1.setTopic(t1);
         surveyList.add(s1);
+
+        // Question question1 = new Question("Leader Question 1", true, QuestionType.TEXT, s1);
+        // List<Answer> answers1 = new ArrayList<>();
+        // answers1.add(new Answer("test body", question1, new User(), s1));
+        // question1.setAnswers(answers1);
+        // List<Question> test = new ArrayList<>();
+        // test.add(question1);
+        // s1.setQuestions(test);
 
         Survey s2 = new Survey(new Topic()); // id - 11
         s2.setSurveyId(11);
@@ -174,5 +180,20 @@ public class SurveyControllerTest {
 
     @Test
     public void getResponses() throws Exception {
+        // String apiUrl = "/surveys/survey/9/responses";
+        //
+        // Mockito.when(surveyService.findById(9).getQuestions().get(0).getAnswers()).thenReturn(surveyList.get(0).getQuestions().get(0).getAnswers());
+        //
+        // RequestBuilder rb = MockMvcRequestBuilders.get(apiUrl);
+        // MvcResult r = mockMvc.perform(rb).andReturn();
+        // String tr = r.getResponse().getContentAsString();
+        //
+        // ObjectMapper mapper = new ObjectMapper();
+        // String er = mapper.writeValueAsString(surveyList.get(0).getQuestions().get(0).getAnswers());
+        //
+        // System.out.println("Expect: " + er);
+        // System.out.println("Actual: " + tr);
+        //
+        // assertEquals("Rest API Returns List", er, tr);
     }
 }
