@@ -39,6 +39,8 @@ public class SurveyServiceImplTest {
 
     @Test
     public void delete() {
+        // surveyService.delete(23);
+        // assertEquals(10, surveyService.findAllSurveys().size());
     }
 
     @Test
