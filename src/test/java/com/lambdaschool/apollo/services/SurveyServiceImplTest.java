@@ -1,6 +1,7 @@
 package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.ApolloApplication;
+import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.models.Topic;
 import com.lambdaschool.apollo.views.TopicFrequency;
 import org.junit.After;
@@ -45,6 +46,8 @@ public class SurveyServiceImplTest {
 
     @Test
     public void save() {
+        surveyService.save(new Survey());
+        assertEquals(12, surveyService.findAllSurveys().size());
     }
 
     @Test
