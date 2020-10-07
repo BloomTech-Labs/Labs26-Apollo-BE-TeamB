@@ -9,6 +9,8 @@ import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.services.AnswerService;
 import com.lambdaschool.apollo.services.SurveyService;
 import com.lambdaschool.apollo.views.QuestionBody;
+import com.lambdaschool.apollo.views.SurveyQuestion;
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,8 +53,12 @@ public class SurveyControllerTest {
     public void setUp() throws Exception {
         surveyList = new ArrayList<>();
 
+        Topic t1 = new Topic(); // id - 10
+        t1.setTopicId(10);
+
         Survey s1 = new Survey(new Topic()); // id - 9
         s1.setSurveyId(9);
+        s1.setTopic(t1);
         surveyList.add(s1);
 
         Survey s2 = new Survey(new Topic()); // id - 11
@@ -152,6 +158,18 @@ public class SurveyControllerTest {
 
     @Test
     public void createSurveyRequest() throws Exception {
+        String apiUrl = "/surveys/topic/10";
+
+        Mockito.when(surveyService.saveRequest(Mockito.<SurveyQuestion>anyList(), any(Topic.class))).thenReturn(surveyList.get(0));
+
+        RequestBuilder rb = MockMvcRequestBuilders.post(apiUrl)
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .content("[{\"body\": \"test survey question\", \"type\": \"TEXT\", \"leader\": false, \"answer\": \"\"}]");
+
+        mockMvc.perform(rb)
+            .andExpect(status().isCreated())
+            .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
