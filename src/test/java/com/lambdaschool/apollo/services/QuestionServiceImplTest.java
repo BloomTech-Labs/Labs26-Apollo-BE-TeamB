@@ -1,6 +1,9 @@
 package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.ApolloApplication;
+import com.lambdaschool.apollo.models.Question;
+import com.lambdaschool.apollo.models.Survey;
+import com.lambdaschool.apollo.views.QuestionType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,10 +46,17 @@ public class QuestionServiceImplTest {
 
     @Test
     public void delete() {
+        questionService.delete(33);
+        assertEquals(4, questionService.findAllQuestions().size());
     }
 
     @Test
     public void save() {
+        Survey s1 = new Survey();
+        s1.setSurveyId(9);
+        Question newQuestion = new Question("Test Question", false, QuestionType.TEXT, s1);
+        questionService.save(newQuestion);
+        assertEquals(6, questionService.findAllQuestions().size());
     }
 
     @Test
