@@ -33,6 +33,7 @@ public class QuestionServiceImplTest {
 
     @Test
     public void findAllQuestions() {
+        assertEquals(5, questionService.findAllQuestions().size());
     }
 
     @Test
