@@ -39,12 +39,16 @@ public class TopicServiceImpl implements TopicService {
 
     @Transactional
     @Override
-    public void delete(long id) {
+    public void delete(long id, User user) {
 
         Topic topic = topicRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Topic " + id + " Not Found"));
-        topicRepository.delete(topic);
-
+        // delete topic if current user is the owner of the topic
+        if (user.getUserid() == topic.getOwner().getUserid()) {
+            topicRepository.delete(topic);
+        } else {
+            throw new ResourceNotFoundException("Not authorized to perform this action");
+        }
     }
 
     @Override
