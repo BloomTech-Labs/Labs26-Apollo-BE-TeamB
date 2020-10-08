@@ -1,20 +1,15 @@
 package com.lambdaschool.apollo;
 
-import com.github.javafaker.Faker;
-import com.github.javafaker.service.FakeValuesService;
-import com.github.javafaker.service.RandomService;
-import com.lambdaschool.apollo.models.*;
+import com.lambdaschool.apollo.models.Context;
+import com.lambdaschool.apollo.models.Question;
+import com.lambdaschool.apollo.models.Survey;
+import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.services.*;
 import com.lambdaschool.apollo.views.QuestionType;
-import com.lambdaschool.apollo.views.TopicFrequency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * SeedData puts both known and random data into the database. It implements CommandLineRunner.
@@ -24,7 +19,7 @@ import java.util.Locale;
  */
 @Transactional
 //Comment this out if the Database is breaking
-//@Component
+@Component
 
 public class SeedData
         implements CommandLineRunner {
@@ -78,164 +73,23 @@ public class SeedData
     public void run(String[] args)
             throws
             Exception {
-        Role r1 = new Role("admin");
-        Role r2 = new Role("user");
-        Role r3 = new Role("data");
 
-        r1 = roleService.save(r1);
-        r2 = roleService.save(r2);
-        r3 = roleService.save(r3);
-
-        // admin, data, user
-        ArrayList<UserRoles> admins = new ArrayList<>();
-        admins.add(new UserRoles(new User(),
-                r1));
-        admins.add(new UserRoles(new User(),
-                r2));
-        admins.add(new UserRoles(new User(),
-                r3));
-        User u1 = new User("admin",
-                "admin@lambdaschool.local",
-                admins);
+        User u1 = new User("llama001@maildrop.cc", "llama001@maildrop.cc");
+        User u2 = new User("llama002@maildrop.cc", "llama002@maildrop.cc");
+        User u3 = new User("llama003@maildrop.cc", "llama003@maildrop.cc");
 
         userService.save(u1);
-
-        // data, user
-        ArrayList<UserRoles> datas = new ArrayList<>();
-        datas.add(new UserRoles(new User(),
-                r3));
-        datas.add(new UserRoles(new User(),
-                r2));
-        User u2 = new User("cinnamon",
-                "cinnamon@lambdaschool.local",
-                datas);
-        u2 = userService.save(u2);
-
-        // user
-        ArrayList<UserRoles> users = new ArrayList<>();
-        users.add(new UserRoles(new User(),
-                r2));
-        User u3 = new User("barnbarn",
-                "barnbarn@lambdaschool.local",
-                users);
+        userService.save(u2);
         userService.save(u3);
 
-        users = new ArrayList<>();
-        users.add(new UserRoles(new User(),
-                r2));
-        User u4 = new User("puttat",
-                "puttat@school.lambda",
-                users);
-        userService.save(u4);
-
-        users = new ArrayList<>();
-        users.add(new UserRoles(new User(),
-                r2));
-        User u5 = new User("misskitty",
-                "misskitty@school.lambda",
-                users);
-        userService.save(u5);
-
-        User lambdaDummy03 = new User("llama003@maildrop.cc", "llama003@maildrop.cc");
-        lambdaDummy03 = userService.save(lambdaDummy03);
-
-        User lambdaDummy01 = new User("llama001@maildrop.cc", "llama001@maildrop.cc");
-        lambdaDummy01 = userService.save(lambdaDummy01);
-
-
-
-        // using JavaFaker create a bunch of regular users
-        // https://www.baeldung.com/java-faker
-        // https://www.baeldung.com/regular-expressions-java
-
-        FakeValuesService fakeValuesService = new FakeValuesService(new Locale("en-US"),
-                new RandomService());
-        Faker nameFaker = new Faker(new Locale("en-US"));
-
-        for (int i = 0; i < 25; i++) {
-            new User();
-            User fakeUser;
-
-            users = new ArrayList<>();
-            users.add(new UserRoles(new User(),
-                    r2));
-            fakeUser = new User(nameFaker.name()
-                    .username(),
-                    nameFaker.internet()
-                            .emailAddress(),
-                    users);
-            userService.save(fakeUser);
-        }
-
-
-
-
-        /*******************************************************************/
-        //List of members to add to topic
-        //NOT WORKING. LEAVING HERE FOR REFERENCE
-
-//        ArrayList<TopicUsers> topicUsersArrayList1 = new ArrayList<>();
-//        topicUsersArrayList1.add(new TopicUsers(new Topic(), u1));
-//        topicUsersArrayList1.add(new TopicUsers(new Topic(), u2));
-//        topicUsersArrayList1.add(new TopicUsers(new Topic(), u3));
-//
-//        ArrayList<TopicUsers> topicUsersArrayList2 = new ArrayList<>();
-//        topicUsersArrayList2.add(new TopicUsers(new Topic(), u3));
-//        topicUsersArrayList2.add(new TopicUsers(new Topic(), u4));
-//        topicUsersArrayList2.add(new TopicUsers(new Topic(), u5));
-
-        /*******************************************************************/
-        // topics
-
-
-
-        Survey s1 = surveyService.save(new Survey());
-        Topic topic2 = new Topic("Topic 2", u1, s1, TopicFrequency.MONDAY);
-        topic2.getUsers().add(new TopicUsers(topic2, u2));
-        topic2.getUsers().add(new TopicUsers(topic2, lambdaDummy01));
-        topic2 = topicService.save(topic2);
-
-        Survey s2 = surveyService.save(new Survey());
-        Topic topic3 = new Topic("Topic 3", u2, s2, TopicFrequency.WEEKLY);
-        topic3 = topicService.save(topic3);
-
-
-        Survey s3 = surveyService.save(new Survey());
-        Topic topic4 = new Topic("Topic 4", u2, s3, TopicFrequency.WEEKLY);
-        topic4 = topicService.save(topic4);
-
-        Survey s4 = surveyService.save(new Survey());
-        Topic topic5 = new Topic("Topic 5", u2, s4, TopicFrequency.MONTHLY);
-        topic5 = topicService.save(topic5);
-
-        Survey s5 = surveyService.save(new Survey());
-        Topic topic6 = new Topic("Topic 6", u2, s5, TopicFrequency.MONTHLY);
-        topic6 = topicService.save(topic6);
-
-
-        /******************************************************************/
-        // survey
-        Survey survey1 = new Survey(topic2);
-        survey1 = surveyService.save(survey1);
-        List<Survey> requests = topic2.getSurveysrequests();
-        requests.add(new Survey(topic2));
-        topic2.setSurveysrequests(requests);
-
-        Survey survey2 = new Survey(topic3);
-        survey2 = surveyService.save(survey2);
-
-        Survey survey3 = new Survey(topic4);
-        survey3 = surveyService.save(survey3);
-
-        Survey survey4 = new Survey(topic5);
-        survey4 = surveyService.save(survey4);
-
-        Survey survey5 = new Survey(topic6);
-        survey5 = surveyService.save(survey5);
+        Survey survey1 = surveyService.save(new Survey());
+        Survey survey2 = surveyService.save(new Survey());
+        Survey survey3 = surveyService.save(new Survey());
+        Survey survey4 = surveyService.save(new Survey());
+        Survey survey5 = surveyService.save(new Survey());
 
         // context
         Context context1 = new Context("Product Leadership", survey1);
-
         contextService.save(context1);
 
         Context context2 = new Context("Delivery Management", survey2);
@@ -253,19 +107,41 @@ public class SeedData
         /*******************************************************************/
         // questions
 
-        Question question1 = new Question("Leader Question 1", true, QuestionType.TEXT, survey1);
-        question1 = questionService.save(question1);
+        Question question1a = new Question("What is the current priority?", true, QuestionType.TEXT, survey1);
+        Question question1b = new Question("What is the current priority?", true, QuestionType.TEXT, survey2);
+        Question question1c = new Question("What is the current priority?", true, QuestionType.TEXT, survey3);
+        Question question1d = new Question("What is the current priority?", true, QuestionType.TEXT, survey4);
+        Question question1e = new Question("What is the current priority?", true, QuestionType.TEXT, survey5);
 
-        Question question2 = new Question("Leader Question 2", true, QuestionType.TEXT, survey1);
-        question2 = questionService.save(question2);
+        question1a = questionService.save(question1a);
+        question1b = questionService.save(question1b);
+        question1c = questionService.save(question1c);
+        question1d = questionService.save(question1d);
+        question1e = questionService.save(question1e);
 
-        Question question3 = new Question("Member Question 1", false, QuestionType.TEXT, survey1);
-        question3 = questionService.save(question3);
+        Question question2a = new Question("What Blockers are you working on?", true, QuestionType.TEXT, survey1);
+        Question question2b = new Question("What Blockers are you working on?", true, QuestionType.TEXT, survey2);
+        Question question2c = new Question("What Blockers are you working on?", true, QuestionType.TEXT, survey3);
+        Question question2d = new Question("What Blockers are you working on?", true, QuestionType.TEXT, survey4);
+        Question question2e = new Question("What Blockers are you working on?", true, QuestionType.TEXT, survey5);
 
-        Question question4 = new Question("Member Question 2", false, QuestionType.TEXT, survey2);
-        question4 = questionService.save(question4);
+        question2a = questionService.save(question2a);
+        question2b = questionService.save(question2b);
+        question2c = questionService.save(question2c);
+        question2d = questionService.save(question2d);
+        question2e = questionService.save(question2e);
 
-        Question question5 = new Question("Member Question 3", false, QuestionType.TEXT, survey2);
-        question5 = questionService.save(question5);
+        Question question3a = new Question("Are there any operational concerns the team should be aware of?", false, QuestionType.TEXT, survey1);
+        Question question3b = new Question("Are there any operational concerns the team should be aware of?", false, QuestionType.TEXT, survey2);
+        Question question3c = new Question("Are there any operational concerns the team should be aware of?", false, QuestionType.TEXT, survey3);
+        Question question3d = new Question("Are there any operational concerns the team should be aware of?", false, QuestionType.TEXT, survey4);
+        Question question3e = new Question("Are there any operational concerns the team should be aware of?", false, QuestionType.TEXT, survey5);
+
+        question3a = questionService.save(question3a);
+        question3b = questionService.save(question3b);
+        question3c = questionService.save(question3c);
+        question3d = questionService.save(question3d);
+        question3e = questionService.save(question3e);
+
     }
 }
