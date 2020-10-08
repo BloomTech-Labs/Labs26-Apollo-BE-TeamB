@@ -8,7 +8,6 @@ import com.lambdaschool.apollo.services.*;
 import com.lambdaschool.apollo.views.QuestionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -19,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 //Comment this out if the Database is breaking
-@Component
+//@Component
 
 public class SeedData
         implements CommandLineRunner {
