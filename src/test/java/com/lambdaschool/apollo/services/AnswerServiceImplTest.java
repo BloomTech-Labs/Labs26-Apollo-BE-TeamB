@@ -57,5 +57,6 @@ public class AnswerServiceImplTest {
 
     @Test
     public void findBySurveyId() {
+        assertEquals(1, answerService.findBySurveyId(9).size());
     }
 }
