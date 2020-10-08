@@ -985,6 +985,28 @@ This is a successful response
 </details>
 
 <details>
+<summary>  POST http://apollo-b-api.herokuapp.com/surveys/response - Answer a survey request </summary>
+Users that aren't owners of a topic cannot answer leader questions and topic owner cannot answer request questions
+Users that aren't members of a topic cannot answer request questions from that topic
+After submitting their answers, a user cannot add another answer or edit their existing answer
+
+```JSON
+[
+    {
+        "questionid" : 12,
+        "body" : "stuff"
+    },
+    {
+       "questionid" : 13,
+       "body" : "more stuff"
+    }
+]
+
+```
+
+</details>
+
+<details>
 <summary>  GET http://apollo-b-api.herokuapp.com/surveys/survey/172/responses - Returns a list of all answers to a Survey </summary>
 
 ```JSON
@@ -1034,8 +1056,6 @@ This is a successful response
 ```
 
 </details>
-
-
 
 ## Messages
 
