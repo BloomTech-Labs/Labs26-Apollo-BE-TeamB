@@ -2,7 +2,9 @@ package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.ApolloApplication;
 import com.lambdaschool.apollo.models.Answer;
+import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.repository.AnswerRepository;
+import com.lambdaschool.apollo.views.QuestionBody;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -46,6 +48,10 @@ public class AnswerServiceImplTest {
 
     @Test
     public void save() {
+        QuestionBody qb = new QuestionBody("save fn test answer", 29);
+        User u = userService.findUserById(4);
+        answerService.save(qb, u);
+        assertEquals(2, answerService.findAllAnswers().size());
     }
 
     @Test
