@@ -24,9 +24,6 @@ public class AnswerServiceImplTest {
     @Autowired
     private AnswerService answerService;
 
-    @MockBean
-    private AnswerRepository answerRepository;
-
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
@@ -38,10 +35,7 @@ public class AnswerServiceImplTest {
 
     @Test
     public void findById() {
-        Answer newAnswer = new Answer();
-        newAnswer.setAnswerId(3);
-        answerRepository.save(newAnswer);
-        assertEquals(3, answerService.findById(3).getAnswerId());
+        assertEquals(34, answerService.findById(34).getAnswerId());
     }
 
     @Test
