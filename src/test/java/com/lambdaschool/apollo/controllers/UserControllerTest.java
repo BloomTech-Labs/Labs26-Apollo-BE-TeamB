@@ -65,38 +65,25 @@ public class UserControllerTest {
         r3.setRoleid(3); // id 3
 
         // admin, data, user
-        ArrayList<UserRoles> admins = new ArrayList<>();
-        admins.add(new UserRoles(new User(), r1));
-        admins.add(new UserRoles(new User(), r2));
-        admins.add(new UserRoles(new User(), r3));
-        User u1 = new User("admin", "admin@lambdaschool.local", admins);
+        User u1 = new User("admin", "admin@lambdaschool.local");
         u1.setUserid(101);
         userList.add(u1); // id 4
 
         // data, user
-        ArrayList<UserRoles> datas = new ArrayList<>();
-        datas.add(new UserRoles(new User(), r3));
-        datas.add(new UserRoles(new User(), r2));
-        User u2 = new User("user1", "user1@user.com", datas);
+        User u2 = new User("user1", "user1@user.com");
         u1.setUserid(102);
         userList.add(u2); // id 5
 
         // user
-        ArrayList<UserRoles> users = new ArrayList<>();
-        users.add(new UserRoles(new User(), r2));
-        User u3 = new User("user2", "user2@user.com", users);
+        User u3 = new User("user2", "user2@user.com");
         u1.setUserid(103);
         userList.add(u3); // id 6
 
-        users = new ArrayList<>();
-        users.add(new UserRoles(new User(), r2));
-        User u4 = new User("user3", "user3@user.com", users);
+        User u4 = new User("user3", "user3@user.com");
         u1.setUserid(104);
         userList.add(u4); // id 7
 
-        users = new ArrayList<>();
-        users.add(new UserRoles(new User(), r2));
-        User u5 = new User("user4", "user4@user.com", users);
+        User u5 = new User("user4", "user4@user.com");
         u1.setUserid(105);
         userList.add(u5); // id 8
 
