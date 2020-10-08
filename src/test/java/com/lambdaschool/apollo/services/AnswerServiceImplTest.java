@@ -52,6 +52,7 @@ public class AnswerServiceImplTest {
 
     @Test
     public void findAllAnswers() {
+        assertEquals(1, answerService.findAllAnswers().size());
     }
 
     @Test
