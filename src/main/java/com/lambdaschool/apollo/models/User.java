@@ -104,19 +104,7 @@ public class User
      *
      * @param username     The username (String) of the user
      * @param primaryemail The primary email (String) of the user
-     * @param userRoles    The list of roles (userroles) assigned to this user
      */
-    public User(
-            String username,
-            String primaryemail,
-            List<UserRoles> userRoles) {
-        setUsername(username);
-        setPrimaryemail(primaryemail);
-        for (UserRoles ur : userRoles) {
-            ur.setUser(this);
-        }
-        this.roles = userRoles;
-    }
 
     public User(@Size(min = 2,
             max = 30,
