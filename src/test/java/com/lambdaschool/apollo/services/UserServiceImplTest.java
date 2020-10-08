@@ -5,7 +5,6 @@ import com.lambdaschool.apollo.exceptions.ResourceFoundException;
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.models.UserRoles;
-import com.lambdaschool.apollo.repository.UserRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -21,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApolloApplication.class)
@@ -86,9 +85,7 @@ public class UserServiceImplTest {
 
     @Test
     public void g_save() {
-        ArrayList<UserRoles> users = new ArrayList<>();
-        users.add(new UserRoles(new User(), roleService.findRoleById(2)));
-        User newUser = new User("tiger", "tiger@school.lambda", users);
+        User newUser = new User("tiger", "tiger@school.lambda");
         userService.save(newUser);
 
         assertEquals("tiger@school.lambda", userService.findByName("tiger").getPrimaryemail());
@@ -111,10 +108,7 @@ public class UserServiceImplTest {
     @WithUserDetails("user2")
     @Test
     public void h_update() {
-        ArrayList<UserRoles> datas = new ArrayList<>();
-        datas.add(new UserRoles(new User(), roleService.findRoleById(2)));
-        datas.add(new UserRoles(new User(), roleService.findRoleById(3)));
-        User user2 = new User("user2", "update@user.com", datas);
+        User user2 = new User("user2", "update@user.com");
         userService.update(user2, 6);
 
         assertEquals("update@user.com", userService.findByName("user2").getPrimaryemail());
@@ -124,7 +118,7 @@ public class UserServiceImplTest {
     @WithUserDetails("user3")
     @Test(expected = ResourceNotFoundException.class)
     public void ha_updateNotAuthorized() {
-        User user2 = new User("user2", "update@user.com", new ArrayList<>());
+        User user2 = new User("user2", "update@user.com");
         userService.update(user2, 6);
 
         assertEquals(ResourceNotFoundException.class, userService.findByName("user2").getPrimaryemail());
