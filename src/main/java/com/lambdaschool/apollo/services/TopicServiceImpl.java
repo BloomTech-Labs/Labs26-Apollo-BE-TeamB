@@ -111,7 +111,7 @@ public class TopicServiceImpl implements TopicService {
             newTopic.setDefaultsurvey(defaultSurvey);
         // If new topic, create a new survey and add questions to it.
         } else {
-            newTopic.setDefaultsurvey(new Survey(newTopic));
+            newTopic.setDefaultsurvey(new Survey());
             for (Question sq : topic.getDefaultsurvey().getQuestions()) {
                 newTopic.getDefaultsurvey().addQuestion(new Question(sq.getBody(), sq.isLeader(),sq.getType(),newTopic.getDefaultsurvey()));
             }
