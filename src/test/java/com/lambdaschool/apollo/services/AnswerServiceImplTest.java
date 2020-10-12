@@ -43,8 +43,6 @@ public class AnswerServiceImplTest {
 
     @Test
     public void b_delete() {
-        // answerService.delete(34);
-        // assertEquals(0, answerService.findAllAnswers().size());
     }
 
     @Test
