@@ -61,8 +61,10 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public List<Topic> findTopicsByUser(String username) {
         List<Topic> topics = new ArrayList<>();
-               topics = topicRepository.findByOwner_usernameOrUsers_user_username(username, username);
-
+               topics = topicRepository.findByOwner_username(username);
+        List<Topic> member = new ArrayList<>();
+                member = topicRepository.findByUsers_user_username(username);
+        topics.addAll(member);
         return topics;
     }
 
@@ -109,7 +111,7 @@ public class TopicServiceImpl implements TopicService {
             newTopic.setDefaultsurvey(defaultSurvey);
         // If new topic, create a new survey and add questions to it.
         } else {
-            newTopic.setDefaultsurvey(new Survey(newTopic));
+            newTopic.setDefaultsurvey(new Survey());
             for (Question sq : topic.getDefaultsurvey().getQuestions()) {
                 newTopic.getDefaultsurvey().addQuestion(new Question(sq.getBody(), sq.isLeader(),sq.getType(),newTopic.getDefaultsurvey()));
             }
