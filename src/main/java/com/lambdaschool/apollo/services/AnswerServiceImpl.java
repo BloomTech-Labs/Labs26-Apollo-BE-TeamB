@@ -59,8 +59,8 @@ public class AnswerServiceImpl implements AnswerService {
         } else {
             throw new ResourceNotFoundException("Question Id " + qb.getQuestionid() + " Not Found");
         }
-        if (user == userService.findUserById(user.getUserid())) {
-            newAnswer.setUser(user);
+        if (user.getUserid() == userService.findUserById(user.getUserid()).getUserid()) {
+            newAnswer.setUser(userService.findUserById(user.getUserid()));
         } else {
             throw new ResourceNotFoundException("User Id " + user.getUserid() + " Not Found");
         }

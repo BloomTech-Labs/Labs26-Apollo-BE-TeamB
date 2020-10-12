@@ -30,7 +30,7 @@ public class AnswerServiceImplTest {
     private AnswerService answerService;
 
     @Autowired
-    private AnswerRepository answerRepository;
+    private UserService userService;
 
     @Before
     public void setUp() throws Exception {
@@ -54,11 +54,9 @@ public class AnswerServiceImplTest {
 
     @Test
     public void save() {
-        User u = new User("test user", "test@test.com");
-        Survey s = new Survey();
-        Question q = new Question("test question", false, QuestionType.TEXT, s);
-        Answer a = new Answer("test answer 2", q, u, s);
-        answerRepository.save(a);
+        QuestionBody qb = new QuestionBody("test answer 2", 29);
+        User u = userService.findUserById(4);
+        answerService.save(qb, u);
         assertEquals(2, answerService.findAllAnswers().size());
     }
 
