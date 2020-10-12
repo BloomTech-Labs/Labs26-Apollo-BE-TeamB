@@ -13,7 +13,8 @@ public interface TopicRepository extends CrudRepository<Topic, Long> {
 
 
     List<Topic> findByOwner_usernameOrUsers_user_username(String ownername, String membername);
-
+    List<Topic> findByOwner_username(String membername);
+    List<Topic> findByUsers_user_username(String membername);
 
     Topic findByJoincodeEquals(String joincode);
 
