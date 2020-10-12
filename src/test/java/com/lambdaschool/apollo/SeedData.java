@@ -169,6 +169,6 @@ public class SeedData implements CommandLineRunner {
         /*******************************************************************/
         // answers
         Answer answer1 = new Answer("test answer 1", question1, u1, s1);
-        answer1 = answerRepository.save(answer1);
+        answer1 = answerRepository.save(answer1); // id 34
     }
 }

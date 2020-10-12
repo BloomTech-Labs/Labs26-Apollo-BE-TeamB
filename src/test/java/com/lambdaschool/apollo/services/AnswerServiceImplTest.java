@@ -48,7 +48,7 @@ public class AnswerServiceImplTest {
 
     @Test
     public void delete() {
-        // answerService.delete(34);
+        // answerRepository.delete(answerService.findById(34));
         // assertEquals(0, answerService.findAllAnswers().size());
     }
 
