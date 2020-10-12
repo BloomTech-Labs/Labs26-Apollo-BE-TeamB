@@ -101,4 +101,14 @@ public class AnswerServiceImpl implements AnswerService {
         List<Answer> answers = answerRepository.findBySurvey_surveyid(surveyid);
         return answers;
     }
+
+    @Override
+    public Answer findByQuestionIdAndUserId(long questionId, long userId) {
+        Answer answer = answerRepository.findAnswerByQuestionIdAndUserId(questionId, userId);
+        if (answer == null) {
+            return null;
+        } else {
+            return answer;
+        }
+    }
 }
