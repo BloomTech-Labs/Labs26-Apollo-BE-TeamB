@@ -2,9 +2,12 @@ package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.ApolloApplication;
 import com.lambdaschool.apollo.models.Answer;
+import com.lambdaschool.apollo.models.Question;
+import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.repository.AnswerRepository;
 import com.lambdaschool.apollo.views.QuestionBody;
+import com.lambdaschool.apollo.views.QuestionType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -25,6 +28,9 @@ import static org.junit.Assert.*;
 public class AnswerServiceImplTest {
     @Autowired
     private AnswerService answerService;
+
+    @Autowired
+    private AnswerRepository answerRepository;
 
     @Before
     public void setUp() throws Exception {
@@ -48,9 +54,11 @@ public class AnswerServiceImplTest {
 
     @Test
     public void save() {
-        QuestionBody qb = new QuestionBody("save fn test answer", 29);
-        User u = userService.findUserById(4);
-        answerService.save(qb, u);
+        User u = new User("test user", "test@test.com");
+        Survey s = new Survey();
+        Question q = new Question("test question", false, QuestionType.TEXT, s);
+        Answer a = new Answer("test answer 2", q, u, s);
+        answerRepository.save(a);
         assertEquals(2, answerService.findAllAnswers().size());
     }
 
