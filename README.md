@@ -1057,7 +1057,9 @@ After submitting their answers, a user cannot add another answer or edit their e
 
 </details>
 
+## IOS Testing Endpoints
 
+[IOS ENDPOINTS](./IOSTEST.md)
 
 ## Messages
 
