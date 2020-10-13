@@ -68,7 +68,7 @@ public class AnswerServiceImpl implements AnswerService {
         if (survey != null) {
             newAnswer.setSurvey(survey);
         } else {
-            throw new ResourceNotFoundException("Survey Id " + question.getSurvey().getSurveyId() + "Not Found");
+            throw new ResourceNotFoundException("Survey Id " + question.getSurvey().getSurveyid() + "Not Found");
         }
 
         answerRepository.save(newAnswer);

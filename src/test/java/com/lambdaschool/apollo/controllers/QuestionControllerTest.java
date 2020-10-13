@@ -52,10 +52,10 @@ public class QuestionControllerTest {
         leaderQuestionList = new ArrayList<>();
 
         Survey s1 = new Survey();
-        s1.setSurveyId(9);
+        s1.setSurveyid(9);
 
         Survey s2 = new Survey();
-        s2.setSurveyId(11);
+        s2.setSurveyid(11);
 
         Question question1 = new Question("Leader Question 1", true, QuestionType.TEXT, s1);
         questionList.add(question1);

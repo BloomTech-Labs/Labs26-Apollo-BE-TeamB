@@ -57,7 +57,7 @@ public class QuestionServiceImplTest {
     @Test
     public void e_save() {
         Survey s1 = new Survey();
-        s1.setSurveyId(9);
+        s1.setSurveyid(9);
         Question newQuestion = new Question("Test Question", false, QuestionType.TEXT, s1);
         questionService.save(newQuestion);
         assertEquals(6, questionService.findAllQuestions().size());

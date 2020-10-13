@@ -66,8 +66,8 @@ public class ContextServiceImpl implements ContextService {
         newContext.setDescription(context.getDescription());
 
         // If saving existing context with a survey, go get the survey by id
-        if (context.getSurvey().getSurveyId() != 0) {
-            Survey survey = surveyService.findById(context.getSurvey().getSurveyId());
+        if (context.getSurvey().getSurveyid() != 0) {
+            Survey survey = surveyService.findById(context.getSurvey().getSurveyid());
             newContext.setSurvey(survey);
         // New context, new survey
         } else {

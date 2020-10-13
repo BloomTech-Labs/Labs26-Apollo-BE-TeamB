@@ -65,7 +65,7 @@ public class SurveyController {
             URISyntaxException {
         Survey newSurvey = new Survey();
 
-        newSurvey.setSurveyId(postedSurvey.getSurveyId());
+        newSurvey.setSurveyid(postedSurvey.getSurveyid());
         surveyService.save(newSurvey);
 
         return new ResponseEntity<>(newSurvey, HttpStatus.CREATED);

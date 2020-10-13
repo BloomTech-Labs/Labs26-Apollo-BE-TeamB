@@ -50,7 +50,7 @@ public class ContextController {
     @PostMapping(value = "/new", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> createContext(@RequestBody Context context, Authentication authentication) {
         context.setContextId(0);
-        context.getSurvey().setSurveyId(0);
+        context.getSurvey().setSurveyid(0);
         context = contextService.save(context);
         return new ResponseEntity<>(context, HttpStatus.CREATED);
     }

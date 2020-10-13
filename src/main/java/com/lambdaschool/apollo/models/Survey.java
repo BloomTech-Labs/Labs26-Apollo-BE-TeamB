@@ -52,14 +52,6 @@ public class Survey extends Auditable {
         this.topic = topic;
     }
 
-    public long getSurveyId() {
-        return surveyid;
-    }
-
-    public void setSurveyId(long surveyid) {
-        this.surveyid = surveyid;
-    }
-
     public Topic getTopic() {
         return topic;
     }
