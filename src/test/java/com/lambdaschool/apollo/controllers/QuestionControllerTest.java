@@ -3,7 +3,6 @@ package com.lambdaschool.apollo.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lambdaschool.apollo.ApolloApplication;
 import com.lambdaschool.apollo.handlers.HelperFunctions;
-import com.lambdaschool.apollo.models.Context;
 import com.lambdaschool.apollo.models.Question;
 import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.services.QuestionService;
@@ -24,12 +23,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = ApolloApplication.class)
@@ -62,24 +60,24 @@ public class QuestionControllerTest {
         Question question1 = new Question("Leader Question 1", true, QuestionType.TEXT, s1);
         questionList.add(question1);
         leaderQuestionList.add(question1);
-        question1.setQuestionId(29);
+        question1.setQuestionid(29);
 
         Question question2 = new Question("Leader Question 2", true, QuestionType.TEXT, s1);
         questionList.add(question2);
         leaderQuestionList.add(question2);
-        question2.setQuestionId(30);
+        question2.setQuestionid(30);
 
         Question question3 = new Question("Member Question 1", false, QuestionType.TEXT, s2);
         questionList.add(question3);
-        question3.setQuestionId(31);
+        question3.setQuestionid(31);
 
         Question question4 = new Question("Member Question 2", false, QuestionType.TEXT, s2);
         questionList.add(question4);
-        question4.setQuestionId(32);
+        question4.setQuestionid(32);
 
         Question question5 = new Question("Member Question 3", false, QuestionType.TEXT, s2);
         questionList.add(question5);
-        question5.setQuestionId(33);
+        question5.setQuestionid(33);
     }
 
     @After

@@ -83,7 +83,7 @@ public class SurveyController {
             Question question = questionService.findById(qb.getQuestionid());
             for (Answer a: question.getAnswers()) {
                 if (user.getUserid() == a.getUser().getUserid()) {
-                    throw new ResourceFoundException("Current user already answered question with id - " + question.getQuestionId());
+                    throw new ResourceFoundException("Current user already answered question with id - " + question.getQuestionid());
                 }
             }
             Survey survey = surveyService.findById(question.getSurvey().getSurveyid());

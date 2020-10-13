@@ -86,7 +86,7 @@ public class ContextServiceImplTest {
         List<Question> questionList = new ArrayList<>();
         questionList.add(new Question("New Question", true, QuestionType.TEXT, survey));
         Question oldQuestion = new Question("Old Question", true, QuestionType.TEXT, survey);
-        oldQuestion.setQuestionId(29);
+        oldQuestion.setQuestionid(29);
         questionList.add(oldQuestion);
         survey.setQuestions(questionList);
 

@@ -103,7 +103,7 @@ public class Question extends Auditable {
      *
      * @return the questionid (long) of the question
      */
-    public long getQuestionId() {
+    public long getQuestionid() {
         return questionid;
     }
 
@@ -112,7 +112,7 @@ public class Question extends Auditable {
      *
      * @param questionid the new questionid (long) of the question
      */
-    public void setQuestionId(long questionid) {
+    public void setQuestionid(long questionid) {
         this.questionid = questionid;
     }
 

@@ -75,8 +75,8 @@ public class ContextServiceImpl implements ContextService {
             // A survey needs questions, add them
             for (Question q : context.getSurvey().getQuestions()) {
                 // Hey, an existing question
-                if (q.getQuestionId() != 0) {
-                    Question q1 = questionService.findById(q.getQuestionId());
+                if (q.getQuestionid() != 0) {
+                    Question q1 = questionService.findById(q.getQuestionid());
                     newContext.getSurvey().addQuestion(q1);
                 // Cool, a new question. I can create that
                 } else {
