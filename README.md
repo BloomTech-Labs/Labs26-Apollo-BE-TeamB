@@ -1278,6 +1278,10 @@ After submitting their answers, a user cannot add another answer or edit their e
 
 </details>
 
+## Answers
+
+<summary> Currently does not have its own controller, you can see the model inside a response that contains a question that has an answer attached to it. See surveys/response for more details on responding to a question. </summary>
+
 ## IOS Testing Endpoints
 
 [IOS ENDPOINTS](./IOSTEST.md)
