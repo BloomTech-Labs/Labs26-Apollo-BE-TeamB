@@ -702,73 +702,224 @@ Example:
 ```JSON
 [
     {
-        "questionId": 51,
-        "body": "Leader Question 1",
+        "createdDate": "2020-10-08 13:54:47",
+        "lastModifiedDate": "2020-10-08 13:54:47",
+        "body": "What is the current priority?",
         "type": "TEXT",
         "survey": {
-            "surveyid": 41,
-            "topic": {
-                "topicid": 35,
-                "title": "Topic 1",
-                "frequency": "MONDAY"
-            }
+            "createdDate": "2020-10-08 13:54:46",
+            "lastModifiedDate": "2020-10-08 13:54:46",
+            "surveyid": 5,
+            "responded": false,
+            "surveyId": 5
         },
+        "answers": [],
+        "questionId": 15,
         "leader": true
     },
     {
-        "questionId": 52,
-        "body": "Leader Question 2",
+        "createdDate": "2020-10-08 13:54:47",
+        "lastModifiedDate": "2020-10-08 13:54:47",
+        "body": "What is the current priority?",
         "type": "TEXT",
         "survey": {
-            "surveyid": 41,
-            "topic": {
-                "topicid": 35,
-                "title": "Topic 1",
-                "frequency": "MONDAY"
-            }
+            "createdDate": "2020-10-08 13:54:46",
+            "lastModifiedDate": "2020-10-08 13:54:46",
+            "surveyid": 6,
+            "responded": false,
+            "surveyId": 6
         },
+        "answers": [],
+        "questionId": 16,
         "leader": true
     },
     {
-        "questionId": 53,
-        "body": "Member Question 1",
+        "createdDate": "2020-10-08 13:54:47",
+        "lastModifiedDate": "2020-10-08 13:54:47",
+        "body": "What is the current priority?",
         "type": "TEXT",
         "survey": {
-            "surveyid": 41,
-            "topic": {
-                "topicid": 35,
-                "title": "Topic 1",
-                "frequency": "MONDAY"
-            }
+            "createdDate": "2020-10-08 13:54:46",
+            "lastModifiedDate": "2020-10-08 13:54:46",
+            "surveyid": 7,
+            "responded": false,
+            "surveyId": 7
         },
-        "leader": false
+        "answers": [],
+        "questionId": 17,
+        "leader": true
     },
     {
-        "questionId": 54,
-        "body": "Member Question 2",
+        "createdDate": "2020-10-08 13:54:47",
+        "lastModifiedDate": "2020-10-08 13:54:47",
+        "body": "What is the current priority?",
         "type": "TEXT",
         "survey": {
-            "surveyid": 42,
-            "topic": {
-                "topicid": 35,
-                "title": "Topic 1",
-                "frequency": "MONDAY"
-            }
+            "createdDate": "2020-10-08 13:54:46",
+            "lastModifiedDate": "2020-10-08 13:54:46",
+            "surveyid": 8,
+            "responded": false,
+            "surveyId": 8
         },
-        "leader": false
+        "answers": [],
+        "questionId": 18,
+        "leader": true
     },
     {
-        "questionId": 55,
-        "body": "Member Question 3",
+        "createdDate": "2020-10-08 13:54:47",
+        "lastModifiedDate": "2020-10-08 13:54:47",
+        "body": "What Blockers are you working on?",
         "type": "TEXT",
         "survey": {
-            "surveyid": 42,
-            "topic": {
-                "topicid": 35,
-                "title": "Topic 1",
-                "frequency": "MONDAY"
-            }
+            "createdDate": "2020-10-08 13:54:46",
+            "lastModifiedDate": "2020-10-08 13:54:46",
+            "surveyid": 4,
+            "responded": false,
+            "surveyId": 4
         },
+        "answers": [],
+        "questionId": 19,
+        "leader": true
+    },
+    {
+        "createdDate": "2020-10-08 13:54:47",
+        "lastModifiedDate": "2020-10-08 13:54:47",
+        "body": "What Blockers are you working on?",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-08 13:54:46",
+            "lastModifiedDate": "2020-10-08 13:54:46",
+            "surveyid": 5,
+            "responded": false,
+            "surveyId": 5
+        },
+        "answers": [],
+        "questionId": 20,
+        "leader": true
+    },
+    {
+        "createdDate": "2020-10-08 13:54:47",
+        "lastModifiedDate": "2020-10-08 13:54:47",
+        "body": "What Blockers are you working on?",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-08 13:54:46",
+            "lastModifiedDate": "2020-10-08 13:54:46",
+            "surveyid": 6,
+            "responded": false,
+            "surveyId": 6
+        },
+        "answers": [],
+        "questionId": 21,
+        "leader": true
+    },
+    {
+        "createdDate": "2020-10-08 13:54:47",
+        "lastModifiedDate": "2020-10-08 13:54:47",
+        "body": "What Blockers are you working on?",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-08 13:54:46",
+            "lastModifiedDate": "2020-10-08 13:54:46",
+            "surveyid": 7,
+            "responded": false,
+            "surveyId": 7
+        },
+        "answers": [],
+        "questionId": 22,
+        "leader": true
+    },
+    {
+        "createdDate": "2020-10-08 13:54:47",
+        "lastModifiedDate": "2020-10-08 13:54:47",
+        "body": "What Blockers are you working on?",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-08 13:54:46",
+            "lastModifiedDate": "2020-10-08 13:54:46",
+            "surveyid": 8,
+            "responded": false,
+            "surveyId": 8
+        },
+        "answers": [],
+        "questionId": 23,
+        "leader": true
+    },
+    {
+        "createdDate": "2020-10-08 14:15:46",
+        "lastModifiedDate": "2020-10-08 14:15:46",
+        "body": "What is the current priority?",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-08 14:15:46",
+            "lastModifiedDate": "2020-10-08 14:15:46",
+            "surveyid": 31,
+            "responded": false,
+            "surveyId": 31
+        },
+        "answers": [],
+        "questionId": 32,
+        "leader": true
+    },
+    {
+        "createdDate": "2020-10-08 14:15:46",
+        "lastModifiedDate": "2020-10-08 14:15:46",
+        "body": "What Blockers are you working on?",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-08 14:15:46",
+            "lastModifiedDate": "2020-10-08 14:15:46",
+            "surveyid": 31,
+            "responded": false,
+            "surveyId": 31
+        },
+        "answers": [],
+        "questionId": 33,
+        "leader": true
+    },
+    {
+        "createdDate": "2020-10-08 14:15:46",
+        "lastModifiedDate": "2020-10-08 14:15:46",
+        "body": "Anything else you need to add?",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-08 14:15:46",
+            "lastModifiedDate": "2020-10-08 14:15:46",
+            "surveyid": 31,
+            "responded": false,
+            "surveyId": 31
+        },
+        "answers": [],
+        "questionId": 34,
+        "leader": true
+    },
+    {
+        "createdDate": "2020-10-08 14:15:46",
+        "lastModifiedDate": "2020-10-08 14:15:46",
+        "body": "Are there any operational concerns the team should be aware of?",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-08 14:15:46",
+            "lastModifiedDate": "2020-10-08 14:15:46",
+            "surveyid": 31,
+            "responded": false,
+            "surveyId": 31
+        },
+        "answers": [
+            {
+                "createdDate": "2020-10-09 11:21:56",
+                "lastModifiedDate": "2020-10-09 11:21:56",
+                "body": "Yes, How did I join your topic and answer this survey???? SPOOOOKY",
+                "user": {
+                    "createdDate": "2020-10-08 14:24:17",
+                    "lastModifiedDate": "2020-10-08 14:24:17",
+                    "userid": 46,
+                    "username": "llama007@maildrop.cc"
+                },
+                "answerId": 132
+            }
+        ],
+        "questionId": 35,
         "leader": false
     }
 ]
@@ -785,33 +936,52 @@ Example:
 ```JSON
 [
     {
-        "createdDate": "2020-10-02 13:26:25",
-        "lastModifiedDate": "2020-10-02 13:26:25",
-        "body": "Leader Question 1",
+        "createdDate": "2020-10-08 14:15:46",
+        "lastModifiedDate": "2020-10-08 14:15:46",
+        "body": "What is the current priority?",
         "type": "TEXT",
         "survey": {
-            "createdDate": "2020-10-02 13:26:25",
-            "lastModifiedDate": "2020-10-02 13:26:25",
-            "surveyid": 46,
+            "createdDate": "2020-10-08 14:15:46",
+            "lastModifiedDate": "2020-10-08 14:15:46",
+            "surveyid": 31,
             "responded": false,
-            "surveyId": 46
+            "surveyId": 31
         },
         "answers": [],
-        "leader": true,
-        "questionId": 57
+        "questionId": 32,
+        "leader": true
     },
     {
-        "createdDate": "2020-10-02 13:26:25",
-        "lastModifiedDate": "2020-10-02 13:26:25",
-        "body": "Leader Question 2",
+        "createdDate": "2020-10-08 14:15:46",
+        "lastModifiedDate": "2020-10-08 14:15:46",
+        "body": "What Blockers are you working on?",
         "type": "TEXT",
         "survey": {
-            "createdDate": "2020-10-02 13:26:25",
-            "lastModifiedDate": "2020-10-02 13:26:25",
-            "surveyid": 46,
+            "createdDate": "2020-10-08 14:15:46",
+            "lastModifiedDate": "2020-10-08 14:15:46",
+            "surveyid": 31,
             "responded": false,
-            "surveyId": 46
+            "surveyId": 31
         },
+        "answers": [],
+        "questionId": 33,
+        "leader": true
+    },
+    {
+        "createdDate": "2020-10-08 14:15:46",
+        "lastModifiedDate": "2020-10-08 14:15:46",
+        "body": "Anything else you need to add?",
+        "type": "TEXT",
+        "survey": {
+            "createdDate": "2020-10-08 14:15:46",
+            "lastModifiedDate": "2020-10-08 14:15:46",
+            "surveyid": 31,
+            "responded": false,
+            "surveyId": 31
+        },
+        "answers": [],
+        "questionId": 34,
+        "leader": true
     }
 ]
 ```
@@ -828,37 +998,89 @@ Extra details here
 ```JSON
 [
     {
+        "createdDate": "2020-10-08 13:54:46",
+        "lastModifiedDate": "2020-10-08 13:54:46",
         "description": "product leadership",
         "survey": {
+            "createdDate": "2020-10-08 13:54:46",
+            "lastModifiedDate": "2020-10-08 13:54:46",
+            "surveyid": 4,
             "questions": [
                 {
-                    "body": "Leader Question 1",
+                    "createdDate": "2020-10-08 13:54:47",
+                    "lastModifiedDate": "2020-10-08 13:54:47",
+                    "body": "What is the current priority?",
                     "type": "TEXT",
                     "answers": [],
-                    "questionId": 56,
+                    "questionId": 14,
                     "leader": true
                 },
                 {
-                    "body": "Leader Question 2",
+                    "createdDate": "2020-10-08 13:54:47",
+                    "lastModifiedDate": "2020-10-08 13:54:47",
+                    "body": "What Blockers are you working on?",
                     "type": "TEXT",
                     "answers": [],
-                    "questionId": 58,
+                    "questionId": 19,
                     "leader": true
                 },
                 {
-                    "body": "Member Question 1",
+                    "createdDate": "2020-10-08 13:54:47",
+                    "lastModifiedDate": "2020-10-08 13:54:47",
+                    "body": "Are there any operational concerns the team should be aware of?",
                     "type": "TEXT",
                     "answers": [],
-                    "questionId": 59,
-                    "leader": false
+                    "questionId": 24,
+                    "leader": true
                 }
             ],
-            "surveyId": 46
+            "responded": false,
+            "surveyId": 4
         },
-        "contextId": 51
+        "contextId": 9
     },
-    {...},
-    {...}
+    {
+        "createdDate": "2020-10-08 13:54:46",
+        "lastModifiedDate": "2020-10-08 13:54:46",
+        "description": "delivery management",
+        "survey": {
+            "createdDate": "2020-10-08 13:54:46",
+            "lastModifiedDate": "2020-10-08 13:54:46",
+            "surveyid": 5,
+            "questions": [
+                {
+                    "createdDate": "2020-10-08 13:54:47",
+                    "lastModifiedDate": "2020-10-08 13:54:47",
+                    "body": "What is the current priority?",
+                    "type": "TEXT",
+                    "answers": [],
+                    "questionId": 15,
+                    "leader": true
+                },
+                {
+                    "createdDate": "2020-10-08 13:54:47",
+                    "lastModifiedDate": "2020-10-08 13:54:47",
+                    "body": "What Blockers are you working on?",
+                    "type": "TEXT",
+                    "answers": [],
+                    "questionId": 20,
+                    "leader": true
+                },
+                {
+                    "createdDate": "2020-10-08 13:54:47",
+                    "lastModifiedDate": "2020-10-08 13:54:47",
+                    "body": "Are there any operational concerns the team should be aware of?",
+                    "type": "TEXT",
+                    "answers": [],
+                    "questionId": 25,
+                    "leader": true
+                }
+            ],
+            "responded": false,
+            "surveyId": 5
+        },
+        "contextId": 10
+    }
 ]
 ```
 
@@ -868,7 +1090,6 @@ Extra details here
 <summary>POST http://apollo-b-api.herokuapp.com Create a new context </summary>
 
 Expected JSON in the body of the post
-
 
 ```JSON
 {
