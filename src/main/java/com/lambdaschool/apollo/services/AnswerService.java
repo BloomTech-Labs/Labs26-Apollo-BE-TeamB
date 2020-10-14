@@ -19,4 +19,6 @@ public interface AnswerService {
     List<Answer> findAllAnswers();
 
     List<Answer> findBySurveyId(long surveyid);
+
+    Answer findByQuestionIdAndUserId(long questionId, long userId);
 }
