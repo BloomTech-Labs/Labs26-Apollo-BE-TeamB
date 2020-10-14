@@ -103,7 +103,7 @@ public class HelperFunctions {
         questions = questionService.findAllBySurveyId(survey.getSurveyid());
 
         for (Question q : questions) {
-            if (answerService.findByQuestionIdAndUserId(q.getQuestionId(), user.getUserid()) != null) {
+            if (answerService.findByQuestionIdAndUserId(q.getQuestionid(), user.getUserid()) != null) {
                 survey.setHasResponded(true);
                 break;
             } else {
