@@ -96,19 +96,19 @@ Response
         "surveyid": 63,
         "questions": [
             {
-                "questionId": 64,
+                "questionid": 64,
                 "body": "Do you have any blockers?",
                 "type": "TEXT",
                 "leader": true
             },
             {
-                "questionId": 65,
+                "questionid": 65,
                 "body": "What is the teams priority?",
                 "type": "TEXT",
                 "leader": true
             },
             {
-                "questionId": 66,
+                "questionid": 66,
                 "body": "How is your weekend?",
                 "type": "TEXT",
                 "leader": false
@@ -158,19 +158,19 @@ GET Endpoint
                 "surveyid": 46,
                 "questions": [
                     {
-                        "questionId": 56,
+                        "questionid": 56,
                         "body": "Leader Question 1",
                         "type": "TEXT",
                         "leader": true
                     },
                     {
-                        "questionId": 58,
+                        "questionid": 58,
                         "body": "Leader Question 2",
                         "type": "TEXT",
                         "leader": true
                     },
                     {
-                        "questionId": 59,
+                        "questionid": 59,
                         "body": "Member Question 1",
                         "type": "TEXT",
                         "leader": false
@@ -209,19 +209,19 @@ GET Endpoint
             "surveyid": 63,
             "questions": [
                 {
-                    "questionId": 64,
+                    "questionid": 64,
                     "body": "Do you have any blockers?",
                     "type": "TEXT",
                     "leader": true
                 },
                 {
-                    "questionId": 65,
+                    "questionid": 65,
                     "body": "What is the teams priority?",
                     "type": "TEXT",
                     "leader": true
                 },
                 {
-                    "questionId": 66,
+                    "questionid": 66,
                     "body": "How is your weekend?",
                     "type": "TEXT",
                     "leader": false
@@ -234,19 +234,19 @@ GET Endpoint
                 "surveyid": 63,
                 "questions": [
                     {
-                        "questionId": 64,
+                        "questionid": 64,
                         "body": "Do you have any blockers?",
                         "type": "TEXT",
                         "leader": true
                     },
                     {
-                        "questionId": 65,
+                        "questionid": 65,
                         "body": "What is the teams priority?",
                         "type": "TEXT",
                         "leader": true
                     },
                     {
-                        "questionId": 66,
+                        "questionid": 66,
                         "body": "How is your weekend?",
                         "type": "TEXT",
                         "leader": false
@@ -306,19 +306,19 @@ Example:
                 "surveyid": 63,
                 "questions": [
                     {
-                        "questionId": 64,
+                        "questionid": 64,
                         "body": "Do you have any blockers?",
                         "type": "TEXT",
                         "leader": true
                     },
                     {
-                        "questionId": 65,
+                        "questionid": 65,
                         "body": "What is the teams priority?",
                         "type": "TEXT",
                         "leader": true
                     },
                     {
-                        "questionId": 66,
+                        "questionid": 66,
                         "body": "How is your weekend?",
                         "type": "TEXT",
                         "leader": false
@@ -331,19 +331,19 @@ Example:
                     "surveyid": 63,
                     "questions": [
                         {
-                            "questionId": 64,
+                            "questionid": 64,
                             "body": "Do you have any blockers?",
                             "type": "TEXT",
                             "leader": true
                         },
                         {
-                            "questionId": 65,
+                            "questionid": 65,
                             "body": "What is the teams priority?",
                             "type": "TEXT",
                             "leader": true
                         },
                         {
-                            "questionId": 66,
+                            "questionid": 66,
                             "body": "How is your weekend?",
                             "type": "TEXT",
                             "leader": false
@@ -373,19 +373,19 @@ Example:
                         "surveyid": 46,
                         "questions": [
                             {
-                                "questionId": 56,
+                                "questionid": 56,
                                 "body": "Leader Question 1",
                                 "type": "TEXT",
                                 "leader": true
                             },
                             {
-                                "questionId": 58,
+                                "questionid": 58,
                                 "body": "Leader Question 2",
                                 "type": "TEXT",
                                 "leader": true
                             },
                             {
-                                "questionId": 59,
+                                "questionid": 59,
                                 "body": "Member Question 1",
                                 "type": "TEXT",
                                 "leader": false
@@ -530,21 +530,21 @@ Example:
                 "body": "Leader Question 1",
                 "type": "TEXT",
                 "answers": [],
-                "questionId": 57,
+                "questionid": 57,
                 "leader": true
             },
             {
                 "body": "Leader Question 2",
                 "type": "TEXT",
                 "answers": [],
-                "questionId": 58,
+                "questionid": 58,
                 "leader": true
             },
             {
                 "body": "Member Question 1",
                 "type": "TEXT",
                 "answers": [],
-                "questionId": 59,
+                "questionid": 59,
                 "leader": false
             }
         ],
@@ -571,14 +571,14 @@ Example:
                 "body": "Member Question 2",
                 "type": "TEXT",
                 "answers": [],
-                "questionId": 60,
+                "questionid": 60,
                 "leader": false
             },
             {
                 "body": "Member Question 3",
                 "type": "TEXT",
                 "answers": [],
-                "questionId": 61,
+                "questionid": 61,
                 "leader": false
             }
         ],
@@ -702,7 +702,7 @@ Example:
 ```JSON
 [
     {
-        "questionId": 51,
+        "questionid": 51,
         "body": "Leader Question 1",
         "type": "TEXT",
         "survey": {
@@ -716,7 +716,7 @@ Example:
         "leader": true
     },
     {
-        "questionId": 52,
+        "questionid": 52,
         "body": "Leader Question 2",
         "type": "TEXT",
         "survey": {
@@ -730,7 +730,7 @@ Example:
         "leader": true
     },
     {
-        "questionId": 53,
+        "questionid": 53,
         "body": "Member Question 1",
         "type": "TEXT",
         "survey": {
@@ -744,7 +744,7 @@ Example:
         "leader": false
     },
     {
-        "questionId": 54,
+        "questionid": 54,
         "body": "Member Question 2",
         "type": "TEXT",
         "survey": {
@@ -758,7 +758,7 @@ Example:
         "leader": false
     },
     {
-        "questionId": 55,
+        "questionid": 55,
         "body": "Member Question 3",
         "type": "TEXT",
         "survey": {
@@ -798,7 +798,7 @@ Example:
         },
         "answers": [],
         "leader": true,
-        "questionId": 57
+        "questionid": 57
     },
     {
         "createdDate": "2020-10-02 13:26:25",
@@ -835,21 +835,21 @@ Extra details here
                     "body": "Leader Question 1",
                     "type": "TEXT",
                     "answers": [],
-                    "questionId": 56,
+                    "questionid": 56,
                     "leader": true
                 },
                 {
                     "body": "Leader Question 2",
                     "type": "TEXT",
                     "answers": [],
-                    "questionId": 58,
+                    "questionid": 58,
                     "leader": true
                 },
                 {
                     "body": "Member Question 1",
                     "type": "TEXT",
                     "answers": [],
-                    "questionId": 59,
+                    "questionid": 59,
                     "leader": false
                 }
             ],
@@ -955,7 +955,7 @@ This is a successful response
                     "answerId": 64
                 }
             ],
-            "questionId": 63,
+            "questionid": 63,
             "leader": true
         },
         {
@@ -967,14 +967,14 @@ This is a successful response
                     "answerId": 66
                 }
             ],
-            "questionId": 65,
+            "questionid": 65,
             "leader": true
         },
         {
             "body": "How is your weekend?",
             "type": "TEXT",
             "answers": [],
-            "questionId": 67,
+            "questionid": 67,
             "leader": false
         }
     ],
@@ -1020,7 +1020,7 @@ After submitting their answers, a user cannot add another answer or edit their e
             "lastModifiedDate": "2020-09-29 10:09:51",
             "body": "Do you have any blockers?",
             "type": "TEXT",
-            "questionId": 173,
+            "questionid": 173,
             "leader": true
         },
         "user": {
@@ -1040,7 +1040,7 @@ After submitting their answers, a user cannot add another answer or edit their e
             "lastModifiedDate": "2020-09-29 10:09:51",
             "body": "What is the teams priority?",
             "type": "TEXT",
-            "questionId": 175,
+            "questionid": 175,
             "leader": true
         },
         "user": {

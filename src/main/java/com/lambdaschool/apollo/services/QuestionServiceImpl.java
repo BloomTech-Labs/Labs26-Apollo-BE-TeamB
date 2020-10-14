@@ -59,20 +59,20 @@ public class QuestionServiceImpl implements QuestionService {
 
         Question newQuestion = new Question();
 
-        if (question.getQuestionId() != 0) {
-            Question oldQuestion = questionRepository.findById(question.getQuestionId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Question " + question.getQuestionId() + " Not Found"));
-            newQuestion.setQuestionId(question.getQuestionId());
+        if (question.getQuestionid() != 0) {
+            Question oldQuestion = questionRepository.findById(question.getQuestionid())
+                    .orElseThrow(() -> new ResourceNotFoundException("Question " + question.getQuestionid() + " Not Found"));
+            newQuestion.setQuestionid(question.getQuestionid());
         }
         newQuestion.setBody(question.getBody());
         newQuestion.setLeader(question.isLeader());
         newQuestion.setType(question.getType());
-        Survey survey = surveyService.findById(question.getSurvey().getSurveyId());
+        Survey survey = surveyService.findById(question.getSurvey().getSurveyid());
         if (survey != null) {
             newQuestion.setSurvey(survey);
             return questionRepository.save(newQuestion);
         } else {
-            throw new ResourceNotFoundException("Survey Id " + question.getSurvey().getSurveyId() + " Not Found");
+            throw new ResourceNotFoundException("Survey Id " + question.getSurvey().getSurveyid() + " Not Found");
         }
 
     }

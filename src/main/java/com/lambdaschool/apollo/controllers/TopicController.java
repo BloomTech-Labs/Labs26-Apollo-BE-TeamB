@@ -117,7 +117,7 @@ public class TopicController {
         newtopic.setTopicId(0);
         User user = userService.findByOKTAUserName(authentication.getName());
         newtopic.setOwner(user);
-        newtopic.getDefaultsurvey().setSurveyId(0);
+        newtopic.getDefaultsurvey().setSurveyid(0);
         newtopic = topicService.save(newtopic);
 
         return new ResponseEntity<>(newtopic, HttpStatus.CREATED);

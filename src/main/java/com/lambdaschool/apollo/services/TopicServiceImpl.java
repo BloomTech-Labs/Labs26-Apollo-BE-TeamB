@@ -106,8 +106,8 @@ public class TopicServiceImpl implements TopicService {
         newTopic.setFrequency(topic.getFrequency());
 
         // If updating topic go find the default survey and attach it.
-        if (topic.getDefaultsurvey().getSurveyId() != 0) {
-            Survey defaultSurvey = surveyService.findById(topic.getDefaultsurvey().getSurveyId());
+        if (topic.getDefaultsurvey().getSurveyid() != 0) {
+            Survey defaultSurvey = surveyService.findById(topic.getDefaultsurvey().getSurveyid());
             newTopic.setDefaultsurvey(defaultSurvey);
         // If new topic, create a new survey and add questions to it.
         } else {
@@ -121,7 +121,7 @@ public class TopicServiceImpl implements TopicService {
         newTopic.getUsers().clear();
 
         for (Survey survey :topic.getSurveysrequests()) {
-            Survey surveyReq = surveyService.findById(survey.getSurveyId());
+            Survey surveyReq = surveyService.findById(survey.getSurveyid());
             if (surveyReq != null) {
                 newTopic.getSurveysrequests().add(surveyReq);
             }
