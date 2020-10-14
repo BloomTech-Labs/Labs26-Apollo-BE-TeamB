@@ -77,7 +77,7 @@ public class SurveyServiceImpl implements SurveyService {
     @Override
     public void removeQuestion(Survey survey, long id) {
         for (Question q : survey.getQuestions()) {
-            if (q.getQuestionId() == id) {
+            if (q.getQuestionid() == id) {
                 survey.getQuestions().remove(q);
                 return;
             }

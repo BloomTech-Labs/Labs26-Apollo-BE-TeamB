@@ -4,7 +4,6 @@ import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
 import com.lambdaschool.apollo.models.Question;
 import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.repository.QuestionRepository;
-import com.lambdaschool.apollo.repository.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,7 +64,7 @@ public class QuestionServiceImpl implements QuestionService {
         // & also remove it via the repository. Doing this came back with the same error message regardless of if
         // I was removing with or without this new service implementation on survey
 
-        surveyService.removeQuestion(question.getSurvey(), question.getQuestionId());
+        surveyService.removeQuestion(question.getSurvey(), question.getQuestionid());
         questionRepository.delete(question);
     }
 
