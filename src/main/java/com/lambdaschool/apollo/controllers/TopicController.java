@@ -80,8 +80,12 @@ public class TopicController {
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
     @GetMapping(value = "/topic/{topicid}", produces = "application/json")
-    public ResponseEntity<?> getTopicById(@PathVariable Long topicid) {
+    public ResponseEntity<?> getTopicById(Authentication authentication, @PathVariable Long topicid) {
         Topic myTopic = topicService.findTopicById(topicid);
+        List<Survey> surveyRequests = myTopic.getSurveysrequests();
+        for (Survey surveyRequest : surveyRequests) {
+            helperFunctions.hasResponded(surveyRequest, userService.findByOKTAUserName(authentication.getName()));
+        }
         return new ResponseEntity<>(myTopic, HttpStatus.OK);
     }
 
