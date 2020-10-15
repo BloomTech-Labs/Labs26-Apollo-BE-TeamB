@@ -5,6 +5,7 @@ import com.lambdaschool.apollo.ApolloApplication;
 import com.lambdaschool.apollo.models.*;
 import com.lambdaschool.apollo.services.AnswerService;
 import com.lambdaschool.apollo.services.SurveyService;
+import com.lambdaschool.apollo.services.UserService;
 import com.lambdaschool.apollo.views.QuestionBody;
 import com.lambdaschool.apollo.views.QuestionType;
 import com.lambdaschool.apollo.views.SurveyQuestion;
@@ -36,6 +37,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -52,15 +54,17 @@ public class SurveyControllerTest {
     private SurveyService surveyService;
 
     private List<Survey> surveyList;
+    private User testUser;
 
     @Before
     public void setUp() throws Exception {
         surveyList = new ArrayList<>();
-        User testUser = new User();
+        testUser = new User();
         testUser.setUsername("admin");
         testUser.setUserid(4);
 
         Topic t1 = new Topic(); // id - 10
+        t1.setOwner(testUser);
         t1.setTopicId(10);
 
         Survey s1 = new Survey(new Topic()); // id - 9
@@ -70,6 +74,8 @@ public class SurveyControllerTest {
 
         Question question1 = new Question("Leader Question 1", true, QuestionType.TEXT, s1);
         question1.setQuestionid(29);
+        Question question2 = new Question("Leader Question 2", true, QuestionType.TEXT, s1);
+        question2.setQuestionid(30);
         List<Answer> answers1 = new ArrayList<>();
         Answer testAnswer = new Answer("test answer 1", question1, testUser, s1);
         testAnswer.setAnswerId(34);
@@ -77,6 +83,7 @@ public class SurveyControllerTest {
         question1.setAnswers(answers1);
         List<Question> qList = new ArrayList<>();
         qList.add(question1);
+        qList.add(question2);
         s1.setQuestions(qList);
 
         Survey s2 = new Survey(new Topic()); // id - 11
@@ -124,22 +131,18 @@ public class SurveyControllerTest {
 
     @Test
     public void createNewResponse() throws Exception {
-        // String apiUrl = "/surveys/response";
+        String apiUrl = "/surveys/response";
 
-        // Mockito.when(answerService.save(any(QuestionBody.class), any(User.class))).thenReturn(null);
+        Mockito.when(surveyService.findById(9L)).thenReturn(surveyList.get(0));
 
-        // for (Survey s: surveyService.findAllSurveys()) {
-        //     System.out.println(s.getSurveyId());
-        // }
+        RequestBuilder rb = MockMvcRequestBuilders.post(apiUrl)
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .content("[{\"questionid\":30, \"body\": \"test response\"}]");
 
-        // RequestBuilder rb = MockMvcRequestBuilders.post(apiUrl)
-        //     .contentType(MediaType.APPLICATION_JSON)
-        //     .accept(MediaType.APPLICATION_JSON)
-        //     .content("[{\"questionid\":60, \"body\": \"test response\"}]");
-        //
-        // mockMvc.perform(rb)
-        //     .andExpect(status().isCreated())
-        //     .andDo(MockMvcResultHandlers.print());
+        mockMvc.perform(rb)
+            .andExpect(status().isCreated())
+            .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
