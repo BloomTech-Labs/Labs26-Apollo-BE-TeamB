@@ -73,4 +73,15 @@ public class SurveyServiceImpl implements SurveyService {
         surveyRepository.findAll().iterator().forEachRemaining(list::add);
         return list;
     }
+
+    @Override
+    public void removeQuestion(Survey survey, long id) {
+        for (Question q : survey.getQuestions()) {
+            if (q.getQuestionid() == id) {
+                survey.getQuestions().remove(q);
+                return;
+            }
+        }
+        throw new ResourceNotFoundException("Question " + id + " Not Found");
+    }
 }

@@ -1,5 +1,7 @@
 package com.lambdaschool.apollo.controllers;
 
+import com.lambdaschool.apollo.handlers.HelperFunctions;
+import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.models.Topic;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.services.TopicService;
@@ -30,6 +32,9 @@ public class TopicController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private HelperFunctions helperFunctions;
+
     @ApiOperation(value = "Get all topics of current user ")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list", response = Topic.class, responseContainer = "List"),
@@ -42,6 +47,13 @@ public class TopicController {
     public ResponseEntity<?> listUserTopics(Authentication authentication) {
         List<Topic> myTopics = new ArrayList<>();
         myTopics = topicService.findTopicsByUser(authentication.getName());
+        List<Survey> surveyRequests = new ArrayList<>();
+        myTopics.iterator().forEachRemaining(topic -> {
+            surveyRequests.addAll(topic.getSurveysrequests());
+        });
+        for (Survey surveyRequest : surveyRequests) {
+            helperFunctions.hasResponded(surveyRequest, userService.findByOKTAUserName(authentication.getName()));
+        }
         return new ResponseEntity<>(myTopics, HttpStatus.OK);
     }
 
@@ -68,8 +80,12 @@ public class TopicController {
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
     @GetMapping(value = "/topic/{topicid}", produces = "application/json")
-    public ResponseEntity<?> getTopicById(@PathVariable Long topicid) {
+    public ResponseEntity<?> getTopicById(Authentication authentication, @PathVariable Long topicid) {
         Topic myTopic = topicService.findTopicById(topicid);
+        List<Survey> surveyRequests = myTopic.getSurveysrequests();
+        for (Survey surveyRequest : surveyRequests) {
+            helperFunctions.hasResponded(surveyRequest, userService.findByOKTAUserName(authentication.getName()));
+        }
         return new ResponseEntity<>(myTopic, HttpStatus.OK);
     }
 
@@ -105,7 +121,7 @@ public class TopicController {
         newtopic.setTopicId(0);
         User user = userService.findByOKTAUserName(authentication.getName());
         newtopic.setOwner(user);
-        newtopic.getDefaultsurvey().setSurveyId(0);
+        newtopic.getDefaultsurvey().setSurveyid(0);
         newtopic = topicService.save(newtopic);
 
         return new ResponseEntity<>(newtopic, HttpStatus.CREATED);

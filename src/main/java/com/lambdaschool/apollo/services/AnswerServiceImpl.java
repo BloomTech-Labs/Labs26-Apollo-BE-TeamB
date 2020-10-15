@@ -59,8 +59,8 @@ public class AnswerServiceImpl implements AnswerService {
         } else {
             throw new ResourceNotFoundException("Question Id " + qb.getQuestionid() + " Not Found");
         }
-        if (user == userService.findUserById(user.getUserid())) {
-            newAnswer.setUser(user);
+        if (user.getUserid() == userService.findUserById(user.getUserid()).getUserid()) {
+            newAnswer.setUser(userService.findUserById(user.getUserid()));
         } else {
             throw new ResourceNotFoundException("User Id " + user.getUserid() + " Not Found");
         }
@@ -68,7 +68,7 @@ public class AnswerServiceImpl implements AnswerService {
         if (survey != null) {
             newAnswer.setSurvey(survey);
         } else {
-            throw new ResourceNotFoundException("Survey Id " + question.getSurvey().getSurveyId() + "Not Found");
+            throw new ResourceNotFoundException("Survey Id " + question.getSurvey().getSurveyid() + "Not Found");
         }
 
         answerRepository.save(newAnswer);
@@ -100,5 +100,15 @@ public class AnswerServiceImpl implements AnswerService {
     public List<Answer> findBySurveyId(long surveyid) {
         List<Answer> answers = answerRepository.findBySurvey_surveyid(surveyid);
         return answers;
+    }
+
+    @Override
+    public Answer findByQuestionIdAndUserId(long questionId, long userId) {
+        Answer answer = answerRepository.findAnswerByQuestionIdAndUserId(questionId, userId);
+        if (answer == null) {
+            return null;
+        } else {
+            return answer;
+        }
     }
 }

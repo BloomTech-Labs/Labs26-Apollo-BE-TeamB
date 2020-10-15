@@ -1,6 +1,5 @@
 package com.lambdaschool.apollo.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lambdaschool.apollo.views.TopicFrequency;
 import io.swagger.annotations.ApiModel;
@@ -105,6 +104,8 @@ public class Topic extends Auditable {
     }
 
     public List<Survey> getSurveysrequests() {
+
+        surveysrequests.sort((Survey s1, Survey s2) ->s2.getCreatedDate().compareTo(s1.getCreatedDate()));
         return surveysrequests;
     }
 

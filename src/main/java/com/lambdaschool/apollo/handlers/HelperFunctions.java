@@ -100,13 +100,14 @@ public class HelperFunctions {
 
     public void hasResponded(Survey survey, User user) {
         List<Question> questions;
-        questions = questionService.findAllBySurveyId(survey.getSurveyId());
+        questions = questionService.findAllBySurveyId(survey.getSurveyid());
 
         for (Question q : questions) {
-            for (Answer a : q.getAnswers()) {
-                if (a.getUser() == user) {
-                    survey.setHasResponded(true);
-                }
+            if (answerService.findByQuestionIdAndUserId(q.getQuestionid(), user.getUserid()) != null) {
+                survey.setHasResponded(true);
+                break;
+            } else {
+                continue;
             }
         }
     }
@@ -115,7 +116,7 @@ public class HelperFunctions {
         List<Question> questions;
         for (Survey s : surveys) {
             // only get questions that are associated with the survey
-            questions = questionService.findAllBySurveyId(s.getSurveyId());
+            questions = questionService.findAllBySurveyId(s.getSurveyid());
             // if the user has is tied to an answer that lives in questions than
             // has responded is set to true
             for (Question q : questions) {

@@ -71,11 +71,11 @@ public class ContextServiceImplTest {
     public void da_saveUpdateSurvey() {
         Context context = contextService.findById(28);
         Survey survey = new Survey();
-        survey.setSurveyId(22);
+        survey.setSurveyid(22);
         context.setSurvey(survey);
         contextService.save(context);
 
-        assertEquals(22, contextService.findById(28).getSurvey().getSurveyId());
+        assertEquals(22, contextService.findById(28).getSurvey().getSurveyid());
     }
 
     @Test
@@ -86,7 +86,7 @@ public class ContextServiceImplTest {
         List<Question> questionList = new ArrayList<>();
         questionList.add(new Question("New Question", true, QuestionType.TEXT, survey));
         Question oldQuestion = new Question("Old Question", true, QuestionType.TEXT, survey);
-        oldQuestion.setQuestionId(29);
+        oldQuestion.setQuestionid(29);
         questionList.add(oldQuestion);
         survey.setQuestions(questionList);
 

@@ -49,7 +49,7 @@ Ok so now that you have copied that idtoken property head over to postman, and i
 
 <details>
 
-<summary>POST: http://apollo-b-api.herokuapp.com/topics/new - create a new topic</summary>
+<summary>POST: https://apollo-b-api.herokuapp.com/topics/new - create a new topic</summary>
 
 Creates a Topic with the current user as the owner.
 
@@ -96,19 +96,19 @@ Response
         "surveyid": 63,
         "questions": [
             {
-                "questionId": 64,
+                "questionid": 64,
                 "body": "Do you have any blockers?",
                 "type": "TEXT",
                 "leader": true
             },
             {
-                "questionId": 65,
+                "questionid": 65,
                 "body": "What is the teams priority?",
                 "type": "TEXT",
                 "leader": true
             },
             {
-                "questionId": 66,
+                "questionid": 66,
                 "body": "How is your weekend?",
                 "type": "TEXT",
                 "leader": false
@@ -124,7 +124,7 @@ Response
 
 <details>
 
-<summary>DELETE: http://apollo-b-api.herokuapp.com/topics/leave/{topicid} - leave topic</summary>
+<summary>DELETE: https://apollo-b-api.herokuapp.com/topics/leave/{topicid} - leave topic</summary>
 
 User leaves topic.
 
@@ -132,7 +132,7 @@ User leaves topic.
 
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/topics/topics - Get all topics for a user</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/topics/topics - Get all topics for a user</summary>
 
 Returns all topics that a user is connected to, either as an owner or as a member
 
@@ -158,19 +158,19 @@ GET Endpoint
                 "surveyid": 46,
                 "questions": [
                     {
-                        "questionId": 56,
+                        "questionid": 56,
                         "body": "Leader Question 1",
                         "type": "TEXT",
                         "leader": true
                     },
                     {
-                        "questionId": 58,
+                        "questionid": 58,
                         "body": "Leader Question 2",
                         "type": "TEXT",
                         "leader": true
                     },
                     {
-                        "questionId": 59,
+                        "questionid": 59,
                         "body": "Member Question 1",
                         "type": "TEXT",
                         "leader": false
@@ -209,19 +209,19 @@ GET Endpoint
             "surveyid": 63,
             "questions": [
                 {
-                    "questionId": 64,
+                    "questionid": 64,
                     "body": "Do you have any blockers?",
                     "type": "TEXT",
                     "leader": true
                 },
                 {
-                    "questionId": 65,
+                    "questionid": 65,
                     "body": "What is the teams priority?",
                     "type": "TEXT",
                     "leader": true
                 },
                 {
-                    "questionId": 66,
+                    "questionid": 66,
                     "body": "How is your weekend?",
                     "type": "TEXT",
                     "leader": false
@@ -234,19 +234,19 @@ GET Endpoint
                 "surveyid": 63,
                 "questions": [
                     {
-                        "questionId": 64,
+                        "questionid": 64,
                         "body": "Do you have any blockers?",
                         "type": "TEXT",
                         "leader": true
                     },
                     {
-                        "questionId": 65,
+                        "questionid": 65,
                         "body": "What is the teams priority?",
                         "type": "TEXT",
                         "leader": true
                     },
                     {
-                        "questionId": 66,
+                        "questionid": 66,
                         "body": "How is your weekend?",
                         "type": "TEXT",
                         "leader": false
@@ -263,25 +263,33 @@ GET Endpoint
 
 <details>
 
-<summary>POST: http://appollo-b-api.herokuapp.com/topics/topic/{joinCode} Current user joins a Topic.</summary>
+<summary>POST: https://appollo-b-api.herokuapp.com/topics/topic/{joinCode} Current user joins a Topic.</summary>
 
-Example: http://appollo-b-api.herokuapp.com/topics/topic/lRQlkNGkg
+Example: https://appollo-b-api.herokuapp.com/topics/topic/lRQlkNGkg
 
 Returns 200 Success message
 
 </details>
 
 <details>
-<summary>GET: http://appollo-b-api.herokuapp.com/topics/all Returns list of all Topics regardless of user</summary>
+<summary>GET: https://appollo-b-api.herokuapp.com/topics/all Returns list of all Topics regardless of user</summary>
 
 N/A
 
 </details>
 
 <details>
-<summary>GET: http://localhost:2019/topics/topic/{topicid} Returns a specific topic</summary>
+<summary>GET: https://appollo-b-api.herokuapp.com/topics/topic/{topicid} Returns a specific topic</summary>
 
-Example : http://appollo-b-api.herokuapp.com/topics/topic/37
+Example : https://appollo-b-api.herokuapp.com/topics/topic/37
+
+</details>
+
+<details>
+
+<summary>DELETE: https://apollo-b-api.herokuapp.com/topics/topic/{topicid} - delete topic</summary>
+
+Delete topic as well as all surveys, questions, responses associated with it.
 
 </details>
 
@@ -289,7 +297,7 @@ Example : http://appollo-b-api.herokuapp.com/topics/topic/37
 
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/users/getuserinfo Returns user info included topics of which they are a member</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/users/getuserinfo Returns user info included topics of which they are a member</summary>
 
 Example:
 
@@ -306,19 +314,19 @@ Example:
                 "surveyid": 63,
                 "questions": [
                     {
-                        "questionId": 64,
+                        "questionid": 64,
                         "body": "Do you have any blockers?",
                         "type": "TEXT",
                         "leader": true
                     },
                     {
-                        "questionId": 65,
+                        "questionid": 65,
                         "body": "What is the teams priority?",
                         "type": "TEXT",
                         "leader": true
                     },
                     {
-                        "questionId": 66,
+                        "questionid": 66,
                         "body": "How is your weekend?",
                         "type": "TEXT",
                         "leader": false
@@ -331,19 +339,19 @@ Example:
                     "surveyid": 63,
                     "questions": [
                         {
-                            "questionId": 64,
+                            "questionid": 64,
                             "body": "Do you have any blockers?",
                             "type": "TEXT",
                             "leader": true
                         },
                         {
-                            "questionId": 65,
+                            "questionid": 65,
                             "body": "What is the teams priority?",
                             "type": "TEXT",
                             "leader": true
                         },
                         {
-                            "questionId": 66,
+                            "questionid": 66,
                             "body": "How is your weekend?",
                             "type": "TEXT",
                             "leader": false
@@ -373,19 +381,19 @@ Example:
                         "surveyid": 46,
                         "questions": [
                             {
-                                "questionId": 56,
+                                "questionid": 56,
                                 "body": "Leader Question 1",
                                 "type": "TEXT",
                                 "leader": true
                             },
                             {
-                                "questionId": 58,
+                                "questionid": 58,
                                 "body": "Leader Question 2",
                                 "type": "TEXT",
                                 "leader": true
                             },
                             {
-                                "questionId": 59,
+                                "questionid": 59,
                                 "body": "Member Question 1",
                                 "type": "TEXT",
                                 "leader": false
@@ -411,7 +419,7 @@ Example:
 ## Surveys
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/surveys/all Returns list of surveys</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/surveys/all Returns list of surveys</summary>
 
 ```JSON
 [
@@ -530,21 +538,21 @@ Example:
                 "body": "Leader Question 1",
                 "type": "TEXT",
                 "answers": [],
-                "questionId": 57,
+                "questionid": 57,
                 "leader": true
             },
             {
                 "body": "Leader Question 2",
                 "type": "TEXT",
                 "answers": [],
-                "questionId": 58,
+                "questionid": 58,
                 "leader": true
             },
             {
                 "body": "Member Question 1",
                 "type": "TEXT",
                 "answers": [],
-                "questionId": 59,
+                "questionid": 59,
                 "leader": false
             }
         ],
@@ -571,14 +579,14 @@ Example:
                 "body": "Member Question 2",
                 "type": "TEXT",
                 "answers": [],
-                "questionId": 60,
+                "questionid": 60,
                 "leader": false
             },
             {
                 "body": "Member Question 3",
                 "type": "TEXT",
                 "answers": [],
-                "questionId": 61,
+                "questionid": 61,
                 "leader": false
             }
         ],
@@ -668,7 +676,7 @@ Example:
 
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/surveys/survey/{id} Returns survey by id</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/surveys/survey/{id} Returns survey by id</summary>
 
 ```JSON
 {
@@ -697,12 +705,12 @@ Example:
 ## Questions
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/questions/all Returns list of questions</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/questions/all Returns list of questions</summary>
 
 ```JSON
 [
     {
-        "questionId": 51,
+        "questionid": 51,
         "body": "Leader Question 1",
         "type": "TEXT",
         "survey": {
@@ -716,7 +724,7 @@ Example:
         "leader": true
     },
     {
-        "questionId": 52,
+        "questionid": 52,
         "body": "Leader Question 2",
         "type": "TEXT",
         "survey": {
@@ -730,7 +738,7 @@ Example:
         "leader": true
     },
     {
-        "questionId": 53,
+        "questionid": 53,
         "body": "Member Question 1",
         "type": "TEXT",
         "survey": {
@@ -744,7 +752,7 @@ Example:
         "leader": false
     },
     {
-        "questionId": 54,
+        "questionid": 54,
         "body": "Member Question 2",
         "type": "TEXT",
         "survey": {
@@ -758,7 +766,7 @@ Example:
         "leader": false
     },
     {
-        "questionId": 55,
+        "questionid": 55,
         "body": "Member Question 3",
         "type": "TEXT",
         "survey": {
@@ -780,7 +788,7 @@ Example:
 
 <details>
 
-<summary>GET: http://apollo-b-api.herokuapp.com/questions/leader/{surveyid} Returns list of leader questions for a given survey</summary>
+<summary>GET: https://apollo-b-api.herokuapp.com/questions/leader/{surveyid} Returns list of leader questions for a given survey</summary>
 
 ```JSON
 [
@@ -798,7 +806,7 @@ Example:
         },
         "answers": [],
         "leader": true,
-        "questionId": 57
+        "questionid": 57
     },
     {
         "createdDate": "2020-10-02 13:26:25",
@@ -821,7 +829,7 @@ Example:
 ## Context
 
 <details>
-<summary> GET http://apollo-b-api.herokuapp.com/contexts/contexts - Returns all of the contexts</summary>
+<summary> GET https://apollo-b-api.herokuapp.com/contexts/contexts - Returns all of the contexts</summary>
 
 Extra details here
 
@@ -835,21 +843,21 @@ Extra details here
                     "body": "Leader Question 1",
                     "type": "TEXT",
                     "answers": [],
-                    "questionId": 56,
+                    "questionid": 56,
                     "leader": true
                 },
                 {
                     "body": "Leader Question 2",
                     "type": "TEXT",
                     "answers": [],
-                    "questionId": 58,
+                    "questionid": 58,
                     "leader": true
                 },
                 {
                     "body": "Member Question 1",
                     "type": "TEXT",
                     "answers": [],
-                    "questionId": 59,
+                    "questionid": 59,
                     "leader": false
                 }
             ],
@@ -865,7 +873,7 @@ Extra details here
 </details>
 
 <details>
-<summary>POST http://apollo-b-api.herokuapp.com Create a new context </summary>
+<summary>POST https://apollo-b-api.herokuapp.com Create a new context </summary>
 
 Expected JSON in the body of the post
 
@@ -906,8 +914,8 @@ Expected JSON in the body of the post
 ## Survey Requests
 
 <details>
-<summary> POST  http://apollo-b-api.herokuapp.com/surveys/topic/{topicid} - Create Survey Request</summary>
-Example - http://apollo-b-api.herokuapp.com/surveys/topic/37 - (this endpoint won't work in this patch because the owner is username 'admin' with userid of 4)
+<summary> POST  https://apollo-b-api.herokuapp.com/surveys/topic/{topicid} - Create Survey Request</summary>
+Example - https://apollo-b-api.herokuapp.com/surveys/topic/37 - (this endpoint won't work in this patch because the owner is username 'admin' with userid of 4)
 To test locally or with the api - I recommend logging in as a test user and creating a topic, then using the topic id to create a survey request
 If you try to make this request not being the owner of the topic you will get this error message - ("Current user not authorized to make this request")
 
@@ -955,7 +963,7 @@ This is a successful response
                     "answerId": 64
                 }
             ],
-            "questionId": 63,
+            "questionid": 63,
             "leader": true
         },
         {
@@ -967,14 +975,14 @@ This is a successful response
                     "answerId": 66
                 }
             ],
-            "questionId": 65,
+            "questionid": 65,
             "leader": true
         },
         {
             "body": "How is your weekend?",
             "type": "TEXT",
             "answers": [],
-            "questionId": 67,
+            "questionid": 67,
             "leader": false
         }
     ],
@@ -985,7 +993,7 @@ This is a successful response
 </details>
 
 <details>
-<summary>  POST http://apollo-b-api.herokuapp.com/surveys/response - Answer a survey request </summary>
+<summary>  POST https://apollo-b-api.herokuapp.com/surveys/response - Answer a survey request </summary>
 Users that aren't owners of a topic cannot answer leader questions and topic owner cannot answer request questions
 Users that aren't members of a topic cannot answer request questions from that topic
 After submitting their answers, a user cannot add another answer or edit their existing answer
@@ -1007,7 +1015,7 @@ After submitting their answers, a user cannot add another answer or edit their e
 </details>
 
 <details>
-<summary>  GET http://apollo-b-api.herokuapp.com/surveys/survey/172/responses - Returns a list of all answers to a Survey </summary>
+<summary>  GET https://apollo-b-api.herokuapp.com/surveys/survey/172/responses - Returns a list of all answers to a Survey </summary>
 
 ```JSON
 [
@@ -1020,7 +1028,7 @@ After submitting their answers, a user cannot add another answer or edit their e
             "lastModifiedDate": "2020-09-29 10:09:51",
             "body": "Do you have any blockers?",
             "type": "TEXT",
-            "questionId": 173,
+            "questionid": 173,
             "leader": true
         },
         "user": {
@@ -1040,7 +1048,7 @@ After submitting their answers, a user cannot add another answer or edit their e
             "lastModifiedDate": "2020-09-29 10:09:51",
             "body": "What is the teams priority?",
             "type": "TEXT",
-            "questionId": 175,
+            "questionid": 175,
             "leader": true
         },
         "user": {
