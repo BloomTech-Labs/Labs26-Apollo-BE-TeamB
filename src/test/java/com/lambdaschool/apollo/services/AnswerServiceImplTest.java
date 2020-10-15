@@ -1,6 +1,7 @@
 package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.ApolloApplication;
+import com.lambdaschool.apollo.models.Answer;
 import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.views.QuestionBody;
 import org.junit.After;
@@ -47,7 +48,7 @@ public class AnswerServiceImplTest {
 
     @Test
     public void c_save() {
-        QuestionBody qb = new QuestionBody("test answer 2", 29);
+        QuestionBody qb = new QuestionBody("test answer 2", 30);
         User u = userService.findUserById(4);
         answerService.save(qb, u);
         assertEquals(2, answerService.findAllAnswers().size());
@@ -66,5 +67,10 @@ public class AnswerServiceImplTest {
     @Test
     public void f_findBySurveyId() {
         assertEquals(2, answerService.findBySurveyId(9).size());
+    }
+
+    @Test
+    public void g_findByQuestionIdAndUserId() {
+        assertEquals("test answer 1", answerService.findByQuestionIdAndUserId(29, 4).getBody());
     }
 }
