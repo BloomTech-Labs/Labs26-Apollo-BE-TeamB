@@ -8,6 +8,7 @@ import com.lambdaschool.apollo.services.SurveyService;
 import com.lambdaschool.apollo.views.QuestionBody;
 import com.lambdaschool.apollo.views.QuestionType;
 import com.lambdaschool.apollo.views.SurveyQuestion;
+import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
@@ -20,12 +21,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +44,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
 public class SurveyControllerTest {
     @Autowired
+    private WebApplicationContext webApplicationContext;
+
     private MockMvc mockMvc;
 
     @MockBean
@@ -50,38 +56,50 @@ public class SurveyControllerTest {
     @Before
     public void setUp() throws Exception {
         surveyList = new ArrayList<>();
+        User testUser = new User();
+        testUser.setUsername("admin");
+        testUser.setUserid(4);
 
         Topic t1 = new Topic(); // id - 10
         t1.setTopicId(10);
 
         Survey s1 = new Survey(new Topic()); // id - 9
-        s1.setSurveyId(9);
+        s1.setSurveyid(9);
         s1.setTopic(t1);
         surveyList.add(s1);
 
-        // Question question1 = new Question("Leader Question 1", true, QuestionType.TEXT, s1);
-        // List<Answer> answers1 = new ArrayList<>();
-        // answers1.add(new Answer("test body", question1, new User(), s1));
-        // question1.setAnswers(answers1);
-        // List<Question> test = new ArrayList<>();
-        // test.add(question1);
-        // s1.setQuestions(test);
+        Question question1 = new Question("Leader Question 1", true, QuestionType.TEXT, s1);
+        question1.setQuestionid(29);
+        List<Answer> answers1 = new ArrayList<>();
+        Answer testAnswer = new Answer("test answer 1", question1, testUser, s1);
+        testAnswer.setAnswerId(34);
+        answers1.add(testAnswer);
+        question1.setAnswers(answers1);
+        List<Question> qList = new ArrayList<>();
+        qList.add(question1);
+        s1.setQuestions(qList);
 
         Survey s2 = new Survey(new Topic()); // id - 11
-        s2.setSurveyId(11);
+        s2.setSurveyid(11);
         surveyList.add(s2);
 
         Survey s3 = new Survey(new Topic()); // id - 13
-        s3.setSurveyId(13);
+        s3.setSurveyid(13);
         surveyList.add(s3);
 
         Survey s4 = new Survey(new Topic()); // id - 15
-        s4.setSurveyId(15);
+        s4.setSurveyid(15);
         surveyList.add(s4);
 
         Survey s5 = new Survey(new Topic()); // id - 17
-        s5.setSurveyId(17);
+        s5.setSurveyid(17);
         surveyList.add(s5);
+
+        RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
+
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+            .apply(SecurityMockMvcConfigurers.springSecurity())
+            .build();
     }
 
     @After
@@ -180,20 +198,21 @@ public class SurveyControllerTest {
 
     @Test
     public void getResponses() throws Exception {
-        // String apiUrl = "/surveys/survey/9/responses";
-        //
-        // Mockito.when(surveyService.findById(9).getQuestions().get(0).getAnswers()).thenReturn(surveyList.get(0).getQuestions().get(0).getAnswers());
-        //
-        // RequestBuilder rb = MockMvcRequestBuilders.get(apiUrl);
-        // MvcResult r = mockMvc.perform(rb).andReturn();
-        // String tr = r.getResponse().getContentAsString();
-        //
-        // ObjectMapper mapper = new ObjectMapper();
-        // String er = mapper.writeValueAsString(surveyList.get(0).getQuestions().get(0).getAnswers());
-        //
-        // System.out.println("Expect: " + er);
-        // System.out.println("Actual: " + tr);
-        //
-        // assertEquals("Rest API Returns List", er, tr);
+        String apiUrl = "/surveys/survey/9/responses";
+
+        Survey survey = surveyList.get(0);
+        List<Answer> responses = survey.getQuestions().get(0).getAnswers();
+
+        RequestBuilder rb = MockMvcRequestBuilders.get(apiUrl);
+        MvcResult r = mockMvc.perform(rb).andReturn();
+        String tr = r.getResponse().getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        String er = mapper.writeValueAsString(responses);
+
+        System.out.println("Expect: " + er);
+        System.out.println("Actual: " + tr);
+
+        assertEquals("Rest API Returns List", er, tr);
     }
 }
