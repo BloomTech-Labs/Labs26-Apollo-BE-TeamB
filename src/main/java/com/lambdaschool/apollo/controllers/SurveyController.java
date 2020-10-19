@@ -123,7 +123,7 @@ public class SurveyController {
     }
 
     @GetMapping(value = "/survey/{surveyid}", produces = {"application/json"})
-    public ResponseEntity<?> getAllSurveys(Authentication authentication, @PathVariable long surveyid) {
+    public ResponseEntity<?> getSurveyById(Authentication authentication, @PathVariable long surveyid) {
         Survey survey = surveyService.findById(surveyid);
 
         helperFunctions.hasResponded(survey, userService.findByOKTAUserName(authentication.getName()));
