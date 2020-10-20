@@ -826,6 +826,15 @@ Example:
 
 </details>
 
+<details>
+
+<summary>DELETE: https://apollo-b-api.herokuapp.com/questions/question/{quesetionid} - delete an question</summary>
+
+Delete the specific question (can be only performed by the topic owner)
+
+</details>
+
+
 ## Context
 
 <details>
