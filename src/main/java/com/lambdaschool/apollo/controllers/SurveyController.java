@@ -153,4 +153,18 @@ public class SurveyController {
 
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
+
+    @ApiOperation(value = "Delete a survey request")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully delete the survey request"),
+            @ApiResponse(code = 401, message = "Not authorized"),
+            @ApiResponse(code = 404, message = "Survey id not found/Not authorized to delete/Cannot delete default survey"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
+    @DeleteMapping(value = "/survey/{surveyid}")
+    public ResponseEntity<?> deleteSurveyRequest(@PathVariable long surveyid, Authentication authentication) {
+        User user = userService.findByOKTAUserName(authentication.getName());
+        surveyService.delete(surveyid, user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
