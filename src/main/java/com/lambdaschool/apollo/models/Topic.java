@@ -33,7 +33,7 @@ public class Topic extends Auditable {
     private String title;
 
     @ApiModelProperty(name = "Owner", value = "Owner id for this topic")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties(value = {"ownedtopics", "topics", "primaryemail", "roles", ""}, allowSetters = true)
     private User owner;
@@ -42,7 +42,7 @@ public class Topic extends Auditable {
     private TopicFrequency frequency;
 
     @ApiModelProperty(name = "Survey id", value = "Default Survey Id used for this topic")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "surveyid")
     @JsonIgnoreProperties(value = {"defaulttopic", "topic"}, allowSetters = true)
     private Survey defaultsurvey;
