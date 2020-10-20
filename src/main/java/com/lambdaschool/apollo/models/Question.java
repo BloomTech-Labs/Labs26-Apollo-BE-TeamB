@@ -64,7 +64,7 @@ public class Question extends Auditable {
      * A survey can have many questions.
      */
     @ApiModelProperty(name = "survey", value = "survey attached to this question")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "surveyid")
     @JsonIgnoreProperties(value = {"questions", "topic", "defaulttopic"}, allowSetters = true)
     private Survey survey;
