@@ -1072,3 +1072,10 @@ After submitting their answers, a user cannot add another answer or edit their e
 ## Messages
 
 ## Answers
+<details>
+
+<summary>DELETE: https://apollo-b-api.herokuapp.com/answers/answer/{answerid} - delete an answer</summary>
+
+Delete the specific answer/response (can be only performed by the answer/response creator)
+
+</details>
