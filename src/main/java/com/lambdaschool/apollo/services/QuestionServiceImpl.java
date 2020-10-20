@@ -3,6 +3,7 @@ package com.lambdaschool.apollo.services;
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
 import com.lambdaschool.apollo.models.Question;
 import com.lambdaschool.apollo.models.Survey;
+import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,26 +47,18 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Transactional
     @Override
-    public void delete(long id) {
+    public void delete(long id, User user) {
 
         Question question = questionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Question " + id + " Not Found"));
 
-        // I am punting on this implementation, we have definitely just ran into one of the main issues with using
-        // the jpa and that is not really seeing into the black box and observing how these delete operations are being
-        // carried out for us. This is something that I would really like to see get implemented and I think this is
-        // a step in the right direction.
+        // delete the question if the associated topic owner is the current user
+        if (user.getUserid() == question.getSurvey().getTopic().getOwner().getUserid()) {
+            questionRepository.delete(question);
+        } else {
+            throw new ResourceNotFoundException("Not authorized to perform this action");
+        }
 
-        // the current error message is...
-        // could not execute statement; SQL [n/a]; constraint ["FKT24DYPA06DC9GGGTQPSE8OBME: PUBLIC.CONTEXTS FOREIGN
-        // KEY(SURVEYID) REFERENCES PUBLIC.SURVEYS(SURVEYID)
-
-        // my thinking was since surveys contains a list of questions we would first remove the instance in the collection
-        // & also remove it via the repository. Doing this came back with the same error message regardless of if
-        // I was removing with or without this new service implementation on survey
-
-        surveyService.removeQuestion(question.getSurvey(), question.getQuestionid());
-        questionRepository.delete(question);
     }
 
     @Transactional
