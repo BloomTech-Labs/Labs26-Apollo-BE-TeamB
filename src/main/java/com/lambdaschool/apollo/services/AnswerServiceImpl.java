@@ -37,10 +37,15 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Transactional
     @Override
-    public void delete(long id) {
+    public void delete(long id, User user) {
         Answer answer = answerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Answer " + id + " Not Found"));
-        answerRepository.delete(answer);
+        // delete the answer if it is created by the current user
+        if (user.getUserid() == answer.getUser().getUserid()) {
+            answerRepository.delete(answer);
+        } else {
+            throw new ResourceNotFoundException("Not authorized to perform this action");
+        }
     }
 
     @Transactional

@@ -10,7 +10,7 @@ public interface AnswerService {
 
     Answer findById(long id);
 
-    void delete(long id);
+    void delete(long id, User user);
 
     void save(QuestionBody qb, User user);
 
