@@ -23,7 +23,7 @@ public class Survey extends Auditable {
     private long surveyid;
 
     @ApiModelProperty(name = "Topic id", value = "Topic id for this survey request, can be null if this is used as survey", allowEmptyValue = true)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "topicid")
     @JsonIgnoreProperties(value = {"surveysrequests", "owner", "defaultsurvey", "users", "frequency"}, allowSetters = true)
     private Topic topic;
