@@ -1074,6 +1074,15 @@ After submitting their answers, a user cannot add another answer or edit their e
 
 </details>
 
+<details>
+
+<summary> DELETE: https://apollo-b-api.herokuapp.com/surveys/survey/{surveyid} - delete an survey request</summary>
+
+Delete a survey request (can be only performed by the topic owner).
+Default survey cannot be deleted.
+
+</details>
+
 ## IOS Testing Endpoints
 
 [IOS ENDPOINTS](./IOSTEST.md)

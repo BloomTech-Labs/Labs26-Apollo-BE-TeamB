@@ -3,7 +3,6 @@ package com.lambdaschool.apollo.services;
 import com.lambdaschool.apollo.exceptions.ResourceNotFoundException;
 import com.lambdaschool.apollo.models.*;
 import com.lambdaschool.apollo.repository.SurveyRepository;
-import com.lambdaschool.apollo.repository.UserRepository;
 import com.lambdaschool.apollo.views.SurveyQuestion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +18,6 @@ public class SurveyServiceImpl implements SurveyService {
     @Autowired
     private SurveyRepository surveyRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @Override
     public Survey findById(long id) {
         return surveyRepository.findById(id)
@@ -30,12 +26,22 @@ public class SurveyServiceImpl implements SurveyService {
 
     @Transactional
     @Override
-    public void delete(long id) {
-        if (surveyRepository.findById(id).isPresent()) {
-            surveyRepository.deleteById(id);
+    public void delete(long id, User user) {
+        Survey survey = surveyRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Survey " + id + " Not Found"));
+
+        // if deleting a survey request
+        if (survey.getTopic() != null) {
+            // delete the survey if the associated topic owner is the current user
+            if (user.getUserid() == survey.getTopic().getOwner().getUserid()) {
+                surveyRepository.delete(survey);
+            } else {
+                throw new ResourceNotFoundException("Not authorized to perform this action");
+            }
         } else {
-            throw new ResourceNotFoundException("Survey " + id + " Not Found");
+            throw new ResourceNotFoundException("Cannot delete a default survey");
         }
+
     }
 
     @Transactional

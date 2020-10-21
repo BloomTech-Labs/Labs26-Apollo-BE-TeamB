@@ -1,8 +1,8 @@
 package com.lambdaschool.apollo.services;
 
-import com.lambdaschool.apollo.models.Question;
 import com.lambdaschool.apollo.models.Survey;
 import com.lambdaschool.apollo.models.Topic;
+import com.lambdaschool.apollo.models.User;
 import com.lambdaschool.apollo.views.SurveyQuestion;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public interface SurveyService {
 
     List<Survey> findAllSurveys();
 
-    void delete(long id);
+    void delete(long id, User user);
 
     Survey save(Survey survey);
 
