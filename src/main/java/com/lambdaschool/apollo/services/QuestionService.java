@@ -1,6 +1,7 @@
 package com.lambdaschool.apollo.services;
 
 import com.lambdaschool.apollo.models.Question;
+import com.lambdaschool.apollo.models.User;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public interface QuestionService {
 
     Question findById(long id);
 
-    void delete(long id);
+    void delete(long id, User user);
 
     Question save(Question question);
 

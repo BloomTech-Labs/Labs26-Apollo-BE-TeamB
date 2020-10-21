@@ -17,17 +17,17 @@ public class Answer extends Auditable{
     @Column(nullable = false)
     private String body;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "questionid")
     @JsonIgnoreProperties(value = {"contexts", "survey", "answers"}, allowSetters = true)
     private Question question;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "userid")
     @JsonIgnoreProperties(value = {"primaryemail", "topics", "roles", "ownedtopics"})
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "surveyid")
     private Survey survey;
 
